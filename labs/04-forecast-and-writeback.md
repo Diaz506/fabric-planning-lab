@@ -69,7 +69,7 @@ from one side to the other and the forecast re-bases itself.
    | **Confidence** | 90% |
    | **Growth factor** | 4% |
    | **Evaluation** | Bottom Up |
-   | **Round negatives** | No |
+   | **Round all negative values to zero** | No |
 
 6. Select **Choose Algorithm** → **Trend Decomposition with MSTL**. Select
    **Customize Algorithm** and check **Year** and **Quarter** for seasonality.
@@ -134,10 +134,10 @@ see it.
 
    | Setting | Value |
    |---|---|
-   | **Connection** | Northwind_FMCG |
-   | **Database** | Northwind_FMCG_[YourName] |
+   | **Select connection** | Northwind_FMCG |
+   | **Database name** | Northwind_FMCG_[YourName] |
    | **Schema** | dbo |
-   | **Table** | Forecast |
+   | **Table name** | Forecast |
    | **Decimal precision** | 2 |
    | **Text length** | 512 |
 
@@ -209,5 +209,6 @@ warehouse rather than from somebody's laptop.
 
 - [Fabric planning tutorial part 3: Forecasting and writeback](https://learn.microsoft.com/fabric/iq/plan/planning-tutorial/planning/tutorial-3-forecasting-writeback)
 - [Writeback](https://learn.microsoft.com/fabric/iq/plan/planning-concept-writeback)
+- [Known limitations in planning](https://learn.microsoft.com/fabric/iq/plan/overview-limitations): writeback does not update the connected semantic model, and sheet row deletions do not propagate to SQL
 - [Statistical forecasts with Predict](https://learn.microsoft.com/fabric/iq/plan/planning-forecasting/planning-how-to-generate-statistical-forecasts-using-predict-feature)
 - [Rolling forecasts](https://learn.microsoft.com/fabric/iq/plan/planning-forecasting/planning-how-to-manage-rolling-forecasts)

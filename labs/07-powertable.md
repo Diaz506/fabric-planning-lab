@@ -25,9 +25,12 @@ writing code.
 > only care about the planning path, and go straight to
 > [Module 08](08-sizing-and-governance.md).
 >
-> Since **August 19, 2026**, building a PowerTable no longer upgrades you to Planner.
-> Creating the plan item does, so if you already hold a Planner session from Module 01
-> this costs you nothing extra on the same capacity.
+> **On cost:** creating or editing PowerTable sheets is Stakeholder work, not Planner
+> work. Microsoft's roles documentation is explicit that these actions no longer upgrade
+> your session to Planner, and that for plan items containing **only** PowerTable sheets,
+> only the Stakeholder and Viewer roles are available. So this module costs a Stakeholder
+> session (168 CU-hours) rather than a Planner one, and nothing extra if you already hold
+> a Planner session on the same capacity.
 
 **You'll need:** `Northwind-FMCG-assets-powertable-tutorial.xlsx` from
 [fabric-samples](https://github.com/microsoft/fabric-samples/tree/main/docs-samples/iq/plan).
@@ -52,8 +55,9 @@ It contains three sheets: assets, employees, and locations.
 Build one sheet per table, starting with the lookups so the asset sheet can reference
 them.
 
-1. On the **Home** ribbon, select **New PowerTable Sheet**.
-2. Choose the import option and upload `Northwind-FMCG-assets-powertable-tutorial.xlsx`.
+1. On the Plan welcome screen, select **PowerTable**.
+2. In the **New PowerTable Sheet** dialog, choose the import option and upload
+   `Northwind-FMCG-assets-powertable-tutorial.xlsx`.
 3. Create a sheet for the **locations** table. Map the fields and set the primary key.
 4. Repeat for **employees**.
 5. Repeat for **assets**.
@@ -72,9 +76,14 @@ each column's input type.
 |---|---|---|
 | Asset image | **Image** | Renders a thumbnail instead of a URL string |
 | Asset status | **Single Select** | Constrains entry to valid states, no more "Retired", "retired", "RETIRED" |
-| Assigned employee | **Lookup** | Resolves against the employees sheet; cannot reference someone who left |
-| Location | **Lookup** | Resolves against the locations sheet |
+| Assigned employee | **Single Select**, values type **Lookup** | Resolves against the employees sheet; cannot reference someone who left |
+| Location | **Single Select**, values type **Lookup** | Resolves against the locations sheet |
 | Expected EOL Date | **Formula** | Calculated, not typed |
+
+> [!NOTE]
+> Lookup is not a separate input type. It is a **values type** available within the
+> Single Select input type, which is why you configure it from the Single Select
+> settings rather than from the type list.
 
 For the formula column, enter:
 
@@ -95,10 +104,10 @@ reference with referential integrity.
 
 Asset changes should not be unilateral.
 
-1. On the **assets** sheet, open the approval configuration.
+1. On the **assets** sheet, go to the **PowerTable** tab and select **Approvals**.
 2. Enable **Requires Approval for All Changes**.
-3. Configure the workflow: simple, multi-level, or rule-based depending on how much
-   ceremony the change deserves.
+3. Configure the workflow: simple, multi-level (up to three levels), or rule-based
+   depending on how much ceremony the change deserves.
 
 The **Save** button becomes **Submit for Review**. Nothing lands until it is approved.
 
@@ -109,7 +118,7 @@ The **Save** button becomes **Submit for Review**. Nothing lands until it is app
 
 ## Part 5: Access control
 
-1. Open **Manage Access** for the sheet.
+1. Go to the **Setup** tab and select **Manage Access**.
 2. Set row-level **Add**, **Update**, and **Delete** permissions per user or group.
 
 Regional IT can add and update assets in their own location. Only the asset manager can
@@ -128,7 +137,7 @@ delete.
 
 Assets past their end-of-life should retire themselves.
 
-1. Open the automation configuration for the **assets** sheet.
+1. Go to the **Setup** tab and select **Automations**.
 2. Create an automation named `Retire Asset`.
 3. Configure a trigger, then a **Find Record** action followed by an **Update Record**
    action to set status to *Retired*.

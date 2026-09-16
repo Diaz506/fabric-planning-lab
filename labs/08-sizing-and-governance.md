@@ -69,18 +69,41 @@ workspaces do not separate the bill.
 
 ## Controlling the bill
 
-- **Gate who can create planning sheets.** Creating or redesigning a planning sheet is
-  the only thing that mints a Planner. Keep that to the modeling team. Everyone else can
-  enter numbers, approve, and write back at Stakeholder rates.
-- **Let readers read.** Since August 19, 2026, building a PowerTable or an Intelligence
-  report no longer creates a Planner. Report builders are Stakeholders.
-- **Watch capacity, not workspace.** Billing is calculated and reported at the capacity
-  level. The workspace named "Planning" in your billing data is not a real workspace.
-  it is a label so capacity-level reporting has somewhere to hang the numbers. Do not go
-  looking for it.
+Sessions are driven by behavior, but behavior is governable. Three tenant settings decide
+who can start an expensive session at all:
+
+| Setting | Effect |
+|---|---|
+| **Users can upgrade to a Planner session** | Enable or disable Planner upgrades, for the entire organization or for named security groups |
+| **Users can upgrade to a Stakeholder session** | The same control for Stakeholder upgrades |
+| **Show Oversubscription Warning** | Warns a user before starting or upgrading a session that would likely oversubscribe the capacity |
+
+All three are set at tenant level and can be **overridden per capacity** using Delegated
+Tenant Settings, so a production capacity and a sandbox capacity can have different rules.
+
+Two things to get right:
+
+- **Planner access includes Stakeholder access.** Enable Planner for the whole
+  organization and you have enabled Stakeholder for the whole organization too. Scope it
+  to a security group instead.
+- **Users with neither grant are not locked out.** They can still open plan items in
+  Reading view as Viewers, which is the cheapest role. That is the correct default for
+  most of the business.
+
+Beyond the settings:
+
+- **Keep planning-sheet authoring narrow.** Creating or redesigning a planning sheet is
+  the only thing that mints a Planner. Everyone else can enter numbers, approve, and
+  write back at Stakeholder rates.
+- **Let report builders build.** Creating or editing PowerTable and intelligence sheets
+  is Stakeholder work, not Planner work. For plan items that contain only PowerTable or
+  only intelligence sheets, Planner is not even available.
+- **Watch capacity, not workspace.** Billing is calculated and reported at capacity level.
+  The workspace named "Planning" in your billing data is not a real workspace. It is a
+  label so capacity-level reporting has somewhere to hang the numbers.
 - **Do not overcommit small SKUs.** On F2 and F4, or on a capacity shared with other
-  Fabric workloads, active sessions can exceed what the SKU supports. Control how many
-  users you point at a small capacity.
+  Fabric workloads, active sessions can exceed what the SKU supports. Turn on the
+  oversubscription warning and control how many users you point at a small capacity.
 
 ---
 
@@ -154,7 +177,10 @@ Before handing a planning environment to real users:
 - [ ] Somebody owns the fact that **deleting a row in a sheet does not delete it from
       the SQL table**
 - [ ] Sizing validated against the capacity estimator, with the 30% buffer applied
-- [ ] Planner creation restricted to the modeling team
+- [ ] Planner creation restricted to the modeling team via the **Users can upgrade to a
+      Planner session** tenant setting, scoped to a security group rather than the
+      organization
+- [ ] **Show Oversubscription Warning** enabled if the capacity is shared
 
 ---
 

@@ -84,6 +84,20 @@ Three consequences worth internalizing:
 Budget roughly a **30% capacity buffer** on top, because Fabric SQL, OneLake, and XMLA
 operations consume capacity outside the planning meters.
 
+### Administrators can cap this
+
+Sessions are not a runaway train. Three tenant settings control who may upgrade:
+
+| Setting | What it does |
+|---|---|
+| **Users can upgrade to a Planner session** | Enable or disable Planner upgrades, for the whole organization or named security groups |
+| **Users can upgrade to a Stakeholder session** | Same control for Stakeholder upgrades |
+| **Show Oversubscription Warning** | Warns a user before they start or upgrade a session that would likely oversubscribe the capacity |
+
+All three can be overridden per capacity through **Delegated Tenant Settings**. Note that
+Planner access includes Stakeholder access, so enabling Planner org-wide also enables
+Stakeholder org-wide. Users with neither can still open plan items in Reading view.
+
 **What this means for you right now:** finishing Module 01 will make you a Planner and
 commit 847 CU-hours over 30 days. On a trial capacity that is free and fine. On a shared
 production F-SKU, do the arithmetic first. Microsoft publishes a
@@ -115,6 +129,13 @@ XMLA and memory limits even when nominally supported.
 connections, and cannot create plan items that require embed token generation. This is
 the single most common reason a first attempt fails, and the error message does not make
 the cause obvious.
+
+> [!NOTE]
+> Microsoft's roles article recommends Admin, Member, **or Contributor** as the workspace
+> role for a Planner persona. The tutorial prerequisites and the known-limitations article
+> are stricter, and say Contributor cannot create cloud connections or plan items that
+> need embed tokens. This lab follows the stricter guidance, because that is the one that
+> matches what happens when you try it. If your admin offers Contributor, push for Member.
 
 ### 3. Tenant settings
 
