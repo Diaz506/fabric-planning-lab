@@ -44,7 +44,7 @@ This becomes the writeback destination for the forecast in Module 04.
 
 1. Select **New item**, search for **SQL database**, and select it.
 2. Name it `Northwind_FMCG_` followed by your name: for example
-   `Northwind_FMCG_DiegoDiaz`, then select **Create**.
+   `Northwind_FMCG_YourName`, then select **Create**.
 
 ## Step 3: Create the plan item
 

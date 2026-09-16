@@ -129,6 +129,19 @@ covers it, but it is the single most misunderstood thing about this workload, so
 
 ---
 
+## Status
+
+The steps in this lab are verified against Microsoft Learn's Fabric Planning
+documentation, including the official 12-part tutorial series, with sources cited at the
+end of every module. They have **not yet been run end to end against a live capacity**,
+and `assets/screenshots/` is deliberately empty for now.
+
+If you run it and something has drifted, please open an issue — see
+[CONTRIBUTING.md](CONTRIBUTING.md). Step drift is the most useful contribution you can
+make, because this workload changes quickly.
+
+---
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

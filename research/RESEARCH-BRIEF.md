@@ -201,15 +201,18 @@ What to change:
 
 ---
 
-## 9. Open questions for the demo design
+## 9. Design decisions this lab made
 
-1. **Narrative** — reuse Northwind FMCG (matches the samples exactly, zero data prep)
-   or wrap a fictional company around it (better story, tiny relabeling cost)?
-2. **Audience** — internal seller/SE enablement, or customer-facing hands-on lab?
-3. **Delivery** — GitHub repo like fabric-space-lab, or a self-contained HTML
-   workshop like `fabric-value-workshop.html`?
-4. **Depth on PowerTable/Infobridge** — include, or keep the demo to planning sheets
-   + intelligence + writeback and mention the rest?
+1. **Narrative** — a fictional company (Harborlight Provisions Co.) wrapped around the
+   Northwind FMCG sample, so the story and the sample numbers agree without relabeling
+   the model.
+2. **Format** — a GitHub repository with numbered modules, following the fabric-space-lab
+   structure.
+3. **Scope** — planning sheets, optimizer, forecasting and writeback, P&L models, and the
+   intelligence canvas as the core path; PowerTable optional; Infobridge described rather
+   than built.
+4. **Cost coverage** — session billing gets first-class treatment in Modules 00 and 08,
+   because it is the most misunderstood aspect of the workload.
 
 ---
 
