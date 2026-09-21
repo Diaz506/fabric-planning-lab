@@ -91,9 +91,20 @@ set. If 2026 is not empty, the open period picked up a default value.
 > tutorial calls it the "2026 Forecast subtotal", but no separate subtotal column appears
 > until you expand the year into quarters.
 
-2. On the **Model** ribbon, select **Predict**.
-3. Select the lock icon to freeze the selection. Confirm **Row Selected** is
-   *Grand Total* and **Measure** is *Forecast*.
+2. On the **Model** ribbon, select **Predict**. **The Predict panel opens.**
+3. **In the Predict panel**, use the lock icon to freeze the selection. Confirm
+   **Row Selected** is *Grand Total* and **Select Measure** is *Forecast*.
+
+> [!WARNING]
+> **This is not the cell lock from Module 02.** The icon that appears on a grid cell,
+> offering *Lock this cell* and *Lock all children*, controls allocation: it stops values
+> being distributed into that cell. It has nothing to do with forecasting, and locking
+> the target cell here would work against you.
+>
+> The lock referred to above lives **inside the Predict panel** and simply pins the row
+> and measure the panel is aimed at, so a stray click elsewhere in the sheet does not
+> retarget the forecast. If you locked the grid cell by mistake, select **Unlock this
+> cell** before continuing.
 4. Confirm **Historic data range** is `Jan 2024 – Dec 2025` and **Forecast date range**
    is `Jan 2026 – Dec 2026`.
 5. Set the parameters:
