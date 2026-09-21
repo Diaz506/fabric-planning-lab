@@ -58,6 +58,15 @@ A capacity supplies its CU continuously, so over a 730-hour window it provides
 all. A single Planner alone consumes 58% of an F2, which is why the smallest SKU is not
 a serious option for a planning deployment.
 
+> [!NOTE]
+> **Put both numbers in the same time window before you compare them.** An F4 can be
+> described as 14,400 CU-seconds per hour or 2,920 CU-hours per 30 days; both describe
+> the same 4 CU capacity, just watched for different lengths of time.
+>
+> Subtract a Planner's 847 CU-hour session total from an hourly supply figure and you
+> will understate the load roughly fivefold. [Module 00](00-prerequisites.md) works the
+> example through both ways.
+
 > [!IMPORTANT]
 > This is a **budget** view, not a throughput view. It answers whether the work fits
 > across 30 days, not whether you will be throttled at nine o'clock on a Monday. The

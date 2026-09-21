@@ -58,6 +58,62 @@ module is for.
 | **Stakeholder** | Business users, reviewers, approvers | **168 CU-hours** |
 | **Viewer** | Executives and report consumers | **37 CU-hours** |
 
+### CU-hours are not CUs
+
+This trips up almost everyone, including people holding the documentation, so it is worth
+thirty seconds.
+
+Picture a tap that flows at **4 litres per minute**. Over an hour it delivers 240 litres.
+Over a day, 5,760. Same tap the whole time. Nothing changed except how long you watched.
+
+A capacity works the same way. **An F4 is a tap that flows at 4 CU.** That is the only
+real number:
+
+| Watched for | Same F4, described as |
+|---|---|
+| a second | 4 CU-seconds |
+| an hour | 14,400 CU-seconds (4 x 3,600) |
+| 30 days | 2,920 CU-hours (4 x 730) |
+
+Every row says "4 CU." Microsoft reports the hourly view in the Fabric Capacity Metrics
+app, because that app watches throughput in short slices, and the 30-day view in the
+planning billing article, because that article describes a total charge. Two jobs, one
+tap.
+
+So a **CU** is a rate and a **CU-hour** is an amount. A Planner does not need an F847,
+any more than a 1,000-watt heater running ten hours needs a 10,000-watt supply. Spread
+across the 730 hours of a session, 847 CU-hours is a little over **one CU** of average
+draw:
+
+| Role | Per 30-day session | Average draw |
+|---|---|---|
+| **Planner** | 847 CU-hours | **1.16 CU** |
+| **Stakeholder** | 168 CU-hours | **0.23 CU** |
+| **Viewer** | 37 CU-hours | **0.05 CU** |
+
+#### The one rule: same window on both sides
+
+Every costing mistake here comes from comparing a supply figure and a usage figure that
+were measured over different lengths of time. Pick a window, put both numbers in it, and
+the arithmetic behaves.
+
+One Planner on an F4, done twice:
+
+| Window | F4 supplies | Planner uses | Left over |
+|---|---|---|---|
+| **Per hour** | 14,400 CU-seconds | 4,177 CU-seconds | **10,223, or 71%** |
+| **Per 30 days** | 2,920 CU-hours | 847 CU-hours | **2,073, or 71%** |
+
+Same answer both ways, because it is the same tap: a Planner takes **29% of an F4**.
+
+The trap is mixing the rows. Subtract the Planner's 30-day total of 847 from the hourly
+supply of 14,400 and you get a tidy-looking 13,553, which says the Planner costs 6%. That
+is wrong by roughly five times, and it is the kind of wrong that survives a meeting
+because the number looks reasonable.
+
+If you ever need to move between the two units: **CU-hours x 3,600 = CU-seconds**, and
+**CU-hours / 730 = average CU draw**.
+
 ### Per session, not per month
 
 This distinction is the whole pricing argument, so it is worth being precise. A session
@@ -308,6 +364,7 @@ Before moving on, you should be able to answer:
 2. What action will make you a Planner, and what does that commit in CU-hours?
 3. Can you end a planning session early if you finish your work in a day?
 4. What happens to a plan item if someone renames the workspace it lives in?
+5. A Planner session costs 847 CU-hours. How much of an F4 is that?
 
 <details>
 <summary>Answers</summary>
@@ -318,6 +375,9 @@ Before moving on, you should be able to answer:
    It commits a 30-day Planner session at 847 CU-hours.
 3. No. A session runs the full 730 hours once triggered and cannot be ended manually.
 4. It breaks. The plan item no longer opens.
+5. 1.16 CU of average draw, which is 29% of an F4. Divide 847 by the 730 hours in the
+   session. Comparing 847 against an hourly supply figure understates it roughly
+   fivefold.
 
 </details>
 
