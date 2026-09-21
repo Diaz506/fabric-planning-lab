@@ -67,11 +67,22 @@ for comparison afterwards. That comparison is the payoff at the end of this modu
    | **Title** | `Gross Profit` | Clear the prepopulated name first |
    | **Insert as** | Visual Measure | The default, and correct here |
    | **Data type** | Number | The default |
-   | **Formula** | `[Sales Plan] - [COGS]` | Type it; **Suggestions** offers column names as you go |
+   | **Formula** | `[Sales Plan] - [COGS]` | See the note below on the picker |
    | **Column aggregation type** | **Formula** | **Defaults to Sum. Change it.** |
    | **Row aggregation type** | Formula | Already the default |
 
    Select **Create**.
+
+> [!TIP]
+> Start typing in the **Formula** box and a picker appears with two tabs. **References**
+> lists what you can point at: the columns on this sheet, such as *2026 Sales Plan*, plus
+> dimension members like *2025*, *GrandTotal*, *Category*, *Month Short* and *Quarter*.
+> **Functions** lists the built-in functions.
+>
+> Pick from **References** rather than typing names by hand. The entries must match your
+> column titles exactly, and picking them avoids a typo that will not resolve. Toggle
+> **Suggestions** off if you would rather type, and use the expand icon for a larger
+> editor.
 
 > [!IMPORTANT]
 > **Column aggregation defaults to Sum and must be changed to Formula.** Row aggregation
@@ -81,6 +92,19 @@ for comparison afterwards. That comparison is the payoff at the end of this modu
 > recalculating `[Sales Plan] - [COGS]` at each level. For a straight subtraction the
 > totals may still look plausible, which is what makes it dangerous. On a margin or
 > percentage row the same mistake produces obvious nonsense.
+
+> [!IMPORTANT]
+> **Reference the editable copies, not the originals.** The picker lists both, and their
+> names are similar:
+>
+> | Pick this | Not this |
+> |---|---|
+> | `Sales Plan`, your copy from step 2 | `2026 Sales Plan`, the read-only original |
+> | `COGS`, your copy from step 2 | `2025 COGS`, the semantic model measure |
+>
+> The Optimizer can only adjust editable data input columns. Point the formula at the
+> originals and it has nothing to work with, because those two columns are exactly the
+> baseline you want left untouched for comparison at the end.
 
 3. Collapse the row hierarchy to category level. On the **Planning** ribbon, select
    **Totals** and enable **Column Grand Total** on the left.
