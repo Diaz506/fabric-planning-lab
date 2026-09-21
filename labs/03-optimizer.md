@@ -44,9 +44,16 @@ The Optimizer needs columns it is allowed to change. Measures pulled from anothe
 or from the semantic model are read-only.
 
 1. On the **Planning** ribbon, select **Number** → **Copy from another series** →
-   **2026 Sales Plan**. Title it `Sales Plan` and select **Create**.
-2. Select **Number** → **Copy from another series** → **2025 COGS**. Title it `COGS` and
-   select **Create**.
+   **2026 Sales Plan**. **Clear the prepopulated Title**, enter `Sales Plan`, and select
+   **Create**.
+2. Select **Number** → **Copy from another series** → **2025 COGS**. Clear the Title,
+   enter `COGS`, and select **Create**.
+
+> [!TIP]
+> The **Title** field in the Data Input pane arrives prepopulated with a generated name.
+> Clear it before typing, or you end up with titles like `Sales PlanNorthwind_FMCGNumber`.
+> Leave the remaining settings at their defaults, as described in
+> [Module 02](02-allocation-and-collaboration.md).
 
 You now have editable copies of both levers, with the originals preserved as a baseline
 for comparison afterwards. That comparison is the payoff at the end of this module.

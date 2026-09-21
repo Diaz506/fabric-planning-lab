@@ -31,10 +31,40 @@ Work in the `Plan Intro` sheet from Module 01.
 1. On the **Planning** ribbon, select **Totals** and enable **Column Grand Total** on the
    left. A grand total column appears showing full-year FY25 actuals.
 2. On the **Planning** ribbon, select **Number** → **Copy from another series** →
-   **2025 Gross Revenue**. Title it `2026 Target` and select **Create**.
+   **2025 Gross Revenue**.
+3. In the **Data Input** pane, **clear the Title field** and enter `2026 Target`.
+4. Leave every other setting at its default and select **Create**.
+
+> [!WARNING]
+> The **Title** field arrives prepopulated with a generated name such as
+> `Northwind_FMCGNumber`. Typing into it without clearing it first produces a column
+> called `2026 TargetNorthwind_FMCGNumber`. Select the existing text and replace it.
 
 The new column arrives **prepopulated with the FY25 values**, around $25.9M in total.
 That is a starting point, not the target.
+
+<details>
+<summary>What the other settings do, and why the defaults are right here</summary>
+
+| Setting | Default | Why it matters |
+|---|---|---|
+| **Insert as** | Visual Measure | Inserts the column across every category when a column hierarchy exists. Because this sheet has a Date hierarchy in Columns, you want the measure repeated per period. *Visual Column* would insert one column regardless of hierarchy |
+| **Input type** | Number | Correct for currency values |
+| **Column aggregation type** | Sum | How values roll up across the column hierarchy |
+| **Row aggregation type** | Sum | How values roll up across the row hierarchy |
+| **Distribute parent value to children** | Checked | **The setting this whole module depends on.** It automatically allocates a parent value proportionally to child members. Uncheck it and typing $28.5M into the grand total will not flow down to regions and categories |
+| **Enable Multi-Dimension Allocation** | Off | For allocating across dimension breakdowns simultaneously. Used in cube scenarios, not here |
+| **Minimum / Maximum Value** | None | Optional guardrails on leaf-level input |
+
+Two things worth knowing before you click Create:
+
+- **You cannot change Insert as or Input type after the column exists.** Everything else
+  can be edited later.
+- **Distribute parent value to children only works with** Sum, Average (Leaf), Minimum,
+  Maximum, First, or Last aggregation. Change the aggregation to something else and the
+  distribution behavior silently stops being available.
+
+</details>
 
 > [!NOTE]
 > Native columns are read-only. You cannot type into a measure that comes from the
@@ -43,7 +73,7 @@ That is a starting point, not the target.
 
 ### Allocate the target
 
-3. Double-click the grand total cell of the **2026 Target** column, enter `28.5m`, and
+5. Double-click the grand total cell of the **2026 Target** column, enter `28.5m`, and
    select the check mark.
 
 You just overwrote the $25.9M baseline with the board's first ask, about 10% growth.
@@ -56,11 +86,11 @@ That is top-down planning in a single gesture.
 Harborlight's Q1 and Q2 are already committed. Trade promotions are booked and the
 supply plan is locked. Growth has to come from the back half.
 
-4. Expand the column hierarchy to quarters.
-5. Select the **Q1** row total cell in the **2026 Target** column, select the
+6. Expand the column hierarchy to quarters.
+7. Select the **Q1** row total cell in the **2026 Target** column, select the
    distribution icon, and select **Lock all children**. Repeat for **Q2**. Locked cells
    turn grey.
-6. Double-click the grand total cell of **2026 Target**, enter `30m`, and press Enter.
+8. Double-click the grand total cell of **2026 Target**, enter `30m`, and press Enter.
 
 The board raised the ask from $28.5M to $30M, and **the extra $1.5M lands only in Q3 and
 Q4**. Q1 and Q2 do not move.
@@ -68,7 +98,7 @@ Q4**. Q1 and Q2 do not move.
 This is the mechanic that makes allocation trustworthy. Without locking, every
 top-down revision silently rewrites commitments people have already made.
 
-7. Select the **Q1** total cell, select the distribution icon, and select
+9. Select the **Q1** total cell, select the distribution icon, and select
    **Unlock all children**. Repeat for **Q2**.
 
 > [!TIP]
@@ -82,7 +112,8 @@ top-down revision silently rewrites commitments people have already made.
 The target is a frame. The plan is what the regions commit to.
 
 1. On the **Planning** ribbon, select **Number** → **Copy from another series** →
-   **2025 Gross Revenue**. Title it `2026 Sales Plan` and select **Create**.
+   **2025 Gross Revenue**. **Clear the prepopulated Title**, enter `2026 Sales Plan`,
+   leave the other settings at their defaults, and select **Create**.
 2. In the footer, select the **Settings** icon and set rows per page to **All**. Every
    category now sits on one scrollable page.
 3. Hover near the *Americas* row, select the row gripper, and choose **Collapse** →
