@@ -266,38 +266,22 @@ against city values summing to 178.96, a rounding difference.
    | **Column aggregation type** | **Formula**, changed from Sum |
    | **Row aggregation type** | Formula, already set |
 
-   Select **Create**, then place *Gross Revenue* and *Discounts and Returns* beneath it:
+   Select **Create**, then attach *Gross Revenue* and *Discounts and Returns* to it with
+   **Add child**. Check the indents, not the order:
 
    ```
-   Net Revenue                    Formula
-     Gross Revenue                Formula
-       Sales Volume               Native
-       Avg Selling Price          Native
-     Discounts and Returns        Native
+   Net Revenue                      root
+     Gross Revenue                  child of Net Revenue
+       Sales Volume                 child of Gross Revenue
+       Avg Selling Price            child of Gross Revenue
+     Discounts and Returns          child of Net Revenue
    ```
 
-   Gross Revenue keeps its own two children as it moves, so the tree deepens rather than
-   flattening.
+   Gross Revenue keeps its own two children as it moves.
 
-> [!IMPORTANT]
-> **A new formula measure arrives as a root, not as a parent.** Creating Net Revenue
-> leaves it sitting alongside Gross Revenue and Discounts and Returns rather than above
-> them, three roots at the same indent.
->
-> Attach the children one at a time, watching the indent after each:
->
-> - With **Net Revenue** selected, **Add child** puts the measure one level in.
-> - With **Gross Revenue** selected, **Add sibling** puts it at Gross Revenue's level,
->   which is the same thing.
->
-> Using **Add child** while a measure that is already indented is selected pushes the new
-> one a level too deep. Discounts and Returns landing beside Sales Volume rather than
-> beside Gross Revenue is the usual result, and it says discounts are a component of gross
-> revenue rather than a deduction from it. The formula still calculates; the structure
-> describes something else.
->
-> The chevron is the quickest check that a measure has children at all. Order within a
-> level does not matter, only depth.
+> [!NOTE]
+> A new formula measure arrives as a root. **Add child** attaches one level inside
+> whatever is selected, so select the intended parent first.
 
 9. Add the cost side. Select **Add Measure** → **Formula**:
 
@@ -311,10 +295,10 @@ against city values summing to 178.96, a rounding difference.
    in the **Measures** list, set **Insert Measure** to **COGS**, and select **Insert**.
 
    ```
-   COGS                           Formula
-     Raw Material Cost            Native
-     Labor Cost                   Native
-     Other Direct Exp             Native
+   COGS                             root
+     Raw Material Cost              child
+     Labor Cost                     child
+     Other Direct Exp               child
    ```
 
 > [!TIP]
@@ -336,22 +320,22 @@ against city values summing to 178.96, a rounding difference.
     Operating Expenses. The finished tree:
 
     ```
-    Net Profit                       Formula
-      Gross Profit                   Formula
-        Net Revenue                  Formula
-          Gross Revenue              Formula
-            Sales Volume             Native
-            Avg Selling Price        Native
-          Discounts and Returns      Native
-        COGS                         Formula
-          Raw Material Cost          Native
-          Labor Cost                 Native
-          Other Direct Exp           Native
-      Operating Expenses             Formula
-        Admin Expenses               Native
-        Employee Expenses            Native
-        R&D                          Native
-        Selling and Marketing Expenses  Native
+    Net Profit
+      Gross Profit
+        Net Revenue
+          Gross Revenue
+            Sales Volume
+            Avg Selling Price
+          Discounts and Returns
+        COGS
+          Raw Material Cost
+          Labor Cost
+          Other Direct Exp
+      Operating Expenses
+        Admin Expenses
+        Employee Expenses
+        R&D
+        Selling and Marketing Expenses
     ```
 
 > [!IMPORTANT]
