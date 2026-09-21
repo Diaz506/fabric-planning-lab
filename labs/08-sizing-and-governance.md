@@ -88,6 +88,23 @@ once a quarter costs four sessions a year, not twelve.
 Size for the peak month, which for a finance team is budget season, rather than for a
 theoretical month in which everyone happens to be active at once.
 
+### Does the 30% buffer actually cover Fabric SQL?
+
+Worth checking rather than assuming, because the buffer also has to cover OneLake and
+XMLA. Harborlight runs two databases on a business-hours pattern:
+
+| Database | Hours online | CU-hours |
+|---|---|---|
+| Collaboration database, open while people plan | 176 | 306 |
+| Writeback destination, bursts plus a daily downstream read | 22 | 38 |
+| Subtotal at the idle floor | | 345 |
+| Allowing 25% for real query compute | | **~431** |
+
+Against a buffer of 511 CU-hours, that leaves about 80 for OneLake and XMLA. **The
+documented 30% holds, but it is a floor rather than a cushion**, and it holds only while
+nothing pins a database online. One DirectQuery report on a wall display would add
+roughly 1,271 CU-hours and overrun the buffer two and a half times over.
+
 ### The three sizing mistakes
 
 1. **Assuming a light user is cheap because they log in once.** They are not billed for
@@ -134,6 +151,90 @@ The role rates cover planning only. Every Fabric SQL database in the deployment 
 Remember that each plan item silently creates its own metadata database in addition to
 any writeback destination you configure. Two plan items and one writeback target is three
 databases, each with its own storage line.
+
+#### The number to remember: 1.74 CU
+
+A SQL database provisions **2 GB minimum memory, billed as compute while online**. Memory
+normalizes at 3 GB per vCore, and 1 vCore is 2.611 CU:
+
+```
+2 GB / 3 GB per vCore = 0.667 vCore
+0.667 x 2.611         = 1.74 CU while online
+```
+
+An idle but online database draws **more than a Planner session's average of 1.16 CU**.
+The database doing nothing costs more per hour than the person doing the planning. What
+saves you is the 15-minute timeout, which a Planner session does not have.
+
+| One database online | CU-hours per 30 days |
+|---|---|
+| 4 hours a day | 153 |
+| 8 hours a day | 306 |
+| 10 hours a day | 383 |
+| **Continuously** | **1,271** |
+
+That last row is the failure mode. A single database pinned online around the clock costs
+**more than a Planner session** and roughly **two and a half times the entire 30% buffer**.
+
+> [!WARNING]
+> Microsoft's worked example in the SQL billing article states a total of 5,483 CU-seconds,
+> but the rows above it sum to 6,266. The 5,483 figure reconstructs exactly if the minimum
+> memory were 1 GB rather than the 2 GB the article now states, so the total appears not to
+> have been recalculated when the minimum changed. Use the conversion factors, which are
+> internally consistent, rather than that total.
+
+#### What actually wakes a database
+
+Any query, not just a report. The two databases have different exposure:
+
+| Database | Woken by |
+|---|---|
+| **Collaboration database**, created with the plan item | Planning activity itself: opening the plan, commenting, saving. Roughly business hours, and largely unavoidable |
+| **Writeback destination** | Writeback runs, plus anything downstream that reads the table: Power BI, semantic models, data agents, pipelines, notebooks, ad-hoc T-SQL |
+
+**Intelligence sheets do not read the writeback database.** The canvas you built in
+[Module 06](06-intelligence-canvas.md) reads the semantic model over XMLA and planning
+sheets through From Sheets, which are live in the plan item. Building the whole canvas
+wakes no SQL compute. Writeback exists to push plan data *out* to the rest of Fabric;
+intelligence sheets are still inside it.
+
+That means you control the writeback database's cost almost entirely, through how you
+build downstream.
+
+#### Downstream storage mode is the biggest lever you have
+
+| Mode | Reads from | Wakes SQL compute | CU-hours per month |
+|---|---|---|---|
+| **Import** | SQL, on scheduled refresh | Briefly, once per refresh | ~11 |
+| **DirectQuery** | SQL, on every interaction | Yes, whenever anyone uses the report | **~306** |
+| **Direct Lake** | The OneLake replica | **No** | OneLake read compute only |
+
+A 28-fold difference between Import and DirectQuery, on the same data.
+
+**Direct Lake is usually the right answer.** A SQL database in Fabric automatically
+mirrors itself to OneLake in Delta format, and the replication compute is **free and does
+not consume capacity**. Replica storage is free up to one terabyte per capacity unit
+purchased. A Direct Lake model reads those Delta files rather than the database, so it
+never triggers the 1.74 CU floor, and replication runs as often as every 15 seconds.
+
+Two caveats. **Pausing the capacity stops mirroring** and starts charging OneLake storage
+for the replica, which compounds the session billing problem described earlier. And
+**Direct Lake can fall back to DirectQuery** under some conditions, so verify the
+behavior on your own model rather than assuming it.
+
+> [!NOTE]
+> Do not confuse this with using Direct Lake as the **source** model a plan item connects
+> to. That direction carries a real constraint: Direct Lake and DirectQuery source models
+> require a gateway connection with fixed credentials, because single sign-on is not
+> supported yet. Direct Lake downstream of writeback is efficient. Direct Lake upstream as
+> your planning source costs you a gateway.
+
+#### Converting to currency
+
+These figures stop at CU-hours deliberately. Converting to money depends on your region
+and on whether the capacity is reserved or pay-as-you-go, so use the
+[Fabric pricing calculator](https://azure.microsoft.com/pricing/details/microsoft-fabric/)
+rather than a rule of thumb.
 
 ---
 
@@ -246,6 +347,8 @@ Before handing a planning environment to real users:
       (Long, Wide, or the "with changes" variants)
 - [ ] Somebody owns the fact that **deleting a row in a sheet does not delete it from
       the SQL table**
+- [ ] Downstream reporting on the writeback table uses **Direct Lake or Import**, not
+      DirectQuery, and no dashboard holds a SQL database online continuously
 - [ ] Sizing validated against the capacity estimator, with the 30% buffer applied
 - [ ] Planner creation restricted to the modeling team via the **Users can upgrade to a
       Planner session** tenant setting, scoped to a security group rather than the
@@ -261,6 +364,8 @@ Before handing a planning environment to real users:
 2. Your semantic model has RLS roles for each region. A new analyst is added with no role
    assigned. What do they see?
 3. You have 25 sheets in a plan item and Finance asks for a new scenario. Now what?
+4. Someone builds a DirectQuery report on the writeback table and pins it to a wall
+   display. What does that cost, and what would you suggest instead?
 
 <details>
 <summary>Answers</summary>
@@ -272,6 +377,10 @@ Before handing a planning environment to real users:
    outside every role stays hidden.
 3. You are at the per-item limit. Split into a second plan item and connect them with
    Infobridge rather than trying to squeeze more sheets in.
+4. It holds the SQL database online continuously, roughly 1,271 CU-hours a month, which
+   exceeds a Planner session and overruns the whole capacity buffer. Direct Lake reads
+   the free OneLake replica and never wakes SQL compute. Import wakes it briefly per
+   refresh, around 11 CU-hours.
 
 </details>
 
@@ -297,3 +406,5 @@ Before handing a planning environment to real users:
 - [Known limitations in planning](https://learn.microsoft.com/fabric/iq/plan/overview-limitations)
 - [Writeback](https://learn.microsoft.com/fabric/iq/plan/planning-concept-writeback)
 - [Connected planning](https://learn.microsoft.com/fabric/iq/plan/infobridge-concept-connected-planning)
+- [Billing and utilization reporting for SQL database in Fabric](https://learn.microsoft.com/fabric/database/sql/usage-reporting): vCore and memory conversions, the 15-minute idle release, and storage behavior
+- [What is Mirroring in Fabric?](https://learn.microsoft.com/fabric/mirroring/overview): free replication compute, free replica storage per CU, and Direct Lake over mirrored data
