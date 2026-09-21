@@ -71,10 +71,19 @@ The fact tables share the common *Date* dimension.
 > unscoped version produces a valid sheet with the wrong shape, and no error to tell you.
 
 > [!NOTE]
-> Microsoft's tutorial text calls the transaction fact table **Sales Transactions**, but
-> the table shipped in the model is named **Fact Transactions**. This lab uses the name
-> you will actually see in the Data pane. The tutorials also never name the table holding
-> *Category* and *Sub Category*; it is **Product**.
+> **Microsoft's tutorial text does not always match the shipped model.** Where they
+> disagree, this lab uses the name you will see on screen:
+>
+> | Learn tutorials say | The model actually has |
+> |---|---|
+> | Sales Transactions | **Fact Transactions** |
+> | Region Name | **Region** |
+> | Quarter Name | **Quarter** |
+> | Sub-Category | **Sub Category** |
+>
+> The tutorials also never name the table holding *Category* and *Sub Category*; it is
+> **Product**. Keep this in mind if you work through Microsoft's tutorials alongside this
+> lab, because searching the Data pane for the tutorial spellings will come up empty.
 
 ---
 

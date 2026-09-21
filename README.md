@@ -133,10 +133,10 @@ covers it, but it is the single most misunderstood thing about this workload, so
 
 The steps in this lab are verified against Microsoft Learn's Fabric Planning
 documentation, including the official 12-part tutorial series, with sources cited at the
-end of every module. A live-capacity walkthrough is in progress; findings from it are
-folded back in as they surface. One already has: the transaction fact table is named
-**Fact Transactions** in the shipped model, not *Sales Transactions* as the tutorial text
-says. `assets/screenshots/` is deliberately empty for now.
+end of every module. A live-capacity walkthrough is in progress and findings are folded
+back in as they surface, including several field names where Microsoft's tutorial text
+does not match the shipped sample model. Those are listed in
+[`data/README.md`](data/README.md). `assets/screenshots/` is deliberately empty for now.
 
 If you run it and something has drifted, please open an issue. See
 [CONTRIBUTING.md](CONTRIBUTING.md). Step drift is the most useful contribution you can
