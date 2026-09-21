@@ -49,10 +49,9 @@ or from the semantic model are read-only.
 2. Select **Number** → **Copy from another series** → **2025 COGS**. Clear the Title,
    enter `COGS`, and select **Create**.
 
-> [!TIP]
-> The **Title** field in the Data Input pane arrives prepopulated with a generated name.
-> Clear it before typing, or you end up with titles like `Sales PlanNorthwind_FMCGNumber`.
-> Leave the remaining settings at their defaults, as described in
+> [!NOTE]
+> The **Title** field arrives prepopulated with a generated name, so clear it before
+> typing. Leave the remaining settings at their defaults, as described in
 > [Module 02](02-allocation-and-collaboration.md).
 
 You now have editable copies of both levers, with the originals preserved as a baseline

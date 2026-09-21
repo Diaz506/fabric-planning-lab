@@ -35,10 +35,9 @@ Work in the `Plan Intro` sheet from Module 01.
 3. In the **Data Input** pane, **clear the Title field** and enter `2026 Target`.
 4. Leave every other setting at its default and select **Create**.
 
-> [!WARNING]
-> The **Title** field arrives prepopulated with a generated name such as
-> `Northwind_FMCGNumber`. Typing into it without clearing it first produces a column
-> called `2026 TargetNorthwind_FMCGNumber`. Select the existing text and replace it.
+> [!NOTE]
+> The **Title** field arrives prepopulated with a generated name. Clear it before typing,
+> or you end up with a column called something like `2026 TargetNorthwind_FMCGNumber`.
 
 The new column arrives **prepopulated with the FY25 values**, around $25.9M in total.
 That is a starting point, not the target.
