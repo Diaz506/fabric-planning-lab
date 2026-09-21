@@ -159,13 +159,37 @@ decline that far.
 > a consumer goods business with both an annual cycle and a quarterly promotional rhythm,
 > which is exactly why both seasonality levels are checked.
 
-9. In the **Filter** panel, check the year filter. **2026 may already be present**,
-   because creating a forecast measure brings its forecast-period columns into the sheet
-   whether or not the filter names that year. If it is missing, add it.
+9. In the **Filter** panel, check the year filter. The **2026 Forecast** column appears as
+   soon as the forecast measure exists, but **2026 Gross Revenue** only appears once 2026
+   is ticked in the filter. Tick it so you can compare forecast against actual.
 10. Expand **2026** with the `>` to see the monthly figures the forecast produced.
 
-You should now see January forecast at around **$2.09M** against actual **$1.92M**. The
-forecast was optimistic. Good. That is the situation worth practising.
+**Check it worked.** At year level on the **All** row, one run produced:
+
+| Year | Gross Revenue | Forecast |
+|---|---|---|
+| 2024 | 24.57 | 24.57 |
+| 2025 | 25.87 | 25.87 |
+| **2026** | **26.56** | **28.01** |
+
+Closed years still mirror actuals exactly. 2026 is the first year where the two diverge,
+and that divergence is the point.
+
+<details>
+<summary>Where 28.01 comes from</summary>
+
+Revenue grew 5.29% from 2024 to 2025. The statistical model projected forward from that
+trend and landed on about **26.93**, roughly 4.1% above 2025. The 4% **Growth Factor**
+then lifted it to **28.01**.
+
+So the number has two distinct parts: what the history implies, and what the planners
+asserted on top. Set Growth Factor to 0 and re-run to see the statistical forecast alone.
+
+</details>
+
+Expanded to months, January forecasts at around **$2.09M** against an actual of
+**$1.92M**. Across the full year the forecast sits about 5.5% above actual. The forecast
+was optimistic. Good. That is the situation worth practising.
 
 ## Part 4: Close the period and roll forward
 
