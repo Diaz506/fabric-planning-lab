@@ -334,21 +334,37 @@ Mentioned users get a Microsoft Teams notification with a link back to the sheet
 
 ## Part 4: Route it for approval
 
+The approval setup is a two-step wizard: **Who needs to approve your data?**, then
+**How should the approval flow work?**
+
 1. On the **Model** ribbon, select **Approval**.
-2. Select the edit icon next to **Level 1**. Rename it `Regional Manager` and choose the
-   first-level approver.
+2. On the first page, select the edit icon next to **Level 1**. Rename it
+   `Regional Manager` and choose the first-level approver.
 3. Select the edit icon next to **Level 2**. Rename it `Finance Director`, choose the
    second-level approver, and select **Next**.
-4. Enable **Reset on Rejection** and **Teams Notifications**. Select **Submit**.
+4. On the second page, turn on **Reset all previous levels to In Progress** under
+   **Reset on Rejection**. It is off by default, and it clears every approval status back
+   to In Progress when a rejection happens, so a rejected change cannot keep a stale
+   approval from an earlier level.
+5. Leave both **Teams Notifications** toggles on. They are on by default and cover the
+   two ends of the round trip: **When submitted for review** notifies the approver, and
+   **When approved/rejected** notifies the submitter.
+6. Select **Submit**.
 
 *Regional Manager* and *Finance Director* columns appear in the sheet.
 
+> [!NOTE]
+> Approvers are picked from the tenant's user list, so a second real account is needed to
+> exercise the handoff end to end. Microsoft Entra B2B guests are not supported, and each
+> participant who acts on the plan starts a billable session. To see the mechanic without
+> that cost, select yourself at both levels.
+
 ### Test it
 
-5. Expand *Asia Pacific*, double-click the **Beverages** cell in the **2026 Sales Plan**
+7. Expand *Asia Pacific*, double-click the **Beverages** cell in the **2026 Sales Plan**
    grand total column, and **append** `+10%` after the existing value as you did with the
    8% uplift. Press Enter.
-6. In the **Regional Manager** column for *Asia Pacific* → *Beverages*, select
+8. In the **Regional Manager** column for *Asia Pacific* → *Beverages*, select
    **Submitted**.
 
 **Finance Director** flips to **Pending** on its own. The change is routed, and the audit
