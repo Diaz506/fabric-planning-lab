@@ -225,8 +225,10 @@ $12.14M gross profit with a $355K gap to close:
 | Lever | Before | After | Movement |
 |---|---|---|---|
 | Sales Plan | $26.31M | **$26.49M** | +$179K |
-| COGS | $14.17M | **$13.99M** | −$176K |
-| **Gross Profit** | $12.14M | **$12.50M** | **+$355K** |
+| COGS | $14,166.31K | **$13,988.75K** | −$177K |
+| **Gross Profit** | $12,144.89K | **$12,500.00K** | **+$355K** |
+
+Gross Profit lands on 12,500.00 exactly, not merely inside the tolerance band.
 
 The solver split the gap almost exactly in half, roughly 50% from revenue and 50% from
 cost. That is a consequence of leaving it unconstrained, not a rule. Your own figures
@@ -234,8 +236,32 @@ will differ, since they depend on how your Module 02 plan finished. The shape is
 matters: revenue up a little, cost down a little, gross profit landing on target.
 
 This is the number that changes the board conversation. The ask is not "grow revenue 5%."
-The ask is **$179K of incremental revenue and $176K of cost out**, two concrete
+The ask is **$179K of incremental revenue and $177K of cost out**, two concrete
 commitments somebody can own, rather than a percentage nobody can act on.
+
+### It solved at the top and applied all the way down
+
+Look past the All row. The adjustment did not stop at the total, it propagated
+proportionally to every leaf:
+
+| Row | COGS before | COGS after | Cut |
+|---|---|---|---|
+| All | 14,166.31 | 13,988.75 | 1.253% |
+| Americas | 3,967.10 | 3,917.38 | 1.253% |
+| Beverages | 886.79 | 875.67 | 1.254% |
+| Skin Care | 424.91 | 419.58 | 1.254% |
+
+The same uniform rate reaches every subcategory. That matters, because a target the
+solver can only satisfy at the total is not a plan anyone can execute. Here each product
+line carries its share, and a category manager can see exactly what was asked of them.
+
+The two original columns are untouched throughout, which is what makes the comparison
+possible at all.
+
+> [!NOTE]
+> Sales Plan displays to two decimals in millions, so 26.49 stands in for a more precise
+> underlying figure. Subtracting the displayed values will leave you a rounding gap of a
+> thousand or two against the Gross Profit column. The formula works on the real values.
 
 > [!NOTE]
 > You ran this without constraints, so the Optimizer was free to move both levers however
