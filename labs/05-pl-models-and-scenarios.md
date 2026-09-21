@@ -172,8 +172,8 @@ against city values summing to 178.96, a rounding difference.
 6. Add **Sales Volume** and **Avg Selling Price** to the canvas. Two ways:
 
    - **Insert**, which avoids dragging. Tick both in the **Measures** list on the left,
-     leave **Insert Measure** set to **As roots**, and select **Insert**.
-   - **Drag**, if you prefer. Tick both first, then drag them across together, into the
+     leave **Insert Measure** set to **As roots**, then select **Insert**.
+   - **Drag**, if you prefer. Tick both first, then drag them across together into the
      dashed **Drop from measure list** box at the **bottom** of the canvas.
 
 > [!IMPORTANT]
