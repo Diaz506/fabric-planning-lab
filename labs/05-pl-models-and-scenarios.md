@@ -171,10 +171,10 @@ against city values summing to 178.96, a rounding difference.
 5. On the **Model** ribbon, select **Measure Model**. The canvas opens.
 6. Add **Sales Volume** and **Avg Selling Price** to the canvas. Two ways:
 
-   - **Insert**, which avoids dragging. Tick both in the **Measures** list on the left,
-     leave **Insert Measure** set to **As roots**, then select **Insert**.
-   - **Drag**, if you prefer. Tick both first, then drag them across together into the
-     dashed **Drop from measure list** box at the **bottom** of the canvas.
+   | Method | How |
+   |---|---|
+   | **Insert**, no dragging | Tick both in the **Measures** list on the left, leave **Insert Measure** set to **As roots**, then select **Insert** |
+   | **Drag** | Tick both first, then drag them across together into the dashed **Drop from measure list** box at the **bottom** of the canvas |
 
 > [!IMPORTANT]
 > Dragging them one at a time risks dropping the second onto the first, which nests it as
