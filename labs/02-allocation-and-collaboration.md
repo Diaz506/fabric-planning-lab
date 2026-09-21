@@ -284,27 +284,51 @@ If every region rose, the edit ran unfiltered and you should undo it.
 
 A number without its reasoning is a number nobody can defend in a board meeting.
 
-1. Right-click the **Energy & Sports** grand total cell under *Americas* → *Beverages*.
-   Select **Add Comment** and enter:
+1. **Select** the **Energy & Sports** grand total cell under *Americas* → *Beverages*.
+   A single click is enough; do not open the edit box.
+2. Select **Comments** on the **toolbar**, the row of icons in the header beside
+   Security, Editing view, and Save. From the **Comments** dropdown choose
+   **Add new comment**.
+3. In the comment editor, enter:
 
    > 8% uplift agreed with the Americas sales lead. Annual total distributed across
    > quarters with a 4% growth trend.
 
-   Select **Post**.
+   Select the **Send** icon to post it.
 
-2. On the **Planning** ribbon, select **Comments** → **Settings**. Enable
-   **Comments Column** and select **Save**.
-3. Double-click the comments cell for the *Americas* row. Enter
-   `Sales Plan reviewed and ready for submission`, type `@` to tag a colleague, and
-   select **Post**.
+> [!NOTE]
+> Commenting lives on the **toolbar**, not on a right-click menu and not on the Planning
+> ribbon. Right-clicking a row gripper opens a different menu entirely, with Select,
+> Expand, Collapse, Insert, Actions, and Audit. That is for manipulating rows.
+>
+> The comment attaches to whatever you had selected, so a cell comment, a row comment,
+> and a column comment are all the same action applied to a different selection.
+
+The sheet stores the comment with your name and a timestamp. You can also star a comment
+to mark it important, or use **Assign to User** to turn it into a tracked task that
+starts at **Open** and can later be **Resolved**.
+
+### Add a comments column
+
+4. Select **Comments** on the toolbar, expand the dropdown, and choose **Settings**.
+5. Enable the **Comments Column** toggle and select **Save**.
+6. Double-click the *Americas* row in the new **Comments** column. Enter
+   `Sales Plan reviewed and ready for submission`, type `@` followed by a colleague's
+   name and pick them from the suggestions, then select the **Send** icon.
+
+Mentioned users get a Microsoft Teams notification with a link back to the sheet.
+
+> [!TIP]
+> Adding a comment as a task creates **Assignee** and **Status** columns alongside the
+> Comments column. Use the **>** icon in the Comments column header to show or hide them.
 
 ### Add a status field
 
-4. Collapse the column hierarchy. On the **Planning** ribbon, select **List** →
+7. Collapse the column hierarchy. On the **Planning** ribbon, select **List** →
    **Single Select**.
-5. Title it `Status`, select **Options** → **Preset** → **Process Status**, select
+8. Title it `Status`, select **Options** → **Preset** → **Process Status**, select
    **Apply**, then **Create**.
-6. Set the *Status* cell for the *Americas* row to **In Progress**.
+9. Set the *Status* cell for the *Americas* row to **In Progress**.
 
 ---
 
