@@ -24,8 +24,23 @@ unless you want to inspect the model first.
 
 ## The model: Northwind FMCG
 
-Three fact tables sharing a common date dimension. In this lab it stands in as
-Harborlight Provisions' sales and financial model.
+Importing the `.pbix` creates **two artifacts**: a report and a semantic model.
+
+The **semantic model** is what matters. The plan item binds to it, permanently, and every
+module reads from it. In this lab it stands in as Harborlight Provisions' governed
+reporting layer, the trusted numbers finance already uses.
+
+The **report** is Harborlight's existing reporting. The lab opens it once in
+[Module 01](../labs/01-environment-and-first-sheet.md) to establish what the company has
+today, and returns to it in [Module 06](../labs/06-intelligence-canvas.md) to show it
+unchanged after a full planning cycle. Planning writes to a separate Fabric SQL database
+and never modifies the connected semantic model, so the existing reporting estate is
+untouched.
+
+In a real deployment you would skip the import entirely and point the plan item at a
+semantic model your organization already reports from.
+
+Three fact tables share a common date dimension.
 
 ### Sales Transactions
 
@@ -35,9 +50,11 @@ distribute a top-down target.
 
 Dimensions you will use repeatedly:
 
-- **Region** → the row hierarchy's top level
-- **Category** → **Sub-Category** → the product breakdown beneath it
-- **Date hierarchy** → Year, Quarter, Month Short, used as the column hierarchy
+| Dimension | Role in the lab |
+|---|---|
+| Region | Top level of the row hierarchy |
+| Category, then Sub-Category | The product breakdown beneath Region |
+| Date hierarchy: Year, Quarter, Month Short | The column hierarchy |
 
 Key measure: **2025 Gross Revenue**, full-year FY25 actuals, totaling roughly **$28.5M**.
 That number is the anchor for the whole lab.

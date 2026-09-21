@@ -28,7 +28,37 @@ FY25 actuals.
    **From this computer**.
 4. Select `Northwind_FMCG.pbix` and select **Open**.
 
-The report and its semantic model appear in the folder.
+**Two artifacts appear in the folder: a report and a semantic model.** Both matter to the
+story, for different reasons.
+
+### Open the report before you go any further
+
+Select the report and spend a minute with it.
+
+This is Harborlight's reporting as it exists **today**. It tells you what happened in
+FY25: revenue by region, by category, by quarter. It is accurate, it is governed, and the
+finance team trusts it. It is also entirely backward-looking. Nowhere in it is there a
+number for next year, because there is nowhere for such a number to live.
+
+That is the gap this lab closes.
+
+Now note what you are about to do to it: **nothing**. Over the next seven modules you
+will build a complete FY26 plan on the semantic model underneath this report, and the
+report itself will keep working exactly as it does now. Plan data is written to a
+separate Fabric SQL database and never modifies the connected semantic model.
+
+For a finance team whose month-end close already works, that is the objection answered
+before it is raised.
+
+> [!NOTE]
+> **In a real deployment you would not import anything.** You would point the plan item at
+> a semantic model your organization already reports from. There are over 20 million
+> semantic models in Power BI, and planning is designed to sit on one of them rather than
+> ask you to build another.
+>
+> The `.pbix` import here manufactures "the model you already have" so the lab is
+> self-contained. The model does not even need to live in the same workspace as the plan
+> item, as long as you have at least Viewer access to its host workspace.
 
 > [!TIP]
 > You may see *"Refresh failed due to missing data source credentials."* Ignore it. The

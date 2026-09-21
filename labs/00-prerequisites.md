@@ -288,6 +288,63 @@ See [`data/README.md`](../data/README.md) for what is inside the model.
 
 ---
 
+## "We don't have a semantic model. Does this still work?"
+
+This comes up in almost every customer conversation, so it is worth answering before you
+start rather than mid-demo.
+
+First, a correction to the usual version of the question. Planning binds to a **semantic
+model**, not to a report. Whether a Power BI report exists is irrelevant: plenty of
+organizations have governed models consumed through Excel or Analyze in Excel with no
+formal report on top, and planning connects over XMLA without caring either way.
+
+So the real question is about the model. Three situations:
+
+### You have a model but no report
+
+Nothing changes. Connect the plan item to the model and every module in this lab works.
+Step 1 becomes "select your existing model" instead of importing a sample.
+
+### You have data in Fabric but no model
+
+Build a semantic model over the Lakehouse or Warehouse first. Direct Lake is supported,
+with one setup cost worth knowing up front: **Direct Lake and DirectQuery models require
+a gateway connection using fixed credentials**, because single sign-on is not supported
+yet.
+
+### You have neither
+
+Planning does offer entry points that do not start from a model:
+
+| Path | Accepts |
+|---|---|
+| Plan item creation | Data from a semantic model **or from Excel**, or start with a planning sheet and connect data afterwards |
+| PowerTable, **New Table** | Excel, CSV, or column headers alone to create an empty table for manual entry |
+| Intelligence sheets | Excel and CSV import |
+
+These are legitimate shapes. The roles article confirms it indirectly when it describes
+plan items that contain only PowerTable sheets, or only intelligence sheets.
+
+**But think carefully before recommending that route.** Every tutorial, every
+prerequisite, and the whole permissions model is written around semantic model
+connections, so the Excel path is thinly documented and less travelled.
+
+More to the point, it usually solves the wrong problem. A company with no semantic model
+that starts by uploading spreadsheets into planning has recreated the situation it was
+trying to escape: ungoverned numbers, no single definition, now hosted somewhere new. The
+40-tab workbook does not stop being a 40-tab workbook because it moved to Fabric.
+
+The sequence that works is: get the actuals into Fabric, build the semantic model, then
+plan on it. Planning earns its value because plan and actual share one governed
+definition. Remove that and you have bought a spreadsheet with approval workflows.
+
+Where the file-based path genuinely fits is **reference and master data with no system of
+record**, the cost centre list, the headcount roster, the asset register. That is exactly
+what [Module 07](07-powertable.md) does, and it is why PowerTable accepts Excel while
+planning sheets expect a model.
+
+---
+
 ## Things that will not work
 
 Read this list once now, so you recognize the symptom later.
@@ -365,6 +422,7 @@ Before moving on, you should be able to answer:
 3. Can you end a planning session early if you finish your work in a day?
 4. What happens to a plan item if someone renames the workspace it lives in?
 5. A Planner session costs 847 CU-hours. How much of an F4 is that?
+6. A customer says they have no Power BI reports. Does that stop them using planning?
 
 <details>
 <summary>Answers</summary>
@@ -378,6 +436,8 @@ Before moving on, you should be able to answer:
 5. 1.16 CU of average draw, which is 29% of an F4. Divide 847 by the 730 hours in the
    session. Comparing 847 against an hourly supply figure understates it roughly
    fivefold.
+6. No. Planning binds to a semantic model, not a report, and never reads the report at
+   all. The question that matters is whether they have a governed semantic model.
 
 </details>
 

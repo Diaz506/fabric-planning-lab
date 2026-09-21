@@ -186,6 +186,22 @@ filterable, commentable, and driven by a live planning sheet on the same page. T
 sees the variance, asks why APAC is short, and expands the plan grid in place, including
 the comment you left in Module 02 explaining the 8% uplift.
 
+### Go back and look at the original report
+
+Open the `Northwind_FMCG` report you imported in Module 01, the one showing FY25 actuals.
+
+It is unchanged. Same numbers, same visuals, same refresh behavior. Eight modules of
+planning work, a $30M target, an optimized margin, a rolling forecast committed to SQL,
+and the existing reporting estate never moved.
+
+That is the argument to make to a customer who already has reporting that works:
+**planning is additive**. It reads the same governed model, writes to its own database,
+and leaves everything downstream alone. Nobody has to migrate a report or renegotiate a
+definition to start planning.
+
+And now there are two things in the workspace: the report that says what happened, and a
+canvas that says what happens next, both reading the same trusted numbers.
+
 That is the core lab complete. Two modules remain: **[07](07-powertable.md)** for
 governed reference data, and **[08](08-sizing-and-governance.md)**, which you should not
 skip. It is the conversation Finance will have with you before any of this reaches
