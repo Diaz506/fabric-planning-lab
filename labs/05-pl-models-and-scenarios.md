@@ -308,6 +308,8 @@ against city values summing to 178.96, a rounding difference.
 > The **Insert Measure** dropdown is not limited to *As roots*. Once a formula measure
 > exists you can select it there, and ticked measures attach as its children. It is the
 > quickest way to build a parent with several children, and it cannot nest by accident.
+> It works on the native drivers listed in the **Measures** pane. Formula measures you
+> have already placed on the canvas are not in that pane, so those are moved by dragging.
 
 10. Complete the P&L with three more formula measures, each configured the same way and
     each needing **Column aggregation type** set to **Formula**:
@@ -318,9 +320,20 @@ against city values summing to 178.96, a rounding difference.
     | `Gross Profit` | `[Net Revenue]-[COGS]` |
     | `Net Profit` | `[Gross Profit]-[Operating Expenses]` |
 
-    Build Operating Expenses first and attach its four drivers, as you did for COGS. Then
-    Gross Profit over Net Revenue and COGS, and finally Net Profit over Gross Profit and
-    Operating Expenses. The finished tree:
+    Build Operating Expenses first and attach its four drivers with **Insert**, as you
+    did for COGS. Create Gross Profit and Net Profit next. Each arrives as a root with
+    nothing under it, so attach the rest on the canvas: tick a row, drag it onto its
+    parent and drop **on** the row rather than between rows. Children travel with the
+    measure you drag.
+
+    | Drag this | Onto this |
+    |---|---|
+    | COGS | Gross Profit |
+    | Net Revenue | Gross Profit |
+    | Gross Profit | Net Profit |
+    | Operating Expenses | Net Profit |
+
+    The finished tree:
 
     ```
     Net Profit                       root, the only one left
@@ -341,9 +354,10 @@ against city values summing to 178.96, a rounding difference.
         Selling and Marketing Expenses   child of Operating Expenses
     ```
 
-    Watch the root count as you go: three roots after Operating Expenses is built, two
-    once Gross Profit adopts Net Revenue and COGS, and one when Net Profit adopts the
-    last two. A single root means the P&L is complete.
+    Watch the root count as you go. It falls by one with each drag, and a single root,
+    Net Profit, means the P&L is complete. Writing a formula never moves anything, so
+    Net Profit can reference Gross Profit and Operating Expenses while all three still
+    sit as separate roots.
 
 > [!IMPORTANT]
 > **Create each formula measure before the one that references it.** Net Profit refers to
