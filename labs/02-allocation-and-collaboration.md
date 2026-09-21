@@ -29,7 +29,15 @@ Work in the `Plan Intro` sheet from Module 01.
 ### Create a column you can actually type in
 
 1. On the **Planning** ribbon, select **Totals** and enable **Column Grand Total** on the
-   left. A grand total column appears showing full-year FY25 actuals.
+   left. A single full-year column appears to the left of the monthly columns, showing
+   FY25 actuals totalled across all periods.
+
+> [!TIP]
+> **Vocabulary, because the lab uses it constantly.** The **grand total column** is that
+> full-year column. A **grand total cell** is that column intersected with whichever row
+> you are pointing at. On the *All* row it is the whole company for the year; on the
+> *Energy & Sports* row it is that subcategory for the year. Entering a value there
+> pushes it down to everything beneath.
 2. On the **Planning** ribbon, select **Number** → **Copy from another series** →
    **2025 Gross Revenue**.
 3. In the **Data Input** pane, **clear the Title field** and enter `2026 Target`.
@@ -72,13 +80,31 @@ Two things worth knowing before you click Create:
 
 ### Allocate the target
 
-5. Double-click the grand total cell of the **2026 Target** column, enter `28.5m`, and
-   select the check mark.
+You are about to type one number into one cell and have Planning build the rest.
+
+**Find the cell first.** It is the intersection of two things you already have on screen:
+
+- the **All** row, the top row that totals every region and category
+- the **grand total column** in **2026 Target**, the single full-year column you created
+  in step 1 by enabling *Column Grand Total*, not the monthly columns
+
+That cell currently shows around **25.9M**, the FY25 total for the whole company. It is
+the one number that represents everything.
+
+5. Double-click that cell, type `28.5m`, and select the check mark to confirm.
+
+> [!NOTE]
+> Double-click rather than single-click: one click selects a cell, two clicks open it for
+> editing. And `28.5m` is shorthand for 28,500,000, so there is no need to type the zeros.
 
 You just overwrote the $25.9M baseline with the board's first ask, about 10% growth.
 Planning redistributes that number across every region, category, and subcategory
-**proportionally to the FY25 revenue mix**. One number in, a fully allocated plan out.
-That is top-down planning in a single gesture.
+**proportionally to the FY25 revenue mix**. Scroll down and you will see every row has
+moved, in proportion to what it contributed last year.
+
+One number in, a fully allocated plan out. That is top-down planning in a single gesture,
+and it works because **Distribute parent value to children** was left enabled when you
+created the column.
 
 ### Now lock the first half of the year
 
@@ -89,7 +115,8 @@ supply plan is locked. Growth has to come from the back half.
 7. Select the **Q1** row total cell in the **2026 Target** column, select the
    distribution icon, and select **Lock all children**. Repeat for **Q2**. Locked cells
    turn grey.
-8. Double-click the grand total cell of **2026 Target**, enter `30m`, and press Enter.
+8. Double-click the same grand total cell of **2026 Target** you used before, enter
+   `30m`, and press Enter.
 
 The board raised the ask from $28.5M to $30M, and **the extra $1.5M lands only in Q3 and
 Q4**. Q1 and Q2 do not move.
@@ -123,8 +150,8 @@ The target is a frame. The plan is what the regions commit to.
 The Americas sales lead is confident about Energy & Sports drinks.
 
 4. Expand *Americas* → *Beverages* and find the **Energy & Sports** row.
-5. Double-click its grand total cell in **2026 Sales Plan** and enter `+ 8%` in the
-   formula bar. Press Enter.
+5. Double-click the **2026 Sales Plan** grand total cell **on the Energy & Sports row**,
+   and enter `+ 8%` in the formula bar. Press Enter.
 
 The increase rolls up through *Beverages* to *Americas* automatically.
 
