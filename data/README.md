@@ -40,7 +40,32 @@ untouched.
 In a real deployment you would skip the import entirely and point the plan item at a
 semantic model your organization already reports from.
 
-Three fact tables share a common date dimension.
+## What is in the model
+
+When you connect the semantic model, the **Data** pane groups everything by the table it
+belongs to. Knowing which table holds what saves a lot of hunting.
+
+| Table | Type | Holds | Used in |
+|---|---|---|---|
+| **Measures** | Measures | *2025 Gross Revenue*, *2025 COGS*, and the other headline measures | Modules 01, 03, 04, 06 |
+| **Date** | Dimension | *Year*, *Quarter*, *Month*, *Month Short*; the column hierarchy everywhere | Every module |
+| **Geography** | Dimension | *Region*, *Sub Region*, *City* | Modules 01, 03, 05 |
+| Product dimension | Dimension | *Category*, *Sub-Category* | Modules 01, 03, 04, 06 |
+| **Sales Transactions** | Fact | Revenue and cost actuals at geography and product level | Underlies the Measures table |
+| **P&L Measures** | Fact | Driver-level measures: sales volume, average selling price, COGS components, operating expenses | Module 05, measure model |
+| **P&L Rows** | Fact | P&L line items as rows, with *Account* and *Value* columns | Module 05, row model |
+
+The three fact tables share the common *Date* dimension.
+
+> [!NOTE]
+> Microsoft's tutorials name the *Measures*, *Date*, and *Geography* tables explicitly but
+> never name the table holding *Category* and *Sub-Category*. It is referred to only as a
+> dimension. Expect a product or item dimension in the Data pane; this lab does not invent
+> a name for it.
+
+---
+
+## The fact tables in detail
 
 ### Sales Transactions
 
@@ -48,16 +73,9 @@ Revenue and cost actuals at geography and product level. This is the base the FY
 revenue plan is built from. It supplies the prior-year mix that allocation uses to
 distribute a top-down target.
 
-Dimensions you will use repeatedly:
-
-| Dimension | Role in the lab |
-|---|---|
-| Region | Top level of the row hierarchy |
-| Category, then Sub-Category | The product breakdown beneath Region |
-| Date hierarchy: Year, Quarter, Month Short | The column hierarchy |
-
 Key measure: **2025 Gross Revenue**, full-year FY25 actuals, totaling roughly **$28.5M**.
-That number is the anchor for the whole lab.
+That number is the anchor for the whole lab. You will find it under the **Measures**
+table rather than here.
 
 ### P&L Measures
 
@@ -74,9 +92,9 @@ the building blocks of the measure model in
 
 ### P&L Rows
 
-P&L line items structured as rows, with cost data at individual line-item level. Used by
-the row model builder in Module 05, where you assemble a P&L hierarchy from Net Profit
-downward.
+P&L line items structured as rows, with cost data at individual line-item level. Exposes
+*Account* and *Value*, which is what the row model builder in Module 05 maps to build a
+P&L hierarchy from Net Profit downward.
 
 ---
 

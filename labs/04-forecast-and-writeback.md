@@ -25,11 +25,11 @@ This is the module that makes planning matter to everyone outside Finance.
    **Create**.
 2. Assign the fields:
 
-   | Field | Value |
-   |---|---|
-   | **Rows** | *Category* → *Sub-Category* |
-   | **Columns** | Date hierarchy: *Year*, *Quarter*, *Month Short* |
-   | **Values** | *Gross Revenue* |
+   | Field | Value | Source table |
+   |---|---|---|
+   | **Rows** | *Category* → *Sub-Category* | the product dimension |
+   | **Columns** | *Year*, *Quarter*, *Month Short* | *Date* |
+   | **Values** | *Gross Revenue* | *Measures* |
 
 3. In the **Filter** panel, apply a year filter for **2024** and **2025**.
 

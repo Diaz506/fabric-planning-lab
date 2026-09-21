@@ -109,11 +109,17 @@ The model's tables appear in the **Data** tab: dimensions, measures, and the dat
    select **Create**.
 2. Assign the fields:
 
-   | Field | Value |
-   |---|---|
-   | **Rows** | *Region* → *Category* → *Sub-Category* |
-   | **Columns** | Date hierarchy: *Year*, *Quarter*, *Month Short* |
-   | **Values** | *2025 Gross Revenue* (from the Measures table) |
+   | Field | Value | Source table |
+   |---|---|---|
+   | **Rows** | *Region* → *Category* → *Sub-Category* | *Geography* for Region; the product dimension for Category and Sub-Category |
+   | **Columns** | *Year*, *Quarter*, *Month Short* | *Date* |
+   | **Values** | *2025 Gross Revenue* | *Measures* |
+
+> [!TIP]
+> In the **Data** pane, dimensions and measures are grouped by the table they belong to.
+> If you cannot find *Region*, expand **Geography** rather than hunting through the fact
+> tables. [`data/README.md`](../data/README.md) lists every table in the model and what
+> lives in each.
 
 You are now looking at Harborlight's FY25 actuals, roughly **$28.5M**, broken out by
 region and product, quarter by quarter. This sheet is the foundation for everything that

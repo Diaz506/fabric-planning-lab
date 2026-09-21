@@ -23,11 +23,12 @@ goal-seek for planning. You state the target, name the levers, and it back-calcu
    select **Create**.
 2. Assign the fields:
 
-   | Field | Value |
-   |---|---|
-   | **Rows** | *Region Name* → *Category* → *Sub-category* |
-   | **Columns** | Date hierarchy |
-   | **Values** | *2026 Sales Plan* from **From Sheets** → *Plan Intro*; *COGS 2025* from the semantic model's measures table |
+   | Field | Value | Source |
+   |---|---|---|
+   | **Rows** | *Region Name* → *Category* → *Sub-category* | *Geography*, then the product dimension |
+   | **Columns** | Date hierarchy | *Date* |
+   | **Values** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
+   | **Values** | *COGS 2025* | *Measures* |
 
 3. Double-click the **Sum of 2026 Sales Plan** label in the **Values** field and rename it
    to `2026 Sales Plan`.

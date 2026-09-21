@@ -33,11 +33,11 @@ two ways is the fastest way to understand which one your own data calls for.
    and select **Create**.
 2. Assign the fields:
 
-   | Field | Value |
-   |---|---|
-   | **Rows** | Region hierarchy, *Region* → *Cities* |
-   | **Columns** | Date hierarchy: *Year*, *Quarter*, *Month* |
-   | **Values** | All measures from the **P&L Measures** table |
+   | Field | Value | Source table |
+   |---|---|---|
+   | **Rows** | *Region* → *Cities* | *Geography* |
+   | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
+   | **Values** | Every measure in the table | **P&L Measures** |
 
 3. Double-click each measure label and remove the `Sum of` prefix.
 4. Select the three dots next to **Avg Selling Price** in the Values field and change it
@@ -155,8 +155,14 @@ Same P&L, built from account-level rows instead of drivers.
 
 1. On the **Home** ribbon, select **New Planning Sheet**. Name it `P&L – Row model` and
    select **Create**.
-2. Assign: **Rows** = *Account*, **Columns** = Date hierarchy (*Year*, *Quarter*,
-   *Month*), **Values** = *Value*.
+2. Assign the fields:
+
+   | Field | Value | Source table |
+   |---|---|---|
+   | **Rows** | *Account* | **P&L Rows** |
+   | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
+   | **Values** | *Value* | **P&L Rows** |
+
 3. On the **Model** ribbon, select **Row Model** → **Enable**.
 
 ### Clear the decks

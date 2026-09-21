@@ -132,12 +132,12 @@ Plan and actual stop being two systems that disagree.
 1. In the **Visualizations** pane, select **Matrix**.
 2. In the field well, map:
 
-   | Well | Field |
-   |---|---|
-   | **Rows** | *Category*, *Sub-Category* |
-   | **Columns** | *Year*, *Quarter* |
-   | **Values (Actuals)** | *2025 Gross Revenue* |
-   | **Compare to Prior Period (PY)** | *2026 Sales Plan*, from **From Sheets** |
+   | Well | Field | Source |
+   |---|---|---|
+   | **Rows** | *Category*, *Sub-Category* | the product dimension |
+   | **Columns** | *Year*, *Quarter* | *Date* |
+   | **Values (Actuals)** | *2025 Gross Revenue* | *Measures* |
+   | **Compare to Prior Period (PY)** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
 
 3. On the **Matrix** tab, select **Show Columns**, then enable **Variance** and
    **Variance %**.
