@@ -181,9 +181,10 @@ against city values summing to 178.96, a rounding difference.
 > a child. You will see it as an indent with a collapse chevron on the parent. Both
 > measures should sit at the same level at this point. If one is indented, drag it out.
 >
-> Check the **Aggregation** column while you are here. If it reads `Sum` against
-> *Avg Selling Price* and the cell is editable, set it to **Average**. The measure model
-> can hold its own aggregation independently of the Values field on the sheet.
+> The **Aggregation** column reads `Sum` against *Avg Selling Price* even when the Values
+> field is correctly set to Average, because it shows the measure's native default rather
+> than the setting in force. Leave it alone. The check in step 7 confirms whether the
+> Average is being honoured.
 
 7. Select **Add Measure** → **Formula**. The **Formula Measure** pane opens, the same one
    you used in [Module 03](03-optimizer.md). Configure it:
@@ -236,13 +237,24 @@ against city values summing to 178.96, a rounding difference.
 > sheet, where *Gross Revenue* now appears as a column.
 >
 > On the **All** row, multiply the two numbers already on screen. Gross Revenue should
-> equal Sales Volume times Avg Selling Price. In one run that was 315.51 thousand units
-> at an averaged price of 194.84, giving roughly **61.5M**.
+> equal Sales Volume times Avg Selling Price. One run gave 311.19 thousand units at an
+> averaged price of 196.10, and Gross Revenue read **61.03M**, matching to the cent.
 >
-> A figure around **583M** instead means the model used the summed price of 1,849 rather
-> than the average, about nine times too high, and every revenue line below would inherit
-> it. Watch for the column scale labels, since Sales Volume displays in thousands and
-> Gross Revenue in millions.
+> A figure around **578M** instead would mean the summed price of 1,858 was used, about
+> nine times too high. Watch the column scale labels, since Sales Volume displays in
+> thousands and Gross Revenue in millions.
+
+> [!NOTE]
+> **The measure model's Aggregation column shows the native default, not the setting in
+> force.** It reads `Sum` against *Avg Selling Price* even when the Values field is
+> correctly set to Average. The check above is what settles it: if Gross Revenue matches
+> volume times the displayed average price, the Average setting is being honoured.
+>
+> The same figures also prove **Column aggregation type** is doing its job. The ten city
+> Gross Revenues summed to 57.85M while the All row read 61.03M, a gap of more than 3M.
+> A total that merely added its children would have shown 57.85M. Instead it recomputed
+> volume times price at the regional level, which is exactly what setting it to Formula
+> buys you.
 
 8. Drag **Discounts and Returns** onto the canvas. Add another formula measure:
 
