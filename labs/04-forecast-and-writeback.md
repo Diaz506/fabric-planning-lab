@@ -272,20 +272,6 @@ see it.
 3. Still inside the **Settings** dialog, switch to its **Data** tab. Deselect
    **Gross Revenue** and keep **Forecast** selected. Gross Revenue is read-only actuals;
    there is no reason to persist a copy.
-
-> [!WARNING]
-> **This is the Data tab inside Settings, not the Data pane on the right of the sheet.**
-> They look similar and do very different things. The Settings tab chooses which measures
-> get written to the database. The Data pane chooses which fields are in the sheet at all.
->
-> Unticking **Gross Revenue** in the Data pane removes it from the sheet, which severs the
-> **Link to Measure** that every closed period reads from. Every closed value empties at
-> once: 2024 and 2025 go blank, and January 2026 drops to zero, leaving the 2026 total at
-> 25.92 instead of 27.84. Nothing errors.
->
-> If that happens, re-tick **Gross Revenue** in the Data pane and the closed periods
-> return.
-
 4. On the **Destinations** tab, select the Fabric SQL destination.
 5. Close Settings, then on the **Writeback** ribbon select **Writeback** and confirm.
 
