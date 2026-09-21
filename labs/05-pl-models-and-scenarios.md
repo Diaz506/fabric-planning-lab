@@ -405,19 +405,26 @@ Harborlight's exec team wants two versions of FY26: an upside case and a cost-ou
 
 ### Best Case: grow the top line
 
-1. Select **Create scenario**, name it `Best Case`, confirm all semantic model measures
-   are included, and select **Create**. The new scenario appears in the selector at the
-   bottom left, beside `Base`.
-2. Expand *Asia Pacific* and select the *Sydney* card.
-3. Open the **Measure Simulation** dropdown and apply:
+1. Select **Create scenario** and name it `Best Case`. The **Include series in scenarios**
+   box arrives prepopulated with all ten drivers. Scroll it to confirm nothing is missing,
+   then select **Create**.
+2. Check the scenario selector at the bottom left reads `Best Case`. If it still reads
+   `Base`, select it from the dropdown. Base is the committed plan and cannot be
+   simulated, so its inputs stay greyed out.
+3. Expand *Asia Pacific* and select the *Sydney* card. The **Measure simulation** panel
+   opens with the whole P&L listed and **Percentage** already selected. Type into these
+   three rows under Gross Revenue and leave the rest at 0:
 
    | Measure | Change |
    |---|---|
-   | Sales Volume | `5%` |
-   | Avg Selling Price | `2%` |
-   | Discounts and Returns | `−5%` |
+   | Sales Volume | `5` |
+   | Avg Selling Price | `2` |
+   | Discounts and Returns | `-5` |
 
 4. Close the dialog. Sydney, Asia Pacific, and the All card update in real time.
+
+Only native driver rows accept input. Formula rows show **Optimize** instead, since they
+are calculated from the drivers underneath them.
 
 Because the model is driver-based, a volume change flows through gross revenue, net
 revenue, gross profit, and net profit automatically. You changed three inputs and the
@@ -425,8 +432,10 @@ entire P&L responded.
 
 ### Cost Restructuring: take cost out
 
-5. Select **Create scenario**, name it `Cost Restructuring`, and select **Create**.
-6. Expand *Europe*, select the *London* card, choose **Value**, scroll, and apply:
+5. Select **Create scenario**, name it `Cost Restructuring`, and select **Create**. Check
+   the selector switched, as you did for Best Case.
+6. Expand *Europe* and select the *London* card. Switch the **Percentage / Value** toggle
+   at the top of the panel to **Value**, then scroll past Gross Revenue and apply:
 
    | Measure | Value |
    |---|---|
