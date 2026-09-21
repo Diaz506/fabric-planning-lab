@@ -125,6 +125,23 @@ the columns it needs.
 3. Collapse the row hierarchy to category level. On the **Planning** ribbon, select
    **Totals** and enable **Column Grand Total** on the left.
 
+> [!NOTE]
+> The two columns may display at different scales, Sales Plan *in Millions* and COGS
+> *in Thousands*. That is display formatting only. The formula operates on the underlying
+> values, so the subtraction is correct even though the columns look like they are in
+> different units.
+
+Note the Gross Profit figure on the **All** row before you continue. It should land
+somewhere around **$12.1M** against the $12.5M target, leaving the Optimizer a real gap
+to close.
+
+> [!TIP]
+> **Your exact figures will differ slightly from the ones quoted later in this module.**
+> They depend on how the bottom-up plan in Module 02 turned out, including whether you ran
+> the `+10%` approval test. The numbers below come from one run; what matters is that
+> Gross Profit finishes at exactly 12.5M and that you can see which two levers moved to
+> get there.
+
 ## Step 4: Run the Optimizer
 
 1. Select the **Gross Profit** grand total cell. On the **Planning** ribbon, select
@@ -147,17 +164,20 @@ the columns it needs.
 1. On the **Planning** ribbon, select **Show Columns** and enable **2026 Sales Plan** and
    **2025 COGS**.
 
-The original and optimized columns now sit side by side:
+The original and optimized columns now sit side by side. From one run:
 
 | Lever | Original | Optimized | Movement |
 |---|---|---|---|
 | Sales Plan | $26.1M | **$26.38M** | +$0.28M |
 | COGS | $14.17M | **$13.88M** | −$0.29M |
 
-Together they deliver the $12.5M target.
+Together they deliver the $12.5M target. Your own figures will differ in the originals
+and therefore in the movements, since they depend on how your Module 02 plan finished.
+The shape is what matters: revenue up a little, cost down a little, gross profit landing
+exactly on 12.5M.
 
 This is the number that changes the board conversation. The ask is not "grow revenue 5%."
-The ask is **$280K of incremental revenue and $290K of cost out**, two concrete
+The ask is **roughly $280K of incremental revenue and $290K of cost out**, two concrete
 commitments somebody can own, rather than a percentage nobody can act on.
 
 > [!NOTE]
