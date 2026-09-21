@@ -185,14 +185,30 @@ against city values summing to 178.96, a rounding difference.
 > *Avg Selling Price* and the cell is editable, set it to **Average**. The measure model
 > can hold its own aggregation independently of the Values field on the sheet.
 
-7. Select **Add Measure** → **Formula**:
+7. Select **Add Measure** → **Formula**. The **Formula Measure** pane opens, the same one
+   you used in [Module 03](03-optimizer.md). Configure it:
 
-   | Name | Formula |
-   |---|---|
-   | `Gross Revenue` | `[Sales Volume]*[Avg Selling Price]` |
+   | Field | Value | Note |
+   |---|---|---|
+   | **Title** | `Gross Revenue` | |
+   | **Insert as** | Visual Measure | The default |
+   | **Data type** | Number | The default |
+   | **Formula** | `[Sales Volume]*[Avg Selling Price]` | Pick names from the **References** tab rather than typing them |
+   | **Column aggregation type** | **Formula** | **Defaults to Sum. Change it.** |
+   | **Row aggregation type** | Formula | Already the default |
 
    Select **Create**. Drag *Gross Revenue* onto the canvas, then drag *Sales Volume* and
    *Avg Selling Price* beneath it.
+
+> [!IMPORTANT]
+> **Column aggregation type defaults to Sum and must be changed to Formula, on every one
+> of the six formula measures in this section.** Row aggregation is already Formula, so
+> the column setting is the one that catches people.
+>
+> Left on Sum, each total adds up its children instead of recalculating the formula at
+> that level. Here that would sum the city-level gross revenues rather than recomputing
+> volume times price for the region, and the error compounds as you stack Net Revenue,
+> Gross Profit and Net Profit on top.
 
 > [!TIP]
 > **Sanity check the first formula before building five more on top of it.** On the All
@@ -226,11 +242,7 @@ against city values summing to 178.96, a rounding difference.
     | `Operating Expenses` | `[Admin Expenses] + [Employee Expenses] + [R&D] + [Selling and Marketing Expenses]` |
     | `Net Profit` | `[Gross Profit] – [Operating Expenses]` |
 
-> [!IMPORTANT]
-> On every calculated measure, set **Column aggregation type** to **Formula**. It
-> defaults to Sum. **Row aggregation type** is already Formula. Same trap as
-> [Module 03](03-optimizer.md): left on Sum, the totals add up their children instead of
-> recalculating the formula at each level, and the subtotals lie.
+    Each one needs **Column aggregation type** set to **Formula**, as in step 7.
 
 ### View it
 
