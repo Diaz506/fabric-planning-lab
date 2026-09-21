@@ -169,8 +169,19 @@ against city values summing to 178.96, a rounding difference.
 ### Build the hierarchy
 
 5. On the **Model** ribbon, select **Measure Model**. The canvas opens.
-6. Drag **Sales Volume** and **Avg Selling Price** into the
-   **Drop from measure list** section.
+6. Drag **Sales Volume** and **Avg Selling Price** into the dashed
+   **Drop from measure list** box at the **bottom** of the canvas, not into the grid
+   above it.
+
+> [!IMPORTANT]
+> Drop them separately so they land as siblings. Dropping one onto the other nests it as a
+> child, which you will see as an indent and a collapse chevron on the parent. If that
+> happens, drag the indented measure out before continuing.
+>
+> Check the **Aggregation** column while you are here. If it reads `Sum` against
+> *Avg Selling Price* and the cell is editable, set it to **Average**. The measure model
+> can hold its own aggregation independently of the Values field on the sheet.
+
 7. Select **Add Measure** → **Formula**:
 
    | Name | Formula |
@@ -179,6 +190,12 @@ against city values summing to 178.96, a rounding difference.
 
    Select **Create**. Drag *Gross Revenue* onto the canvas, then drag *Sales Volume* and
    *Avg Selling Price* beneath it.
+
+> [!TIP]
+> **Sanity check the first formula before building five more on top of it.** On the All
+> row, Gross Revenue should be about `Sales Volume x 194.84`, the averaged price. If it
+> comes out roughly nine times larger, the model multiplied by the summed price of 1,849
+> instead, and every revenue line below will inherit the error.
 
 8. Drag **Discounts and Returns** onto the canvas. Add another formula measure:
 
