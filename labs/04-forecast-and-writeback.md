@@ -206,7 +206,7 @@ twelve months ahead.
 
    | Measure | Closed Period | Open Period |
    |---|---|---|
-   | Forecast | Jan 2024 - **Jan 2026** | **Feb 2026** - **Jan 2027** |
+   | Forecast | Jan 2024 to **Jan 2026** | **Feb 2026** to **Jan 2027** |
 
    Select **Save**. **Back** returns to the settings and **Discard** abandons the change.
 
