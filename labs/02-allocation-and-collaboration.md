@@ -286,9 +286,9 @@ A number without its reasoning is a number nobody can defend in a board meeting.
 
 1. **Select** the **Energy & Sports** grand total cell under *Americas* → *Beverages*.
    A single click is enough; do not open the edit box.
-2. Select **Comments** on the **toolbar**, the row of icons in the header beside
-   Security, Editing view, and Save. From the **Comments** dropdown choose
-   **Add new comment**.
+2. Select **Comments** in the **top-right of the window**, on the same row as the ribbon
+   tab names. The cluster reads Security, Comments, Editing, Save. Open the **Comments**
+   dropdown and choose **Add new comment**.
 3. In the comment editor, enter:
 
    > 8% uplift agreed with the Americas sales lead. Annual total distributed across
@@ -296,10 +296,17 @@ A number without its reasoning is a number nobody can defend in a board meeting.
 
    Select the **Send** icon to post it.
 
-> [!NOTE]
-> Commenting lives on the **toolbar**, not on a right-click menu and not on the Planning
-> ribbon. Right-clicking a row gripper opens a different menu entirely, with Select,
-> Expand, Collapse, Insert, Actions, and Audit. That is for manipulating rows.
+> [!IMPORTANT]
+> **Comments is not on the Planning ribbon.** It is in the top-right of the window, on
+> the same row as the ribbon tabs: **Security, Comments, Editing, Save**.
+>
+> Two things on the ribbon look like candidates and are not:
+>
+> - **Notes**, in the Actions group, is a separate feature. Notes are static annotations
+>   added through *Planning* → *Notes* → *Add New Note*. Comments are threaded, support
+>   `@` mentions and assignment, and send Teams notifications.
+> - **Right-clicking a row gripper** opens Select, Expand, Collapse, Insert, Actions, and
+>   Audit. That menu manipulates rows and has nothing to do with commenting.
 >
 > The comment attaches to whatever you had selected, so a cell comment, a row comment,
 > and a column comment are all the same action applied to a different selection.
@@ -310,7 +317,8 @@ starts at **Open** and can later be **Resolved**.
 
 ### Add a comments column
 
-4. Select **Comments** on the toolbar, expand the dropdown, and choose **Settings**.
+4. Select **Comments** in the top-right of the window, expand the dropdown, and choose
+   **Settings**.
 5. Enable the **Comments Column** toggle and select **Save**.
 6. Double-click the *Americas* row in the new **Comments** column. Enter
    `Sales Plan reviewed and ready for submission`, type `@` followed by a colleague's

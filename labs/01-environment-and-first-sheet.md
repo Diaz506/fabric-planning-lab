@@ -152,24 +152,47 @@ The plan item is now ready for collaboration.
 
 ## Step 7: Learn the room
 
-Two minutes here saves twenty later. Select the down arrow at top right to expand the
-full ribbon.
+Two minutes here saves twenty later.
+
+The window has three layers. **Ribbon tabs** run along the top: Home, Planning, Model,
+Format, Writeback, Infobridge. On the **same row, at the far right**, sit four controls
+that belong to no ribbon: **Security**, **Comments**, **Editing** (the view toggle), and
+**Save**. Below the tabs is the ribbon itself, organized into named groups.
 
 | Ribbon | What lives there |
 |---|---|
 | **Home** | New planning, PowerTable, and intelligence sheets |
-| **Planning** | Layout, formatting, bulk edit, pivot, filters, audit log, inserted columns |
+| **Planning** | Layout, formatting, inserted rows and columns, bulk edit, filters, audit |
 | **Model** | Forecasts, scenarios, driver-based models, cube, approvals |
 | **Format** | Conditional and semantic formatting |
 | **Writeback** | Destinations, settings, logs |
+| **Infobridge** | Data integration and connected planning across sheets |
+
+The **Planning** ribbon is the one you will live in, and it is organized into groups:
+
+| Group | Contains |
+|---|---|
+| **Layout & Number** | Layout, Totals, Quick format, percentage, currency, decimal places |
+| **Rows & Columns** | Insert Row, Manage Rows, and the inserted column types: Formula, Text, List, Number, Checkbox, Date, Simulate, Person; plus Manage measures and Show Columns |
+| **Tools** | Bulk Edit, Pivot, Optimize, Top n, Filter, Filter context |
+| **Actions** | Audit, Notes, Writeback, Reset, Export |
+| **Default** | Undo |
 
 Also worth finding now:
 
-- **Header icons:** Security, Comments, Editing/Reading view, Save
-- **Left arrow:** the **Explorer** pane: add, manage, and navigate between sheets
-- **Right sidebar:** Data, Fields, Filter, Comments, Bookmarks
-- **Footer:** row and column counts, a zoom slider, and a **Settings** icon for rows per
-  page, which you will use in the next module
+- **Top-right, beside the ribbon tabs:** Security, **Comments**, Editing, Save.
+  Commenting is here, not on the Planning ribbon
+- **Left edge:** the **Explorer** pane: add, manage, and navigate between sheets
+- **Right edge:** a strip of icons opening Data, Filter, Comments, Bookmarks, and formula
+  panes. The **Data** pane is where your semantic model tables live
+- **Footer:** session status, row and column counts, a live Sum, Avg and Count of the
+  current selection, a zoom slider, and a **Settings** icon for rows per page, which you
+  will use in the next module
+
+> [!TIP]
+> **Notes and Comments are different features.** Notes, in the Planning ribbon's Actions
+> group, are static annotations on a cell. Comments, in the header bar, are threaded and
+> support `@` mentions, assignment, and Teams notifications. This lab uses Comments.
 
 ---
 
