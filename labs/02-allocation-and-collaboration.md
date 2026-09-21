@@ -296,20 +296,12 @@ A number without its reasoning is a number nobody can defend in a board meeting.
 
    Select the **Send** icon to post it.
 
-> [!IMPORTANT]
-> **Comments is not on the Planning ribbon.** It is in the top-right of the window, on
-> the same row as the ribbon tabs: **Security, Comments, Editing, Save**.
->
-> Two things on the ribbon look like candidates and are not:
->
-> - **Notes**, in the Actions group, is a separate feature. Notes are static annotations
->   added through *Planning* → *Notes* → *Add New Note*. Comments are threaded, support
->   `@` mentions and assignment, and send Teams notifications.
-> - **Right-clicking a row gripper** opens Select, Expand, Collapse, Insert, Actions, and
->   Audit. That menu manipulates rows and has nothing to do with commenting.
->
+> [!NOTE]
 > The comment attaches to whatever you had selected, so a cell comment, a row comment,
 > and a column comment are all the same action applied to a different selection.
+>
+> **Notes**, on the Planning ribbon, is a different feature: static annotations rather
+> than threaded discussion.
 
 The sheet stores the comment with your name and a timestamp. You can also star a comment
 to mark it important, or use **Assign to User** to turn it into a tracked task that
