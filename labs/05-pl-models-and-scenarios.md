@@ -230,10 +230,19 @@ against city values summing to 178.96, a rounding difference.
 > Gross Profit and Net Profit on top.
 
 > [!TIP]
-> **Sanity check the first formula before building five more on top of it.** On the All
-> row, Gross Revenue should be about `Sales Volume x 194.84`, the averaged price. If it
-> comes out roughly nine times larger, the model multiplied by the summed price of 1,849
-> instead, and every revenue line below will inherit the error.
+> **Sanity check the first formula before building five more on top of it.**
+>
+> The measure model canvas shows no values, so select **Back to Home** to return to the
+> sheet, where *Gross Revenue* now appears as a column.
+>
+> On the **All** row, multiply the two numbers already on screen. Gross Revenue should
+> equal Sales Volume times Avg Selling Price. In one run that was 315.51 thousand units
+> at an averaged price of 194.84, giving roughly **61.5M**.
+>
+> A figure around **583M** instead means the model used the summed price of 1,849 rather
+> than the average, about nine times too high, and every revenue line below would inherit
+> it. Watch for the column scale labels, since Sales Volume displays in thousands and
+> Gross Revenue in millions.
 
 8. Drag **Discounts and Returns** onto the canvas. Add another formula measure:
 
