@@ -115,14 +115,23 @@ anything else. That is what makes the scenarios in Part 2 possible.
 
 </details>
 
-3. Double-click each measure label and remove the `Sum of` prefix.
+3. Double-click each measure label in the **Values** field and remove the `Sum of` prefix.
 4. Select the three dots next to **Avg Selling Price** in the Values field and change it
    to **Average**.
 
 > [!IMPORTANT]
-> Average selling price is a rate, not a quantity. Summing it across cities produces a
-> number with no meaning. This is the most common modeling error in driver-based P&Ls, and
-> it is silent. The total just looks oddly large.
+> **Do both of these before opening the measure model canvas.**
+>
+> The rename is cosmetic. The aggregation change is not. Your first formula is
+> `Gross Revenue = [Sales Volume] * [Avg Selling Price]`, and average selling price is a
+> rate, not a quantity. Left on Sum, you multiply volume by the sum of prices across every
+> city, and the whole P&L is wrong from the top line down. Nothing errors. The total just
+> looks oddly large.
+>
+> This is the most common modeling error in driver-based P&Ls.
+>
+> If the measure list in the canvas still shows `Sum of` against every measure, these two
+> steps have not been applied. Close the canvas, apply them, and reopen.
 
 ### Build the hierarchy
 
