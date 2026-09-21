@@ -227,18 +227,36 @@ spreading it evenly.
 
 APAC and Europe both expect a Q3 lift in beverages and personal care.
 
-7. On the **Planning** ribbon, select **Bulk Edit** and configure:
+7. On the **Planning** ribbon, select **Bulk Edit**. The dialog has four parts, and the
+   dimension scoping is not a set of fields, it is a filter list you build.
 
-   | Setting | Value |
+   **Measure:** select `2026 Sales Plan`.
+
+   **Select Filter:** choose **+ Add Filter** once for each dimension you are scoping to,
+   three times in total:
+
+   | Filter | Value |
    |---|---|
-   | **Measure** | 2026 Sales Plan |
-   | **Region Name** | Asia Pacific, Europe |
-   | **Category** | Beverages, Personal Care |
-   | **Quarter Name** | Q3 |
-   | **Apply to Row Level** | Subcategory |
-   | **Apply to Column Level** | Month Short |
-   | **Type** | Append By |
-   | **Value** | 8% |
+   | Region Name | Asia Pacific, Europe |
+   | Category | Beverages, Personal Care |
+   | Quarter Name | Q3 |
+
+   **Apply to Row Level:** `Sub Category`. **Apply to Column Level:** `Month Short`.
+   These control how deep the edit reaches, not which rows it touches.
+
+   **Type:** change it from the default to **Append By**. **Value:** `8%`.
+
+   Select **Apply**.
+
+> [!IMPORTANT]
+> **Type defaults to Set Value, which replaces rather than adds.** Leave it there with a
+> value of `8%` and you will overwrite every Q3 subcategory in two regions with the
+> literal figure, wiping the plan you just built. Change it to **Append By** before you
+> select Apply.
+>
+> This is the same append-versus-replace distinction as the cell edit above, and it is
+> the reason bulk edit is worth using: it applies that append to hundreds of cells at
+> once, consistently.
 
 Q3 rises 8% across both regions and both categories, applied down to subcategory and
 month. In the old workbook that was four tabs and a prayer.
