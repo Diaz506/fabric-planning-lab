@@ -95,16 +95,58 @@ set. If 2026 is not empty, the open period picked up a default value.
 3. At the top of the panel, confirm **Row Selected** reads `GrandTotal` and
    **Measure Selected** reads `Forecast`. Each field has its own lock icon; select both
    to freeze the selection so a stray click in the sheet cannot retarget the forecast.
-4. Confirm **Historic data range** is `Jan 2024 – Dec 2025` and **Forecast date range**
-   is `Jan 2026 – Dec 2026`.
-5. Set the parameters:
+4. Under **Set Period Range**, confirm **Historic Data Range** reads `Jan 2024 - Dec 2025`
+   and **Forecast Date Range** reads `Jan 2026 - Dec 2026`. Both should already be
+   correct, derived from the filter and the forecast period you set earlier.
+5. Under **Configure Forecast**, leave **Select Profile** on `Profile 1` and set:
 
-   | Setting | Value |
-   |---|---|
-   | **Confidence** | 90% |
-   | **Growth factor** | 4% |
-   | **Evaluation** | Bottom Up |
-   | **Round all negative values to zero** | No |
+   | Setting | Value | Default |
+   |---|---|---|
+   | **Confidence (%)** | `90` | already 90 |
+   | **Growth Factor (%)** | `4` | **0, you must change this** |
+   | **Evaluation** | Bottom Up | already Bottom Up |
+   | **Round all negative values to zero** | No | already No |
+
+   Confidence and Growth Factor each have a slider and a number box. Typing in the box is
+   easier than dragging.
+
+<details>
+<summary>What these settings do</summary>
+
+**Select Profile** is a saved collection of forecast settings: confidence, growth factor,
+evaluation, negative handling, algorithm and seasonality. Use **More options (...)** to
+create, duplicate, delete, or reset profiles. Naming them descriptively means a forecast
+configuration can be reproduced later rather than rebuilt from memory. One profile is
+enough for this lab.
+
+**Confidence (%)** sets the confidence interval around the prediction, the probability
+that the actual value falls inside the predicted range. 80% gives a narrower band suited
+to central planning, 90% is the balanced choice for most business forecasts, and 95% is
+wider and more conservative.
+
+**Growth Factor (%)** is a business adjustment applied on top of the statistical result.
+0% leaves the statistics alone; 4% lifts every forecast value by that much to reflect an
+expected uplift; a negative value trims it. This is where judgement enters a model that
+otherwise only knows history.
+
+**Evaluation** decides the direction of the calculation. **Bottom Up** forecasts each
+detailed row and aggregates upward, which respects the behaviour of individual
+subcategories. **Top Down** forecasts the total and distributes it down.
+
+**Round all negative values to zero** matters for measures that cannot go below zero.
+Revenue cannot, but the statistical model does not know that, so a sharply declining
+series can produce negative predictions. Left at No here because the data does not
+decline that far.
+
+**Choose Algorithm** offers three:
+
+| Algorithm | Suits |
+|---|---|
+| **Trend Decomposition with MSTL** | Data with several overlapping repeating patterns, split into parts that are easier to model |
+| **Exponential Smoothing** | Smooth trends with one clear seasonal cycle, weighting recent data more heavily |
+| **ARIMA** | Series where recent spikes, drops and lags carry the signal |
+
+</details>
 
 6. Select **Choose Algorithm** → **Trend Decomposition with MSTL**. Select
    **Customize Algorithm** and check **Year** and **Quarter** for seasonality.
