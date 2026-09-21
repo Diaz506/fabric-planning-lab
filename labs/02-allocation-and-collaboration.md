@@ -141,8 +141,24 @@ supply plan is locked. Growth has to come from the back half.
 The board raised the ask from $28.5M to $30M, and **the extra $1.5M lands only in Q3 and
 Q4**. Q1 and Q2 do not move.
 
-This is the mechanic that makes allocation trustworthy. Without locking, every
-top-down revision silently rewrites commitments people have already made.
+**Check it worked.** Compare the quarterly totals on the *All* row before and after:
+
+| Quarter | After the $28.5M allocation | After $30M with Q1 and Q2 locked |
+|---|---|---|
+| Q1 | 6.49 | **6.49**, unchanged |
+| Q2 | 7.09 | **7.09**, unchanged |
+| Q3 | 7.32 | **8.05** |
+| Q4 | 7.60 | **8.37** |
+
+Q3 absorbed about 0.73 and Q4 about 0.77, together the full $1.5M. The split between them
+stays proportional to their own prior-year weights.
+
+Had you skipped the locking, all four quarters would have rescaled by 30 / 25.87 and Q1
+would have moved from 6.49 to 6.83. The commitment already made to trade promotions would
+have been quietly rewritten by someone entering a number at the top of the sheet.
+
+That is the mechanic that makes allocation trustworthy. Without locking, every top-down
+revision silently overwrites decisions people have already made.
 
 9. Select the **Q1** total cell, select the distribution icon, and select
    **Unlock all children**. Repeat for **Q2**.
