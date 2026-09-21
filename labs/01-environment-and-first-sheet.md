@@ -122,7 +122,7 @@ The model's tables appear in the **Data** tab: dimensions, measures, and the dat
 > cannot find *Region*, expand **Geography** rather than hunting through the fact tables.
 > [`data/README.md`](../data/README.md) lists what lives in each.
 
-You are now looking at Harborlight's FY25 actuals, roughly **$28.5M**, broken out by
+You are now looking at Harborlight's actuals, roughly **$25.9M** for FY25, broken out by
 region and product, quarter by quarter. This sheet is the foundation for everything that
 follows.
 

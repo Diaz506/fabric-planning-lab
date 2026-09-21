@@ -73,8 +73,8 @@ Revenue and cost actuals at geography and product level. This is the base the FY
 revenue plan is built from. It supplies the prior-year mix that allocation uses to
 distribute a top-down target.
 
-Key measure: **2025 Gross Revenue**, full-year FY25 actuals, totaling roughly **$28.5M**.
-That number is the anchor for the whole lab. You will find it under **Measures Table**
+Key measure: **2025 Gross Revenue**, full-year FY25 actuals, totaling roughly **$25.9M**.
+That is the baseline the FY26 target grows from. You will find it under **Measures Table**
 rather than here.
 
 ### P&L Measures

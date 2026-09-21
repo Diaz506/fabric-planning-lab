@@ -9,7 +9,7 @@
 
 **Harborlight Provisions Co. (HPC)** is a mid-market consumer goods company: snacks,
 beverages, and household care sold across North America, Europe, and APAC. FY25 closed
-at **$28.5M** in revenue.
+at roughly **$25.9M** in revenue.
 
 The FY26 plan lives in a 40-tab Excel workbook. It takes eleven days to consolidate, the
 regional tabs never tie to the corporate roll-up, and last year's forecast was stale by

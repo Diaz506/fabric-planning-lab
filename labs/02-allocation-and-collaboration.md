@@ -8,12 +8,17 @@ plan with regional adjustments, and a two-level approval workflow.
 
 ## Where we are
 
-The board wants **$30M** for FY26. Harborlight closed FY25 at **$28.5M**. Nobody has yet
-said where the extra $1.5M comes from, and that question is the entire job.
+The board wants **$30M** for FY26. Harborlight closed FY25 at roughly **$25.9M**. Nobody
+has yet said where the extra $4M comes from, and that question is the entire job.
 
 This module works the problem from both ends: top-down allocation to set the frame, then
 bottom-up adjustment where the regional leads actually know something. Along the way you
 will meet the single most useful control in the product: **locking**.
+
+The target arrives in two steps, which is deliberate. The board's first ask was $28.5M,
+about 10% growth. It then went to $30M, about 16%. You will allocate the first number,
+lock the quarters that are already committed, and let the increase land only where there
+is still room.
 
 Work in the `Plan Intro` sheet from Module 01.
 
@@ -28,6 +33,9 @@ Work in the `Plan Intro` sheet from Module 01.
 2. On the **Planning** ribbon, select **Number** → **Copy from another series** →
    **2025 Gross Revenue**. Title it `2026 Target` and select **Create**.
 
+The new column arrives **prepopulated with the FY25 values**, around $25.9M in total.
+That is a starting point, not the target.
+
 > [!NOTE]
 > Native columns are read-only. You cannot type into a measure that comes from the
 > semantic model. Copying creates an editable series and keeps FY25 actuals intact as a
@@ -38,7 +46,8 @@ Work in the `Plan Intro` sheet from Module 01.
 3. Double-click the grand total cell of the **2026 Target** column, enter `28.5m`, and
    select the check mark.
 
-Planning distributes that number across every region, category, and subcategory
+You just overwrote the $25.9M baseline with the board's first ask, about 10% growth.
+Planning redistributes that number across every region, category, and subcategory
 **proportionally to the FY25 revenue mix**. One number in, a fully allocated plan out.
 That is top-down planning in a single gesture.
 
@@ -53,7 +62,8 @@ supply plan is locked. Growth has to come from the back half.
    turn grey.
 6. Double-click the grand total cell of **2026 Target**, enter `30m`, and press Enter.
 
-The extra **$1.5M lands only in Q3 and Q4**. Q1 and Q2 do not move.
+The board raised the ask from $28.5M to $30M, and **the extra $1.5M lands only in Q3 and
+Q4**. Q1 and Q2 do not move.
 
 This is the mechanic that makes allocation trustworthy. Without locking, every
 top-down revision silently rewrites commitments people have already made.

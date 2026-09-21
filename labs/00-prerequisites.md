@@ -8,8 +8,9 @@ workload costs before you spend anything.
 
 ## The briefing
 
-Harborlight Provisions closed FY25 at **$28.5M**. The board has approved an FY26 target
-of **$30M revenue** and **$12.5M gross profit**.
+Harborlight Provisions closed FY25 at roughly **$25.9M**. The board initially asked for
+**$28.5M** in FY26, then raised the ask to **$30M revenue** and **$12.5M gross profit**.
+That is growth of about 16% on a business that grew 5% last year.
 
 The current planning process is a 40-tab Excel workbook. Three regional finance leads
 each own a tab, corporate owns the consolidation, and nobody trusts the roll-up because
