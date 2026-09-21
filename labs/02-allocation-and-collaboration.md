@@ -38,6 +38,11 @@ Work in the `Plan Intro` sheet from Module 01.
 > you are pointing at. On the *All* row it is the whole company for the year; on the
 > *Energy & Sports* row it is that subcategory for the year. Entering a value there
 > pushes it down to everything beneath.
+>
+> You will notice the grand total column and the *2025* column show identical numbers.
+> That is expected: *2025 Gross Revenue* is scoped to a single year, so the total across
+> all periods is simply that year. The distinction starts to matter in the next section,
+> when you expand to quarters.
 2. On the **Planning** ribbon, select **Number** → **Copy from another series** →
    **2025 Gross Revenue**.
 3. In the **Data Input** pane, **clear the Title field** and enter `2026 Target`.
@@ -95,16 +100,31 @@ the one number that represents everything.
 
 > [!NOTE]
 > Double-click rather than single-click: one click selects a cell, two clicks open it for
-> editing. And `28.5m` is shorthand for 28,500,000, so there is no need to type the zeros.
+> editing.
+>
+> The `m` suffix means million. When the sheet is already displaying in millions, as this
+> one is, typing plain `28.5` works identically. The suffix is worth using anyway, because
+> it means the same thing regardless of what scaling the sheet happens to be showing.
 
 You just overwrote the $25.9M baseline with the board's first ask, about 10% growth.
 Planning redistributes that number across every region, category, and subcategory
-**proportionally to the FY25 revenue mix**. Scroll down and you will see every row has
-moved, in proportion to what it contributed last year.
+**proportionally to the FY25 revenue mix**.
 
-One number in, a fully allocated plan out. That is top-down planning in a single gesture,
-and it works because **Distribute parent value to children** was left enabled when you
-created the column.
+**Check it worked.** Every row should have grown by the same factor, 28.50 / 25.87, or
+about 1.1017:
+
+| Row | FY25 actual | 2026 Target |
+|---|---|---|
+| All | 25.87 | **28.50** |
+| Americas | 7.14 | **7.87** |
+| Asia Pacific | 9.76 | **10.75** |
+| Energy & Sports | 0.49 | **0.54** |
+
+If your numbers match, the allocation cascaded correctly. If only the All row changed,
+**Distribute parent value to children** was unchecked when you created the column; delete
+it and start again from step 2.
+
+One number in, a fully allocated plan out. That is top-down planning in a single gesture.
 
 ### Now lock the first half of the year
 
