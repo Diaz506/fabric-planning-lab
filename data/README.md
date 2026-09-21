@@ -80,6 +80,7 @@ The fact tables share the common *Date* dimension.
 > | Region Name | **Region** |
 > | Quarter Name | **Quarter** |
 > | Sub-Category | **Sub Category** |
+> | Select Measure, in the Predict panel | **Measure Selected** |
 >
 > The tutorials also never name the table holding *Category* and *Sub Category*; it is
 > **Product**. Keep this in mind if you work through Microsoft's tutorials alongside this
