@@ -290,8 +290,8 @@ See [`data/README.md`](../data/README.md) for what is inside the model.
 
 ## "We don't have a semantic model. Does this still work?"
 
-This comes up in almost every customer conversation, so it is worth answering before you
-start rather than mid-demo.
+This is the most common question asked about planning, and the answer is less obvious than
+it looks. Worth settling before you start.
 
 First, a correction to the usual version of the question. Planning binds to a **semantic
 model**, not to a report. Whether a Power BI report exists is irrelevant: plenty of
@@ -422,7 +422,7 @@ Before moving on, you should be able to answer:
 3. Can you end a planning session early if you finish your work in a day?
 4. What happens to a plan item if someone renames the workspace it lives in?
 5. A Planner session costs 847 CU-hours. How much of an F4 is that?
-6. A customer says they have no Power BI reports. Does that stop them using planning?
+6. An organization has no Power BI reports at all. Does that stop them using planning?
 
 <details>
 <summary>Answers</summary>

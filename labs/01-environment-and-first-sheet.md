@@ -47,8 +47,7 @@ will build a complete FY26 plan on the semantic model underneath this report, an
 report itself will keep working exactly as it does now. Plan data is written to a
 separate Fabric SQL database and never modifies the connected semantic model.
 
-For a finance team whose month-end close already works, that is the objection answered
-before it is raised.
+If your month-end close already works, nothing in this lab puts it at risk.
 
 > [!NOTE]
 > **In a real deployment you would not import anything.** You would point the plan item at

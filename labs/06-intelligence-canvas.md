@@ -194,7 +194,7 @@ It is unchanged. Same numbers, same visuals, same refresh behavior. Eight module
 planning work, a $30M target, an optimized margin, a rolling forecast committed to SQL,
 and the existing reporting estate never moved.
 
-That is the argument to make to a customer who already has reporting that works:
+That is the property that matters if your organization already has reporting that works:
 **planning is additive**. It reads the same governed model, writes to its own database,
 and leaves everything downstream alone. Nobody has to migrate a report or renegotiate a
 definition to start planning.
