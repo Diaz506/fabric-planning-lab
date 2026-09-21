@@ -279,28 +279,80 @@ see it.
 
 6. Open the `Northwind_FMCG_[YourName]` database, expand **dbo** → **Tables**, and
    confirm the **Forecast** table is populated. **Refresh the explorer and run a query**
-   rather than trusting the preview, which caches:
+   rather than trusting the preview, which caches and will often show an empty table that
+   is not empty:
 
    ```sql
    SELECT COUNT(*) FROM dbo.Forecast;
    SELECT TOP 100 * FROM dbo.Forecast;
    ```
 
-7. Back in the plan, select **Writeback** → **Logs** to review status, duration, the user
-   who ran it, measures written, and writeback type.
+   One run of this sheet returned **1,155**.
+
+> [!NOTE]
+> The **Data preview** tab is unreliable here. It can report "Showing 1000 rows" while
+> displaying an empty grid. Trust the query result and the writeback log, not the preview.
+
+<details>
+<summary>What Long with Changes actually writes</summary>
+
+The table has one row per cell per writeback, with the dimensions flattened into columns:
+
+| Column | Holds |
+|---|---|
+| `IrId` | Row identifier |
+| `IrScenario` | The scenario written, *Base* here |
+| `Category`, `SubCategory`, `Year`, `Quarter`, `MonthShort` | The dimension members identifying the cell |
+| `ValueColumnName` | Which measure this row is, *Forecast* |
+| `Value`, `PreviousValue` | The new value and what it replaced, as `decimal(25,2)` |
+| `ValueText`, `PreviousValueText` | Text equivalents, for non-numeric inputs |
+| `IsLatest` | Marks the current row for a given cell |
+| `LastUpdatedAt`, `LastUpdatedBy` | When and who |
+| `IrComments` | Any comment captured with the value |
+| `IrWritebackUser`, `IrWritebackTimestamp` | Who ran the writeback and when |
+
+`PreviousValue` and `IsLatest` are what the **with Changes** part buys you. Each writeback
+keeps the prior value alongside the new one and flags the current row, so the table is an
+audit trail rather than a snapshot. A downstream report filters on `IsLatest = 1` for
+current values, or reads the history to answer why a number moved.
+
+Notice that `Value` is `decimal(25,2)`. That is the **Decimal precision** setting of 2
+from the destination configuration, applied to the column definition.
+
+</details>
+
+7. Back in the plan, select **Writeback** → **Logs**. Each run appears as a row with an
+   ID, duration, status, timestamp, who ran it, scenario, **Incoming Row Count**, event
+   type, and writeback type.
+
+**Check it worked.** A successful run reads **Success** with a non-zero **Incoming Row
+Count**. One run of this sheet wrote **1,155 rows** in about three seconds, against the
+**Base** scenario, using **Long with Changes**.
+
+Incoming Row Count is the number to trust. If it says 1,155 and the SQL table looks
+empty, the rows exist and the explorer view is stale.
 
 > [!TIP]
 > **If the table exists but looks empty**, the table was created so the connection and
 > permissions are fine. Work through it in this order:
 >
-> 1. **Check the logs first.** If they report success with *Forecast* among the measures
->    written, the rows are there and the SQL view is stale. Refresh and query again.
+> 1. **Check Incoming Row Count in the logs.** Non-zero means the rows were written.
+>    Refresh the SQL explorer and query again.
 > 2. **Confirm Forecast stayed selected** on the Settings **Data** tab. If deselecting
->    Gross Revenue left nothing ticked, writeback reports success and writes nothing.
+>    Gross Revenue left nothing ticked, writeback reports success with a row count of
+>    zero.
 > 3. **Check the writeback filter** on the Settings **Advanced** tab. A restrictive filter
 >    can exclude every row.
-> 4. **Check the scenario.** If you wrote back one scenario and are previewing another,
->    the rows will not match.
+> 4. **Check the scenario.** The log names the scenario written, *Base* here. If you are
+>    previewing a different one, the rows will not match.
+
+> [!NOTE]
+> Running writeback repeatedly does not multiply your data. Three runs of this sheet each
+> reported the same 1,155 incoming rows and the table still held exactly 1,155, because
+> **Long with Changes** writes only what moved since the previous run.
+
+The plan is now queryable SQL. The count matching the log is the moment planning data
+stops being locked inside a planning tool.
 
 > [!WARNING]
 > Deleting a row in a planning sheet does **not** delete it from the destination table.
