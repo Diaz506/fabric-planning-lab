@@ -36,9 +36,14 @@ two ways is the fastest way to understand which one your own data calls for.
 
    | Field | Value | Source table |
    |---|---|---|
-   | **Rows** | *Region Hierarchy*: Region → Cities | **P&L Measures** |
+   | **Rows** | *Region Hierarchy*, with **both** the Region and Cities levels | **P&L Measures** |
    | **Columns** | *Date Hierarchy*: Year, Quarter, Month | **P&L Measures** |
    | **Values** | The ten driver measures listed below | **P&L Measures** |
+
+> [!NOTE]
+> Add **both** levels to Rows. Selecting only Cities gives a flat list of ten cities under
+> All, with no regional grouping. Part 2 asks you to expand *Asia Pacific* and work on the
+> *Sydney* card, which needs Region sitting above Cities.
 
 > [!IMPORTANT]
 > **Use the hierarchies inside P&L Measures, not the Geography and Date tables.**
@@ -147,6 +152,19 @@ anything else. That is what makes the scenarios in Part 2 possible.
 >
 > If the measure list in the canvas still shows `Sum of` against every measure, these two
 > steps have not been applied. Close the canvas, apply them, and reopen.
+
+**Check the sheet before building the model.** Two things should be true:
+
+- **Cities and years hold different values.** If every cell shows the same number, Rows or
+  Columns is pointing at the Geography or Date table rather than the hierarchies inside
+  P&L Measures.
+- **Avg Selling Price is nowhere near the sum of its cities.** In one run the ten cities
+  ranged from 136 to 225 while the All row read **194.84**. The sum would have been
+  1,849. A sum-like total here means step 4 did not take, and every revenue figure below
+  it will be wrong.
+
+Sum-based measures should behave normally alongside it: Admin Expenses totalled **178.95**
+against city values summing to 178.96, a rounding difference.
 
 ### Build the hierarchy
 
