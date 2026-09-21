@@ -256,33 +256,88 @@ against city values summing to 178.96, a rounding difference.
 > volume times price at the regional level, which is exactly what setting it to Formula
 > buys you.
 
-8. Drag **Discounts and Returns** onto the canvas. Add another formula measure:
+8. Add **Discounts and Returns** to the canvas as a root, then select **Add Measure** →
+   **Formula** and configure:
 
-   | Name | Formula |
+   | Field | Value |
    |---|---|
-   | `Net Revenue` | `[Gross Revenue] – [Discounts and Returns]` |
+   | **Title** | `Net Revenue` |
+   | **Formula** | `[Gross Revenue]-[Discounts and Returns]` |
+   | **Column aggregation type** | **Formula**, changed from Sum |
+   | **Row aggregation type** | Formula, already set |
 
-   Drag *Net Revenue* onto the canvas with *Gross Revenue* and *Discounts and Returns*
-   beneath it.
+   Select **Create**, then place *Gross Revenue* and *Discounts and Returns* beneath it:
 
-9. Add the cost side:
+   ```
+   Net Revenue                    Formula
+     Gross Revenue                Formula
+       Sales Volume               Native
+       Avg Selling Price          Native
+     Discounts and Returns        Native
+   ```
 
-   | Name | Formula |
+   Gross Revenue keeps its own two children as it moves, so the tree deepens rather than
+   flattening.
+
+9. Add the cost side. Select **Add Measure** → **Formula**:
+
+   | Field | Value |
    |---|---|
-   | `COGS` | `[Raw Material Cost]+[Labor Cost]+[Other Direct Exp]` |
+   | **Title** | `COGS` |
+   | **Formula** | `[Raw Material Cost]+[Labor Cost]+[Other Direct Exp]` |
+   | **Column aggregation type** | **Formula** |
 
-   Drag *COGS* onto the canvas. Then select *Raw Material Cost*, *Labor Cost*, and
-   *Other Direct Exp*, choose the **Insert Measure** dropdown → **COGS** → **Insert**.
+   Select **Create**. Then tick *Raw Material Cost*, *Labor Cost* and *Other Direct Exp*
+   in the **Measures** list, set **Insert Measure** to **COGS**, and select **Insert**.
 
-10. Complete the P&L with three more formula measures:
+   ```
+   COGS                           Formula
+     Raw Material Cost            Native
+     Labor Cost                   Native
+     Other Direct Exp             Native
+   ```
 
-    | Name | Formula |
+> [!TIP]
+> The **Insert Measure** dropdown is not limited to *As roots*. Once a formula measure
+> exists you can select it there, and ticked measures attach as its children. It is the
+> quickest way to build a parent with several children, and it cannot nest by accident.
+
+10. Complete the P&L with three more formula measures, each configured the same way and
+    each needing **Column aggregation type** set to **Formula**:
+
+    | Title | Formula |
     |---|---|
-    | `Gross Profit` | `[Net Revenue] – [COGS]` |
-    | `Operating Expenses` | `[Admin Expenses] + [Employee Expenses] + [R&D] + [Selling and Marketing Expenses]` |
-    | `Net Profit` | `[Gross Profit] – [Operating Expenses]` |
+    | `Operating Expenses` | `[Admin Expenses]+[Employee Expenses]+[R&D]+[Selling and Marketing Expenses]` |
+    | `Gross Profit` | `[Net Revenue]-[COGS]` |
+    | `Net Profit` | `[Gross Profit]-[Operating Expenses]` |
 
-    Each one needs **Column aggregation type** set to **Formula**, as in step 7.
+    Build Operating Expenses first and attach its four drivers, as you did for COGS. Then
+    Gross Profit over Net Revenue and COGS, and finally Net Profit over Gross Profit and
+    Operating Expenses. The finished tree:
+
+    ```
+    Net Profit                       Formula
+      Gross Profit                   Formula
+        Net Revenue                  Formula
+          Gross Revenue              Formula
+            Sales Volume             Native
+            Avg Selling Price        Native
+          Discounts and Returns      Native
+        COGS                         Formula
+          Raw Material Cost          Native
+          Labor Cost                 Native
+          Other Direct Exp           Native
+      Operating Expenses             Formula
+        Admin Expenses               Native
+        Employee Expenses            Native
+        R&D                          Native
+        Selling and Marketing Expenses  Native
+    ```
+
+> [!IMPORTANT]
+> **Create each formula measure before the one that references it.** Net Profit refers to
+> Gross Profit and Operating Expenses, so both must exist first. Working outward from
+> Gross Revenue, as these steps do, keeps every reference resolvable when you type it.
 
 ### View it
 
