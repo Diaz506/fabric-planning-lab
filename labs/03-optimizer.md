@@ -25,7 +25,7 @@ goal-seek for planning. You state the target, name the levers, and it back-calcu
 
    | Field | Value | Source |
    |---|---|---|
-   | **Rows** | *Region Name* → *Category* → *Sub Category* | *Geography*, then *Product* |
+   | **Rows** | *Region* → *Category* → *Sub Category* | *Geography*, then *Product* |
    | **Columns** | Date hierarchy | *Date* |
    | **Values** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
    | **Values** | *2025 COGS* | *Measures Table* |

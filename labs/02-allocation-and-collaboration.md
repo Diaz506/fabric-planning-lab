@@ -233,13 +233,15 @@ APAC and Europe both expect a Q3 lift in beverages and personal care.
    **Measure:** select `2026 Sales Plan`.
 
    **Select Filter:** choose **+ Add Filter** once for each dimension you are scoping to,
-   three times in total:
+   three times in total. Each filter row has three parts: the dimension, an operator such
+   as **Is**, and a value picker with checkboxes and a search box, so you can select
+   several members at once. A bin icon at the end of the row removes that filter.
 
-   | Filter | Value |
-   |---|---|
-   | Region Name | Asia Pacific, Europe |
-   | Category | Beverages, Personal Care |
-   | Quarter Name | Q3 |
+   | Dimension | Operator | Values |
+   |---|---|---|
+   | Region | Is | Asia Pacific, Europe |
+   | Category | Is | Beverages, Personal Care |
+   | Quarter | Is | Q3 |
 
    **Apply to Row Level:** `Sub Category`. **Apply to Column Level:** `Month Short`.
    These control how deep the edit reaches, not which rows it touches.
