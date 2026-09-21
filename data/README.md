@@ -51,7 +51,7 @@ belongs to. Knowing which table holds what saves a lot of hunting.
 | **Date** | Dimension | *Date Hierarchy*, *Date Key*, *Half Year*, *Month*, *Month Name*, *Month Short*, *Quarter*, *Year*, *Year Month*, *Year Quarter* | Every module |
 | **Fact Transactions** | Fact | Revenue and cost actuals at geography and product level | Underlies the Measures Table |
 | **Geography** | Dimension | *Region*, *Sub Region*, *City* | Modules 01, 03, 05 |
-| **P&L Measures** | Fact | Driver-level measures: sales volume, average selling price, COGS components, operating expenses | Module 05, measure model |
+| **P&L Measures** | Fact | Driver-level measures: sales volume, average selling price, COGS components, operating expenses. **Carries its own Region Hierarchy and Date Hierarchy** | Module 05, measure model |
 | **P&L Rows** | Fact | P&L line items as rows, with *Account* and *Value* columns | Module 05, row model |
 | **Product** | Dimension | *Category*, *Sub Category* | Modules 01, 03, 04, 06 |
 
@@ -102,16 +102,28 @@ rather than here.
 
 ### P&L Measures
 
-Driver-level measures for the key financial metrics:
+Ten driver-level measures, plus its own dimensions:
 
-- Sales volume
-- Average selling price
-- COGS components (including **2025 COGS**)
-- Operating expenses
+| Group | Measures |
+|---|---|
+| Revenue | Sales Volume, Avg Selling Price, Discounts and Returns |
+| Cost of goods | Raw Material Cost, Labor Cost, Other Direct Exp |
+| Operating expense | Admin Expenses, Employee Expenses, R&D, Selling and Marketing Expenses |
 
-These are the levers the Optimizer adjusts in [Module 03](../labs/03-optimizer.md) and
-the building blocks of the measure model in
-[Module 05](../labs/05-pl-models-and-scenarios.md).
+It also carries **Region Hierarchy** and **Date Hierarchy**, an *Invoice ID* field, and
+native *COGS*, *Gross revenue* and *net revenue* measures.
+
+> [!IMPORTANT]
+> **P&L Measures does not relate to the Geography and Date dimension tables.** Its
+> measures slice by the Region Hierarchy and Date Hierarchy inside the table itself.
+>
+> Build a sheet on P&L Measures with rows from Geography or columns from Date and every
+> cell returns the grand total, repeated identically down every row and across every
+> column. Nothing errors. Modules 01, 03, 04 and 06 use the Measures Table, which does
+> relate to Geography, Date and Product, so this only bites in Module 05.
+
+These drivers are what the measure model in
+[Module 05](../labs/05-pl-models-and-scenarios.md) assembles into a P&L.
 
 ### P&L Rows
 

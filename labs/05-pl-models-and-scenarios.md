@@ -31,33 +31,48 @@ two ways is the fastest way to understand which one your own data calls for.
 
 1. On the **Home** ribbon, select **New Planning Sheet**. Name it `P&L – Measure model`
    and select **Create**.
-2. Assign the fields:
+2. Assign the fields. **Everything comes from the P&L Measures table**, including the
+   dimensions:
 
    | Field | Value | Source table |
    |---|---|---|
-   | **Rows** | *Region* → *Cities* | *Geography* |
-   | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
+   | **Rows** | *Region Hierarchy*: Region → Cities | **P&L Measures** |
+   | **Columns** | *Date Hierarchy*: Year, Quarter, Month | **P&L Measures** |
    | **Values** | The ten driver measures listed below | **P&L Measures** |
 
 > [!IMPORTANT]
+> **Use the hierarchies inside P&L Measures, not the Geography and Date tables.**
+>
+> P&L Measures carries its own *Region Hierarchy* and *Date Hierarchy*. The driver
+> measures are related to those, not to the Geography and Date dimension tables you used
+> in earlier modules.
+>
+> Point Rows at Geography and Columns at Date and every cell returns the same number: the
+> grand total repeated down every city and across every year, because the measures have no
+> relationship to those tables to slice by. It looks like a rendering fault rather than a
+> modeling one. If you see identical values everywhere, this is why.
+
+> [!NOTE]
 > **Expand P&L Measures, not Measures Table.** They are different. *Measures Table* holds
 > the four headline measures used in Modules 01 to 04. *P&L Measures* holds the drivers
-> this module needs.
+> and hierarchies this module needs.
 >
 > Microsoft's tutorial says to take "all the measures from the P&L Measures table", but
-> the table contains more than measures and more than you want. Tick these ten:
+> the table contains more than measures. Tick these ten:
 >
 > Admin Expenses · Avg Selling Price · Discounts and Returns · Employee Expenses ·
 > Labor Cost · Other Direct Exp · R&D · Raw Material Cost · Sales Volume ·
 > Selling and Marketing Expenses
 >
-> Leave the rest alone:
+> Leave these:
 >
-> | Also in the table | Why skip it |
+> | Also in the table | Why |
 > |---|---|
-> | *Date Hierarchy*, *Region Hierarchy* | Hierarchies, not measures. Your rows and columns already come from the Geography and Date tables |
 > | *Invoice ID* | Has no sigma icon, so it is a field rather than an aggregating measure |
 > | *COGS*, *Gross revenue*, *net revenue* | Native measures whose names collide with three of the six formula measures you are about to create. Two columns called COGS makes formula references ambiguous |
+>
+> *Date Hierarchy* and *Region Hierarchy* are not measures, but you do need them, in Rows
+> and Columns as above.
 
 <details>
 <summary>What these measures are, and the P&L they build</summary>
@@ -241,13 +256,19 @@ Same P&L, built from account-level rows instead of drivers.
 
 1. On the **Home** ribbon, select **New Planning Sheet**. Name it `P&L – Row model` and
    select **Create**.
-2. Assign the fields:
+2. Assign the fields. As with the measure model, **the dimensions live in the fact table**:
 
    | Field | Value | Source table |
    |---|---|---|
    | **Rows** | *Account* | **P&L Rows** |
-   | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
+   | **Columns** | *Date Hierarchy*: Year, Quarter, Month | **P&L Rows** |
    | **Values** | *Value* | **P&L Rows** |
+
+> [!NOTE]
+> If P&L Rows carries its own Date hierarchy, use it rather than the Date table, for the
+> same reason as the measure model: the values relate to the hierarchy inside their own
+> table. Identical numbers repeating across every column is the symptom of pointing at the
+> wrong one.
 
 3. On the **Model** ribbon, select **Row Model** → **Enable**.
 
