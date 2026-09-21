@@ -198,9 +198,16 @@ The Optimizer is a three-step wizard: **Objective & Variables**, **Add Constrain
    `Sales Plan` and `COGS`. **Next** stays disabled until at least one series is chosen.
 4. Select **Next**.
 5. On **Add Constraints**, select **Run** without adding any.
-6. On **Output**, confirm **Target Value** shows 12.5M and **Achieved** shows 12.5M with
-   a green check.
+6. On **Output**, confirm **Target Value** shows 12.50m and **Achieved** shows 12.50m with
+   a green check. The **Variables** panel beside it lists the values the solver settled
+   on.
 7. Select **Apply**.
+
+The **Set Parameters** panel on the right carries the three tuning controls, preset to
+sensible defaults: **Strategy** at *Balanced*, **Tolerance** at *Standard (0.1%)*, and
+**Iterations** at *Standard (200 tries)*. A **Re-Run** button sits beneath them. Leave
+all three alone unless the solver misses; the section at the end of this module covers
+what to change when it does.
 
 > [!NOTE]
 > Only the editable copies appear in **Choose Series**. If `Sales Plan` or `COGS` is
@@ -212,20 +219,22 @@ The Optimizer is a three-step wizard: **Objective & Variables**, **Add Constrain
 1. On the **Planning** ribbon, select **Show Columns** and enable **2026 Sales Plan** and
    **2025 COGS**.
 
-The original and optimized columns now sit side by side. From one run:
+The original and optimized columns now sit side by side. From one run, starting at
+$12.14M gross profit with a $355K gap to close:
 
-| Lever | Original | Optimized | Movement |
+| Lever | Before | After | Movement |
 |---|---|---|---|
-| Sales Plan | $26.1M | **$26.38M** | +$0.28M |
-| COGS | $14.17M | **$13.88M** | −$0.29M |
+| Sales Plan | $26.31M | **$26.49M** | +$179K |
+| COGS | $14.17M | **$13.99M** | −$176K |
+| **Gross Profit** | $12.14M | **$12.50M** | **+$355K** |
 
-Together they deliver the $12.5M target. Your own figures will differ in the originals
-and therefore in the movements, since they depend on how your Module 02 plan finished.
-The shape is what matters: revenue up a little, cost down a little, gross profit landing
-exactly on 12.5M.
+The solver split the gap almost exactly in half, roughly 50% from revenue and 50% from
+cost. That is a consequence of leaving it unconstrained, not a rule. Your own figures
+will differ, since they depend on how your Module 02 plan finished. The shape is what
+matters: revenue up a little, cost down a little, gross profit landing on target.
 
 This is the number that changes the board conversation. The ask is not "grow revenue 5%."
-The ask is **roughly $280K of incremental revenue and $290K of cost out**, two concrete
+The ask is **$179K of incremental revenue and $176K of cost out**, two concrete
 commitments somebody can own, rather than a percentage nobody can act on.
 
 > [!NOTE]
@@ -252,13 +261,14 @@ conversation with procurement in about four seconds.
 ### If it does not reach the target
 
 An unconstrained two-variable problem like this one converges easily. Tighter problems
-may not, and the Output page exposes three parameters to retune before running again:
+may not, and the **Set Parameters** panel on the Output page exposes three controls to
+retune before selecting **Re-Run**:
 
-| Parameter | What it controls |
-|---|---|
-| **Strategy** | The size of each adjustment. Smaller steps converge more slowly but overshoot less; larger steps are faster and can sail past the answer |
-| **Tolerance** | How close counts as done. A target of 0.50 with tolerance 0.01 stops anywhere between 0.49 and 0.51 |
-| **Number of iterations** | How many times it may go round the loop before giving up |
+| Parameter | Default | What it controls |
+|---|---|---|
+| **Strategy** | Balanced | The size of each adjustment. Smaller steps converge more slowly but overshoot less; larger steps are faster and can sail past the answer |
+| **Tolerance** | Standard, 0.1% | How close counts as done. At 0.1% a 12.5m target is satisfied anywhere between 12.4875m and 12.5125m |
+| **Iterations** | Standard, 200 tries | How many times it may go round the loop before giving up |
 
 If the solver fails, the usual cause is that the constraints make the target
 unreachable. Check whether the target is actually achievable before loosening tolerance
