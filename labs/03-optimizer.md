@@ -59,24 +59,31 @@ for comparison afterwards. That comparison is the payoff at the end of this modu
 
 ## Step 3: Calculate gross profit
 
-1. On the **Planning** ribbon, select **Formula** and configure:
+1. On the **Planning** ribbon, select **Formula**. The **Formula Measure** pane opens.
+2. Configure it:
 
-   | Setting | Value |
-   |---|---|
-   | **Title** | Gross Profit |
-   | **Formula** | `[Sales Plan] - [COGS]` |
-   | **Column aggregation** | Formula |
-   | **Row aggregation** | Formula |
+   | Field | Value | Note |
+   |---|---|---|
+   | **Title** | `Gross Profit` | Clear the prepopulated name first |
+   | **Insert as** | Visual Measure | The default, and correct here |
+   | **Data type** | Number | The default |
+   | **Formula** | `[Sales Plan] - [COGS]` | Type it; **Suggestions** offers column names as you go |
+   | **Column aggregation type** | **Formula** | **Defaults to Sum. Change it.** |
+   | **Row aggregation type** | Formula | Already the default |
 
    Select **Create**.
 
-2. Collapse the row hierarchy to category level. On the **Planning** ribbon, select
-   **Totals** and enable **Column Grand Total** on the left.
-
 > [!IMPORTANT]
-> Both aggregations must be set to **Formula**. Leave them on the default and the
-> subtotals sum the children instead of recalculating the formula at each level, which
-> quietly produces wrong totals on percentage and margin rows.
+> **Column aggregation defaults to Sum and must be changed to Formula.** Row aggregation
+> is already Formula, so it is the column setting that catches people.
+>
+> Left on Sum, the quarterly and grand totals add up their children instead of
+> recalculating `[Sales Plan] - [COGS]` at each level. For a straight subtraction the
+> totals may still look plausible, which is what makes it dangerous. On a margin or
+> percentage row the same mistake produces obvious nonsense.
+
+3. Collapse the row hierarchy to category level. On the **Planning** ribbon, select
+   **Totals** and enable **Column Grand Total** on the left.
 
 ## Step 4: Run the Optimizer
 

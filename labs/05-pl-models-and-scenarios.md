@@ -89,9 +89,10 @@ two ways is the fastest way to understand which one your own data calls for.
     | `Net Profit` | `[Gross Profit] – [Operating Expenses]` |
 
 > [!IMPORTANT]
-> Set **Row aggregation** and **Column aggregation** to **Formula** on every calculated
-> measure. Same trap as Module 03. Defaults sum the children instead of recalculating,
-> and the subtotals lie.
+> On every calculated measure, set **Column aggregation type** to **Formula**. It
+> defaults to Sum. **Row aggregation type** is already Formula. Same trap as
+> [Module 03](03-optimizer.md): left on Sum, the totals add up their children instead of
+> recalculating the formula at each level, and the subtotals lie.
 
 ### View it
 
