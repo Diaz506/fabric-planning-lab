@@ -279,6 +279,15 @@ against city values summing to 178.96, a rounding difference.
    Gross Revenue keeps its own two children as it moves, so the tree deepens rather than
    flattening.
 
+> [!IMPORTANT]
+> **A new formula measure arrives as a root, not as a parent.** Creating Net Revenue
+> leaves it sitting alongside Gross Revenue and Discounts and Returns rather than above
+> them, three roots at the same indent.
+>
+> Select **Net Revenue**, then use **Add child** to attach the other two. The quickest
+> check is the chevron: a parent shows an expand arrow next to its name, the way Gross
+> Revenue does. If Net Revenue has no chevron, nothing is beneath it yet.
+
 9. Add the cost side. Select **Add Measure** → **Formula**:
 
    | Field | Value |
