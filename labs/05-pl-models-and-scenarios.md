@@ -490,40 +490,56 @@ Same P&L, built from account-level rows instead of drivers.
 ### Build from the root down
 
 5. Select the **All** row, select the edit icon, set **Row Name** to `Net Profit` and
-   **Configure as** to `Formula`. Select **Apply**.
-6. Select *Net Profit* → **Add Child** → **Formula**. Name it `Gross Profit`. **Apply**.
-7. Select *Gross Profit* → **Add Child** → **Formula**. Name it `Net Revenue`. **Apply**.
+   **Configure as** to `Aggregate`, with **Aggregate children rows with** set to `Sum`.
+   Select **Apply**.
+6. Select *Net Profit* → **Add Child** → **Aggregate**. Name it `Gross Profit`. **Apply**.
+7. Select *Gross Profit* → **Add Child** → **Aggregate**. Name it `Net Revenue`. **Apply**.
 8. Select *Net Revenue* → **Add Child** → **Data Source**. Name it `Gross Revenue`,
    select **Choose Close Period Source Row**, pick the matching row from the semantic
    model, and **Apply**.
 9. Select *Gross Revenue* → **Add Sibling** → **Data Source** for each of:
    `Returns and Breakage`, `Distribution Allowance & Rebates`,
-   `Federal & State Excise Taxes`. Map each to its source row.
-10. Select the **Configure Formula** box on *Net Revenue* and enter:
-
-    ```
-    [Gross Revenue] - [Returns and Breakage] - [Distribution Allowance & Rebates] - [Federal & State Excise Taxes]
-    ```
-
-    Select **Apply**.
+   `Federal & State Excise Taxes`. Map each to its source row and set **Desired Trend**
+   to **Decrease**, since falling deductions are the good outcome.
 
 > [!IMPORTANT]
-> Enter formulas **after** creating all the child nodes. A formula referencing a row that
-> does not exist yet cannot resolve.
+> **A parent row cannot reference its own children in a formula.** Type `[` in a formula
+> box and the suggestion list offers other rows in the model, never the rows nested
+> underneath. Parents whose inputs are their own children must be **Aggregate**. Reserve
+> **Formula** for rows computed from something other than their children.
+>
+> Learn's row model walkthrough shows this without saying it. Every intermediate parent
+> there is Aggregate, and only the topmost row is a Formula.
 
+> [!WARNING]
+> **Check the sign before trusting an aggregate.** The three deduction rows are named
+> `Less:` in the source but arrive positive, so Sum adds them to Gross Revenue instead of
+> taking them off. Select **Show Preview** and compare: if Net Revenue comes out larger
+> than Gross Revenue, the deductions are positive and the total is wrong in the direction
+> that looks plausible.
+>
+> Observed on F4 for 2024: Gross Revenue 28.26 plus deductions of 2.40, 1.55 and 0.27
+> gives Net Revenue 32.49, where the correct figure is 24.04.
+
+10. Select **Show Preview** and confirm each parent lands where it should before building
+    the next branch. Sign errors compound upward, and every figure above a wrong total
+    is wrong with it.
 11. Select *Net Revenue* → **Add Sibling** → **Aggregate**. Name it `COGS`. **Apply**.
 12. Under *COGS*, use **Add Child** → **Data Source** for `Brewing Materials`,
     `Packaging, Plant Overhead and Maintenance`, and `Water & Utilities`.
-13. Select **Configure Formula** on *Gross Profit* and enter `[Net Revenue] - [COGS]`.
-    **Apply**.
-14. Build the `Operating Expenses` branch the same way, using **Add Child** →
-    **Data Source** for each expense line.
-15. Select **Configure Formula** on *Net Profit* and enter
-    `[Gross Profit]-[Operating Expenses]`. **Apply**.
-16. Select **Back to Home**.
+13. Build the `Operating Expenses` branch the same way, as a child of *Net Profit*, using
+    **Add Child** → **Data Source** for each expense line.
+14. Select **Back to Home**.
 
 The full P&L now cascades from Net Profit down through every line item, recalculating in
 real time as values change.
+
+> [!NOTE]
+> **Unresolved in this lab.** Making positive deduction rows subtract from their parent
+> has no confirmed answer here. A per-row sign or operator setting may exist in the row's
+> properties pane, and negating the values at the source would also work. Treat the row
+> model section as structurally correct and arithmetically unverified. The measure model
+> in Part 1 has no such problem, since its formulas are explicit.
 
 ---
 
