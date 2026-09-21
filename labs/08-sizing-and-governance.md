@@ -41,14 +41,43 @@ Then add the surrounding Fabric workloads (Fabric SQL, OneLake, XMLA operations)
 
 **1,704 × 1.3 ≈ 2,215 CU-hours per 30-day period.**
 
-Spread across a 730-hour month, that is roughly **3 CU of sustained draw**, which an F4
-absorbs comfortably alongside modest other work, and an F2 does not.
+### Does that fit?
+
+A capacity supplies its CU continuously, so over a 730-hour window it provides
+**CU × 730 CU-hours**. Compare the requirement against the budget:
+
+| SKU | CU-hours per 30 days | Harborlight (1,704) | With buffer (2,215) | Verdict |
+|---|---|---|---|---|
+| **F2** | 1,460 | 117% | 152% | Does not fit |
+| **F4** | 2,920 | 58% | 76% | Fits, with little room |
+| **F8** | 5,840 | 29% | 38% | Comfortable |
+| **F16** | 11,680 | 15% | 19% | Ample |
+| **F64** | 46,720 | 4% | 5% | Rounding error |
+
+**F4 is the floor and F8 is the sensible choice** if the capacity does anything else at
+all. A single Planner alone consumes 58% of an F2, which is why the smallest SKU is not
+a serious option for a planning deployment.
 
 > [!IMPORTANT]
-> This arithmetic is a planning estimate, not a quote. Validate it against Microsoft's
+> This is a **budget** view, not a throughput view. It answers whether the work fits
+> across 30 days, not whether you will be throttled at nine o'clock on a Monday. The
+> capacity is also shared with every other Fabric workload, so these percentages sit on
+> top of whatever warehouse, pipeline, and semantic model activity already runs there.
+>
+> Validate against Microsoft's
 > [capacity estimator](https://community.fabricplan.com/capacity-pricing/) and your own
-> capacity metrics before committing. Automation jobs add **2 CU each** on top, and only
+> capacity metrics before committing. Automation jobs add **2 CU each**, and only
 > successful jobs bill.
+
+### These numbers are a worst case
+
+The table assumes all ten people hold **overlapping sessions simultaneously**. In
+practice Harborlight's five executives are unlikely to all open the canvas in the same
+30-day window, and sessions recur only on activity. A Viewer who reads the board pack
+once a quarter costs four sessions a year, not twelve.
+
+Size for the peak month, which for a finance team is budget season, rather than for a
+theoretical month in which everyone happens to be active at once.
 
 ### The three sizing mistakes
 
@@ -64,6 +93,38 @@ absorbs comfortably alongside modest other work, and an F2 does not.
 And the one that surprises people: **if you assign the same capacity to multiple
 workspaces, the user is billed at the highest role active across all of them.** Separate
 workspaces do not separate the bill.
+
+### Pausing is not a cost control
+
+If you pause or delete a capacity mid-session, **the remaining CUs for every active
+session are summed and added to your Azure bill**. Pausing does not defer the charge, it
+brings it forward.
+
+The same applies to the other two escape routes people reach for:
+
+| You do this | What actually happens |
+|---|---|
+| Pause or delete the capacity | Remaining CUs for all active sessions are summed and billed immediately |
+| Delete the plan item | Sessions continue and bill through the full 30 days |
+| Let the capacity run out of credits | Sessions keep being recorded; billing continues periodically |
+
+Once a session opens, its 30 days are a commitment. The only real lever is deciding who
+can open one, which is the next section.
+
+### Fabric SQL is billed separately
+
+The role rates cover planning only. Every Fabric SQL database in the deployment bills
+**compute plus storage** on top:
+
+- **Compute** autoscales with a 2 GB minimum memory charge while online, and drops to
+  zero after 15 minutes of inactivity. The database stays online 15 minutes past the last
+  query, so short bursts bill longer than they run.
+- **Storage** bills continuously, **even when compute is paused**, covering allocated
+  storage plus backup storage beyond 100% of the provisioned size.
+
+Remember that each plan item silently creates its own metadata database in addition to
+any writeback destination you configure. Two plan items and one writeback target is three
+databases, each with its own storage line.
 
 ---
 

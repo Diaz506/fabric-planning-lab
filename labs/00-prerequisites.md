@@ -46,15 +46,79 @@ It has four components. You will use the first three in this lab, and meet the f
 Fabric Planning does not sell per-user licenses. It bills **active 30-day sessions**.
 
 A session starts the moment a user opens, creates, or edits a plan item. It then runs
-for **730 hours, which is 30 days, and you cannot end it early**. Pausing the capacity does not
-help; if you pause or delete a capacity mid-session, the remaining CUs are summed and
-added to your Azure bill.
+for **730 hours, which is 30 days, and you cannot end it early**.
 
-| Role | Who it is | 30-day consumption |
+The role rates below cover the **planning workload only**. Fabric SQL, OneLake, and Power
+BI XMLA operations consume capacity separately, which is what the 30% buffer later in this
+module is for.
+
+| Role | Who it is | Per 30-day session |
 |---|---|---|
 | **Planner** | FP&A analysts, modelers, administrators | **847 CU-hours** |
 | **Stakeholder** | Business users, reviewers, approvers | **168 CU-hours** |
 | **Viewer** | Executives and report consumers | **37 CU-hours** |
+
+### Per session, not per month
+
+This distinction is the whole pricing argument, so it is worth being precise. A session
+runs 30 days **from the moment it is triggered**, not from the first of the month. Within
+that window the user can work every day at no extra cost, because a user returning in the
+same role, tenant, and capacity does not start a second session. When it expires, a new
+session begins **only when they next act**.
+
+So annual cost follows usage, not headcount:
+
+| Usage pattern | Sessions per year | Planner CU-hours per year |
+|---|---|---|
+| Continuously active | 12 | 10,164 |
+| Quarterly reforecast | 4 | 3,388 |
+| Budget season only (3 months) | 3 | 2,541 |
+| Opened it once, in March | 1 | 847 |
+
+That is the argument against per-seat EPM licensing: occasional reviewers and approvers
+cost you only when they participate. A CFO who signs off twice a year is two Viewer
+sessions, not an annual seat.
+
+The trap runs the other way. Because a session cannot be ended early, someone who touches
+the plan once on day one costs exactly the same as someone who works it daily for 30 days.
+There is no partial credit for light usage inside an open session.
+
+### What that looks like against a real capacity
+
+A capacity supplies its CU continuously, so over a 730-hour window it provides
+**CU × 730 CU-hours**. One Planner session spends 847 of them.
+
+| SKU | CU-hours per 30 days | One Planner | Ten-person team (1,704) | Plus 30% buffer (2,215) |
+|---|---|---|---|---|
+| **F2** | 1,460 | 58% | **117%, does not fit** | **152%, does not fit** |
+| **F4** | 2,920 | 29% | 58% | 76% |
+| **F8** | 5,840 | 15% | 29% | 38% |
+| **F16** | 11,680 | 7% | 15% | 19% |
+| **F32** | 23,360 | 4% | 7% | 9% |
+| **F64** | 46,720 | 2% | 4% | 5% |
+
+The ten-person team is the one sized in [Module 08](08-sizing-and-governance.md): one
+Planner, four Stakeholders, five Viewers.
+
+Two caveats. This is a **budget** view, not a throughput view. It tells you whether the
+work fits across 30 days, not whether you will be throttled at nine o'clock on a Monday.
+And the capacity is **shared with every other Fabric workload**, so if that F8 already
+runs a warehouse and semantic model refreshes, planning is additive on top of it.
+
+### Pausing the capacity does not help
+
+If you pause or delete a capacity mid-session, **the remaining CUs for every active
+session are summed and added to your Azure bill**. Pausing does not defer the cost; it
+brings it forward. Start a Planner session on Monday, pause on Tuesday, and the remaining
+twenty-eight days arrive on the bill anyway.
+
+Two related behaviors worth knowing:
+
+- **Deleting the plan item does not stop the session.** Active sessions run and bill
+  through the full 30 days regardless.
+- **Exhausting the capacity does not stop the session either.** Sessions keep being
+  recorded even when other workloads have consumed the credits, and billing continues
+  periodically.
 
 ### You do not assign these roles. Users earn them.
 
@@ -198,6 +262,41 @@ delete it.
 That database is separate from any **writeback destination** you set up later. Writeback
 is where your plan numbers land so the rest of Fabric can read them, and you configure it
 explicitly in Module 04.
+
+### Fabric SQL is not free, and it is not in the role rates
+
+Each Fabric SQL database bills **compute plus storage**, independently of the planning
+meters:
+
+- **Compute** autoscales, with a 2 GB minimum memory charge while the database is online.
+  After 15 minutes of inactivity, compute drops to zero. The database stays online for 15
+  minutes past your last query, so two minutes of work bills as roughly seventeen.
+- **Storage** bills **continuously, even when compute is paused**. Allocated storage plus
+  any backup storage beyond 100% of the provisioned database size.
+
+A lab environment you abandon still accrues storage charges, and the 30-day session keeps
+running whether or not you ever open it again.
+
+> [!WARNING]
+> **On a trial capacity you can create only three SQL databases.**
+>
+> This lab creates four if you do every module:
+>
+> | # | Database | Created in |
+> |---|---|---|
+> | 1 | `Northwind_FMCG_YourName`, the writeback destination | Module 01 |
+> | 2 | the plan item's metadata database, automatic | Module 01 |
+> | 3 | `fabric_plan_training` | Module 07 |
+> | 4 | the second plan item's metadata database, automatic | Module 07 |
+>
+> Modules 00 through 06 and 08 fit exactly at the limit. **Adding Module 07 needs a
+> fourth database and will fail on a trial capacity.** The symptom is error
+> `GEN_DB_010`, *"SQL database capacity limit reached, so a new plan item can't be
+> created."*
+>
+> To do Module 07 on a trial, delete the Module 01 plan item first, or run it on a paid
+> capacity. Also check your trial's size under **Capacity settings** → **Trial**: trials
+> are provisioned as either **F4 or F64**, and you may be eligible to change it.
 
 ---
 

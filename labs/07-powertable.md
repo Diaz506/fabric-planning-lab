@@ -36,6 +36,16 @@ writing code.
 [fabric-samples](https://github.com/microsoft/fabric-samples/tree/main/docs-samples/iq/plan).
 It contains three sheets: assets, employees, and locations.
 
+> [!WARNING]
+> **This module will fail on a Fabric trial capacity.** A trial allows only three SQL
+> databases, and Modules 01 through 06 already use three: the writeback database, the
+> plan item's automatic metadata database, and nothing spare. This module needs two more,
+> `fabric_plan_training` plus a second plan item's automatic metadata database.
+>
+> The symptom is error `GEN_DB_010`, *"SQL database capacity limit reached, so a new plan
+> item can't be created."* Delete the Module 01 plan item first, or run this module on a
+> paid capacity.
+
 ---
 
 ## Part 1: Set up
