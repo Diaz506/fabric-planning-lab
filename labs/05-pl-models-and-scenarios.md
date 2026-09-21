@@ -368,9 +368,34 @@ against city values summing to 178.96, a rounding difference.
 
 11. Select **Back to Home**. On the **Planning** ribbon, select the **Layout** dropdown →
     **Measures In Rows**. The P&L appears as a structured hierarchy.
-12. Select **Layout** → **Tree** for the node view.
+12. Select **Layout** → **Tree** for the node view. The **Tree View** tab appears in the
+    top tab strip beside Infobridge, and a **Scenario** tab appears next to it. Switch to
+    **Tree View**, since the ribbon stays on **Planning** and the scenario buttons are not
+    there.
 13. On the **Tree View** ribbon, select **Display** → **Display Settings** and toggle
     **Show Header KPI** off.
+
+    If the tree runs straight from All to cities with no regions in between, open the
+    **Fields** pane and add the **Region** level above **Cities** in the **Rows** well.
+    The hierarchy is added at city grain by default.
+
+> [!NOTE]
+> **The tree's absolute figures are inflated, and that is expected.** Native measures
+> always roll up by Sum in the measure model. The **Aggregation** column is read only,
+> **Summarize by** in the semantic model is ignored, and deleting and re-adding the node
+> changes nothing. *Avg Selling Price* is the only rate in this P&L, so it is the only
+> measure this distorts, and Gross Revenue multiplies by it. Expect roughly 5.57k rather
+> than 196, and billions rather than tens of millions.
+>
+> Part 2 is unaffected. Scenarios apply percentage and value changes and compare against
+> each other, so the movements are right even though the base is inflated. Planning sheets
+> have their own **Values** setting and are not affected either, which is why Part 1 was
+> correct.
+>
+> The cause is upstream: *Avg Selling Price* is a numeric column, not a DAX measure, so it
+> carries an implicit summarization. An explicit measure such as
+> `DIVIDE(SUM(Revenue), SUM(Volume))` would evaluate in filter context and could not be
+> summed. Microsoft's tutorial has the same behavior and publishes no tree figures.
 
 ---
 
@@ -380,8 +405,9 @@ Harborlight's exec team wants two versions of FY26: an upside case and a cost-ou
 
 ### Best Case: grow the top line
 
-1. Select **Create Scenario**, name it `Best Case`, confirm all semantic model measures
-   are included, and select **Create**.
+1. Select **Create scenario**, name it `Best Case`, confirm all semantic model measures
+   are included, and select **Create**. The new scenario appears in the selector at the
+   bottom left, beside `Base`.
 2. Expand *Asia Pacific* and select the *Sydney* card.
 3. Open the **Measure Simulation** dropdown and apply:
 
@@ -399,7 +425,7 @@ entire P&L responded.
 
 ### Cost Restructuring: take cost out
 
-5. Select **Create Scenario**, name it `Cost Restructuring`, and select **Create**.
+5. Select **Create scenario**, name it `Cost Restructuring`, and select **Create**.
 6. Expand *Europe*, select the *London* card, choose **Value**, scroll, and apply:
 
    | Measure | Value |
@@ -411,7 +437,7 @@ entire P&L responded.
 
 ### Compare them
 
-7. On the **Tree View** ribbon, select **Compare Scenario**. Set **Compare** to
+7. On the **Tree View** ribbon, select **Compare scenario**. Set **Compare** to
    `Best Case` and **With** to `Cost Restructuring`.
 8. Review the side-by-side variance, then select **Exit Compare**.
 
