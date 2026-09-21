@@ -151,20 +151,31 @@ Two things confirm the formula is wired correctly:
 
 ## Step 4: Run the Optimizer
 
+The Optimizer is a three-step wizard: **Objective & Variables**, **Add Constraints**,
+**Output**.
+
 1. Select the **Gross Profit** grand total cell. On the **Planning** ribbon, select
-   **Optimize**.
-2. In **Optimizer: Objectives and Variables**, configure and select **Next**:
+   **Optimize**. The command stays greyed out until a valid target cell is selected.
+2. On **Objective & Variables**, set **Objective** to `Target` and **Target Value** to
+   `12.5m`.
 
-   | Setting | Value |
-   |---|---|
-   | **Objective** | Target |
-   | **Target value** | `12.5m` |
-   | **Variables to update** | Sales Plan, COGS |
+   Beneath those two fields the pane names the cell it is about to solve for, reading
+   **GrandTotal** and **2025 > Gross Profit**. **Check it.** That is your confirmation
+   that the right cell was selected before you opened the wizard. There is also a
+   **Show Formula** expander if you want to see the calculation being targeted.
 
-3. On the **Add Constraints** page, select **Run** without adding constraints.
-4. On the **Output** screen, confirm **Target Value** shows 12.5M and **Achieved** shows
-   12.5M with a green check.
-5. Select **Apply**.
+3. Open **Variables to Update**, the **Choose Series** dropdown, and select both
+   `Sales Plan` and `COGS`. **Next** stays disabled until at least one series is chosen.
+4. Select **Next**.
+5. On **Add Constraints**, select **Run** without adding any.
+6. On **Output**, confirm **Target Value** shows 12.5M and **Achieved** shows 12.5M with
+   a green check.
+7. Select **Apply**.
+
+> [!NOTE]
+> Only the editable copies appear in **Choose Series**. If `Sales Plan` or `COGS` is
+> missing from the list, you are looking at a sheet where the copies from Step 2 were
+> never created.
 
 ## Step 5: See what it actually did
 
