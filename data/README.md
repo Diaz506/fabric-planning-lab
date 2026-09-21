@@ -47,35 +47,35 @@ belongs to. Knowing which table holds what saves a lot of hunting.
 
 | Table | Type | Holds | Used in |
 |---|---|---|---|
-| **Measures** | Measures | *2025 Gross Revenue*, *2025 COGS*, and the other headline measures | Modules 01, 03, 04, 06 |
+| **Measures Table** | Measures | *2025 Gross Revenue*, *2025 COGS*, and the other headline measures | Modules 01, 03, 04, 06 |
 | **Date** | Dimension | *Year*, *Quarter*, *Month*, *Month Short*; the column hierarchy everywhere | Every module |
+| **Fact Transactions** | Fact | Revenue and cost actuals at geography and product level | Underlies the Measures Table |
 | **Geography** | Dimension | *Region*, *Sub Region*, *City* | Modules 01, 03, 05 |
-| Product dimension | Dimension | *Category*, *Sub-Category* | Modules 01, 03, 04, 06 |
-| **Sales Transactions** | Fact | Revenue and cost actuals at geography and product level | Underlies the Measures table |
 | **P&L Measures** | Fact | Driver-level measures: sales volume, average selling price, COGS components, operating expenses | Module 05, measure model |
 | **P&L Rows** | Fact | P&L line items as rows, with *Account* and *Value* columns | Module 05, row model |
+| **Product** | Dimension | *Category*, *Sub-Category* | Modules 01, 03, 04, 06 |
 
-The three fact tables share the common *Date* dimension.
+The fact tables share the common *Date* dimension.
 
-> [!NOTE]
-> Microsoft's tutorials name the *Measures*, *Date*, and *Geography* tables explicitly but
-> never name the table holding *Category* and *Sub-Category*. It is referred to only as a
-> dimension. Expect a product or item dimension in the Data pane; this lab does not invent
-> a name for it.
+> [!IMPORTANT]
+> Microsoft's tutorial text calls the transaction fact table **Sales Transactions**, but
+> the table shipped in the model is named **Fact Transactions**. This lab uses the name
+> you will actually see in the Data pane. The tutorials also never name the table holding
+> *Category* and *Sub-Category*; it is **Product**.
 
 ---
 
 ## The fact tables in detail
 
-### Sales Transactions
+### Fact Transactions
 
 Revenue and cost actuals at geography and product level. This is the base the FY26
 revenue plan is built from. It supplies the prior-year mix that allocation uses to
 distribute a top-down target.
 
 Key measure: **2025 Gross Revenue**, full-year FY25 actuals, totaling roughly **$28.5M**.
-That number is the anchor for the whole lab. You will find it under the **Measures**
-table rather than here.
+That number is the anchor for the whole lab. You will find it under **Measures Table**
+rather than here.
 
 ### P&L Measures
 

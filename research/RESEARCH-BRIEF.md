@@ -165,7 +165,7 @@ From `microsoft/fabric-samples` → `docs-samples/iq/plan/`:
 
 | File | Size | Use |
 |---|---|---|
-| `Northwind_FMCG.pbix` | 9.3 MB | Main planning tutorial model. 3 fact tables on a shared date dim: **Sales Transactions** (revenue/cost actuals by geography + product), **P&L Measures** (driver-level: sales volume, avg selling price, COGS components, OpEx), **P&L Rows** (line items as rows) |
+| `Northwind_FMCG.pbix` | 9.3 MB | Main planning tutorial model. Seven tables: **Measures Table**, **Date**, **Fact Transactions** (revenue/cost actuals by geography + product; tutorial text calls it "Sales Transactions"), **Geography**, **P&L Measures** (driver-level: sales volume, avg selling price, COGS components, OpEx), **P&L Rows** (line items as rows), **Product** |
 | `planning-tutorial-dataset.pbix` | 9.3 MB | Identical size — likely the same model under the tutorial name |
 | `Northwind-FMCG-assets-powertable-tutorial.xlsx` | 36 KB | IT asset data for PowerTable labs |
 | `region_dimension_pt.xlsx` | 6 KB | Region dimension for PowerTable |

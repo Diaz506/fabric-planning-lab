@@ -27,9 +27,9 @@ This is the module that makes planning matter to everyone outside Finance.
 
    | Field | Value | Source table |
    |---|---|---|
-   | **Rows** | *Category* → *Sub-Category* | the product dimension |
+   | **Rows** | *Category* → *Sub-Category* | *Product* |
    | **Columns** | *Year*, *Quarter*, *Month Short* | *Date* |
-   | **Values** | *Gross Revenue* | *Measures* |
+   | **Values** | *Gross Revenue* | *Measures Table* |
 
 3. In the **Filter** panel, apply a year filter for **2024** and **2025**.
 

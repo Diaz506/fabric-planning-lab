@@ -25,10 +25,10 @@ goal-seek for planning. You state the target, name the levers, and it back-calcu
 
    | Field | Value | Source |
    |---|---|---|
-   | **Rows** | *Region Name* → *Category* → *Sub-category* | *Geography*, then the product dimension |
+   | **Rows** | *Region Name* → *Category* → *Sub-category* | *Geography*, then *Product* |
    | **Columns** | Date hierarchy | *Date* |
    | **Values** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
-   | **Values** | *COGS 2025* | *Measures* |
+   | **Values** | *COGS 2025* | *Measures Table* |
 
 3. Double-click the **Sum of 2026 Sales Plan** label in the **Values** field and rename it
    to `2026 Sales Plan`.

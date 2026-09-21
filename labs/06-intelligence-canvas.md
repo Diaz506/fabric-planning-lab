@@ -134,9 +134,9 @@ Plan and actual stop being two systems that disagree.
 
    | Well | Field | Source |
    |---|---|---|
-   | **Rows** | *Category*, *Sub-Category* | the product dimension |
+   | **Rows** | *Category*, *Sub-Category* | *Product* |
    | **Columns** | *Year*, *Quarter* | *Date* |
-   | **Values (Actuals)** | *2025 Gross Revenue* | *Measures* |
+   | **Values (Actuals)** | *2025 Gross Revenue* | *Measures Table* |
    | **Compare to Prior Period (PY)** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
 
 3. On the **Matrix** tab, select **Show Columns**, then enable **Variance** and
