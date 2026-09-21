@@ -23,10 +23,9 @@ Change a number in the plan and the charts move, with no refresh and no data mov
 > on the Harborlight model, because a plan item binds permanently to one semantic model
 > and switching here would sever the canvas from everything you built in Modules 01–05.
 >
-> Harborlight's model has no *Plan* or *Forecast* base measure, so this module uses the
-> **blend** pattern instead: semantic model actuals combined with live measures from your
-> planning sheets. The mechanics are documented; only the field names differ from the
-> Learn walkthrough.
+> Harborlight's model has no *Plan* or *Forecast* base measure, so this module maps the
+> plan measures you used in Module 01 instead. The visuals and the mechanics are the same;
+> only the field names differ from the Learn walkthrough.
 
 Work in the same `Harborlight_FY26_Plan` item.
 
@@ -54,13 +53,18 @@ not appear in the **Data** pane, and the rest of this module has nothing to refe
 > The **Planning** visualization option is greyed out until at least one planning sheet
 > exists in the plan item. If it looks disabled, you are in the wrong plan item.
 
-Now open the **Data** pane. A **From Sheets** section has appeared, containing the
-measures from `Plan Intro`: input values, formulas, simulations, and forecasts.
+Now open the **Data** pane.
 
-> [!NOTE]
-> Two kinds of data now sit side by side. **Semantic model** data is read-only actuals
-> and reference data from Power BI. **From Sheets** data is what you created inside
-> planning: targets, sales plans, forecasts. Blending them is the point of this module.
+> [!IMPORTANT]
+> **From Sheets may read "No Other Sheets Available" even with a sheet embedded.** That is
+> not a failure, and it does not block anything. Every measure this module needs lives in
+> the semantic model, under **Measures Table**, because the Module 01 sheet was built from
+> model measures rather than from measures created inside the sheet. Map every field well
+> from the semantic model and search the Data pane by name.
+>
+> **From Sheets** carries measures that exist only inside a planning sheet, such as a
+> Data Input column or a formula measure defined on the sheet itself. A plan built
+> entirely on model measures produces none.
 
 The embedded sheet is **live and editable**, not a snapshot. Adjusting a cell in it
 updates every chart, KPI, table, and matrix on this canvas.
@@ -68,15 +72,16 @@ updates every chart, KPI, table, and matrix on this canvas.
 ## Step 3: Variance, plan against prior year
 
 1. In the **Visualizations** pane, select **Charts 100+**.
-2. Search for `variance` and select **Integrated Variance Bar Chart**.
-3. In the field well, map:
+2. Search for `variance`. Results group by chart family with a count on each, rather than
+   listing chart names, so hover the thumbnails under **Bar/ Column** to find the
+   integrated variance chart. The **IBCS** filter pill narrows it faster.
+3. Map the field wells. Every field comes from the semantic model:
 
    | Well | Field |
    |---|---|
-   | **Values (Actuals)** | *2026 Sales Plan*, from **From Sheets** → *Plan Intro* |
-   | **Comparison 1 (vs Actuals)** | *2025 Gross Revenue*, from the semantic model |
-   | **Category** | *Region* |
-   | **Category** | *Category* |
+   | **Values (Actuals)** | *2026 Sales Plan* |
+   | **Comparison 1 (vs Actuals)** | *2025 Gross Revenue* |
+   | **Category** | *Region*, then *Category* |
 
 4. With the chart selected, use the visual header to drill down from *Region* to
    *Category*, then use **Expand all** to show both levels at once.
@@ -89,41 +94,35 @@ variance calculated for you.
 ## Step 4: Trend over time
 
 1. In the **Visualizations** pane, select **Charts 100+**, expand **Line**, and select
-   **Grouped line**.
-2. In the field well, map:
+   **Grouped/Clustered Line**.
+2. Map the field wells. **Actual(s)** and **Legend** are both required, marked with an
+   asterisk, and the visual stays as a grey placeholder until they are filled:
 
    | Well | Field |
    |---|---|
-   | First measure | *2025 Gross Revenue*, from the semantic model |
-   | Second measure | *Forecast*, from **From Sheets** → *Forecast* |
    | **Category** | *Month Short* |
+   | **Actual(s)** | *2025 Gross Revenue* |
+   | **Forecast** | *2026 Sales Plan* |
+   | **Legend / Color by / Stacked** | *Region* |
 
-The forecast you generated in Module 04 now sits against last year's actual shape. The
-seasonality either matches or it does not, and either answer is worth knowing.
-
-> [!TIP]
-> If *Forecast* does not appear under **From Sheets**, the `Forecast` sheet exists but is
-> not embedded. Only embedded sheets contribute measures. Embed it with the **Planning**
-> visual as in Step 2, or point this series at *2026 Target* from `Plan Intro` instead.
+Last year's actual shape sits against this year's plan. The seasonality either matches or
+it does not, and either answer is worth knowing.
 
 ## Step 5: The blended KPI
 
-1. In the **Visualizations** pane, select **KPI**.
-2. Map the semantic model field first:
+1. In the **Visualizations** pane, select **KPIs**. The placeholder reads *Card*.
+2. Map the field wells. Only **Actual(s)** is required here:
 
    | Well | Field |
    |---|---|
+   | **Category** | *Region* |
+   | **Actual(s)** | *2026 Target* |
    | **Comparison 1 (vs Actuals)** | *2025 Gross Revenue* |
    | **Trellis Row** | *Category* |
 
-3. In the field well, expand **From Sheets** and select the embedded `Plan Intro` sheet.
-4. Add *2026 Target* from `Plan Intro` to the **Actuals** well.
+   There are three comparison wells, so prior year, plan and forecast can sit on one card.
 
-This is the blend worth pausing on. The headline value comes from a **planning sheet**.
-The comparison comes from the **semantic model**. The card tiles into one panel per
-category.
-
-5. Change a value in the embedded planning sheet and watch the KPI series update.
+3. Change a value in the embedded planning sheet and watch the KPI update.
 
 Plan and actual stop being two systems that disagree.
 
@@ -137,7 +136,7 @@ Plan and actual stop being two systems that disagree.
    | **Rows** | *Category*, *Sub Category* | *Product* |
    | **Columns** | *Year*, *Quarter* | *Date* |
    | **Values (Actuals)** | *2025 Gross Revenue* | *Measures Table* |
-   | **Compare to Prior Period (PY)** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
+   | **Compare to Prior Period (PY)** | *2026 Sales Plan* | *Measures Table* |
 
 3. On the **Matrix** tab, select **Show Columns**, then enable **Variance** and
    **Variance %**.
@@ -209,22 +208,22 @@ production.
 
 ## Check yourself
 
-1. Why must you embed the planning sheet before building the other visuals?
+1. Why is the embedded planning sheet worth having on the canvas at all?
 2. What is the difference between semantic model data and **From Sheets** data?
-3. Why does this lab blend measures instead of mapping Plan and Forecast straight from
-   the semantic model as Microsoft's tutorial does?
+3. Why is **From Sheets** empty in this lab?
 
 <details>
 <summary>Answers</summary>
 
-1. A planning sheet's measures only appear under **From Sheets** in the **Data** pane
-   after the sheet is embedded. Build the visuals first and there is nothing to map.
+1. It is live rather than a snapshot. Editing a cell in it updates every visual on the
+   canvas at once, which is what makes this a planning report rather than a Power BI
+   report next to a plan.
 2. Semantic model data is read-only actuals and reference data from Power BI. **From
-   Sheets** data is created inside planning: targets, sales plans, forecasts, and
-   simulations. It is live, so editing the sheet updates the visuals immediately.
-3. The Harborlight model has no Plan or Forecast base measure. Those values live in the
-   planning sheets you built, so the canvas blends semantic actuals with live planning
-   measures.
+   Sheets** data exists only inside a planning sheet, such as a Data Input column or a
+   formula measure defined on the sheet.
+3. Every measure in this plan came from the semantic model's Measures Table, so no
+   sheet-local measures were ever created. The canvas maps everything from the semantic
+   model and the visuals behave identically.
 
 </details>
 
