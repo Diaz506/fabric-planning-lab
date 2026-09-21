@@ -284,9 +284,20 @@ against city values summing to 178.96, a rounding difference.
 > leaves it sitting alongside Gross Revenue and Discounts and Returns rather than above
 > them, three roots at the same indent.
 >
-> Select **Net Revenue**, then use **Add child** to attach the other two. The quickest
-> check is the chevron: a parent shows an expand arrow next to its name, the way Gross
-> Revenue does. If Net Revenue has no chevron, nothing is beneath it yet.
+> Attach the children one at a time, watching the indent after each:
+>
+> - With **Net Revenue** selected, **Add child** puts the measure one level in.
+> - With **Gross Revenue** selected, **Add sibling** puts it at Gross Revenue's level,
+>   which is the same thing.
+>
+> Using **Add child** while a measure that is already indented is selected pushes the new
+> one a level too deep. Discounts and Returns landing beside Sales Volume rather than
+> beside Gross Revenue is the usual result, and it says discounts are a component of gross
+> revenue rather than a deduction from it. The formula still calculates; the structure
+> describes something else.
+>
+> The chevron is the quickest check that a measure has children at all. Order within a
+> level does not matter, only depth.
 
 9. Add the cost side. Select **Add Measure** → **Formula**:
 
