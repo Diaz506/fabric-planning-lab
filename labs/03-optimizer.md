@@ -131,9 +131,9 @@ the columns it needs.
 > values, so the subtraction is correct even though the columns look like they are in
 > different units.
 
-Note the Gross Profit figure on the **All** row before you continue. It should land
-somewhere around **$12.1M** against the $12.5M target, leaving the Optimizer a real gap
-to close.
+Note the Gross Profit figure on the **All** row before you continue. In one run it landed
+at **12,144.89 thousands**, which is $12.14M against the $12.5M target, leaving the
+Optimizer a gap of about **$355K** to close.
 
 > [!TIP]
 > **Your exact figures will differ slightly from the ones quoted later in this module.**
@@ -141,6 +141,13 @@ to close.
 > the `+10%` approval test. The numbers below come from one run; what matters is that
 > Gross Profit finishes at exactly 12.5M and that you can see which two levers moved to
 > get there.
+
+Two things confirm the formula is wired correctly:
+
+- The sheet title now reads *2026 Sales Plan, 2025 COGS, Sales Plan, COGS, Gross Profit*,
+  five columns.
+- Gross Profit on any row equals that row's Sales Plan minus its COGS. On the All row,
+  26,311.20 minus 14,166.31 gives 12,144.89.
 
 ## Step 4: Run the Optimizer
 
