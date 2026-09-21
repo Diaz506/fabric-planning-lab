@@ -37,7 +37,64 @@ two ways is the fastest way to understand which one your own data calls for.
    |---|---|---|
    | **Rows** | *Region* → *Cities* | *Geography* |
    | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
-   | **Values** | Every measure in the table | **P&L Measures** |
+   | **Values** | Tick **every** measure in the table | **P&L Measures** |
+
+> [!IMPORTANT]
+> **Expand P&L Measures, not Measures Table.** They are different tables. *Measures
+> Table* holds the four headline measures used in Modules 01 to 04: Gross Revenue, COGS,
+> and their 2025-scoped versions. *P&L Measures* holds the driver-level measures this
+> module needs, and you want all of them.
+
+<details>
+<summary>What these measures are, and the P&L they build</summary>
+
+These are **drivers**: the operational quantities a business actually manages. Ten of
+them, in three groups.
+
+**Revenue drivers**
+
+| Measure | What it is |
+|---|---|
+| Sales Volume | Units sold |
+| Avg Selling Price | Price per unit. A rate, not a quantity, which is why it needs Average rather than Sum |
+| Discounts and Returns | What comes off the top: promotional discounts, returned goods |
+
+**Cost of goods drivers**
+
+| Measure | What it is |
+|---|---|
+| Raw Material Cost | Materials that go into the product |
+| Labor Cost | Direct labor to make it |
+| Other Direct Exp | Remaining costs attributable to production |
+
+**Operating expense drivers**
+
+| Measure | What it is |
+|---|---|
+| Admin Expenses | Running the business: finance, legal, facilities |
+| Employee Expenses | Staff costs not tied directly to production |
+| R&D | Product development |
+| Selling and Marketing Expenses | Getting the product to market |
+
+Nothing in that list is a P&L line. That is the point of this module: the six formula
+measures you are about to build assemble them into one.
+
+```
+Sales Volume x Avg Selling Price          = Gross Revenue
+Gross Revenue - Discounts and Returns     = Net Revenue
+
+Raw Material + Labor + Other Direct       = COGS
+Net Revenue - COGS                        = Gross Profit
+
+Admin + Employee + R&D + Selling & Mktg   = Operating Expenses
+Gross Profit - Operating Expenses         = Net Profit
+```
+
+A driver-based model is worth the effort because of what it does next. Change Sales
+Volume by 5% and every line below it moves, all the way to net profit, without touching
+anything else. That is what makes the scenarios in Part 2 possible.
+
+</details>
 
 3. Double-click each measure label and remove the `Sum of` prefix.
 4. Select the three dots next to **Avg Selling Price** in the Values field and change it
