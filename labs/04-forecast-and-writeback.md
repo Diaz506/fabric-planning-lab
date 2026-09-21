@@ -124,7 +124,13 @@ open period with nothing in it.
 Jan 2027 seeds from Jan 2026 actuals at **$1.92M**, a defensible starting point rather
 than a guess.
 
-6. Double-click the Jan 2027 grand total, enter `+4%`, and select the check mark.
+6. Double-click the Jan 2027 grand total and **append** `+4%` after the existing value,
+   then select the check mark.
+
+> [!NOTE]
+> As in [Module 02](02-allocation-and-collaboration.md), this is an append. Double-clicking
+> selects the current value, so type after it rather than over it. The cell should read
+> something like `1.92+4%` before you confirm.
 
 Jan 2027 lands at **$2M**. The planner's judgement sits on top of the statistical base,
 and both are visible.

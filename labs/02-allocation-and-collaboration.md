@@ -186,8 +186,31 @@ The target is a frame. The plan is what the regions commit to.
 The Americas sales lead is confident about Energy & Sports drinks.
 
 4. Expand *Americas* → *Beverages* and find the **Energy & Sports** row.
-5. Double-click the **2026 Sales Plan** grand total cell **on the Energy & Sports row**,
-   and enter `+ 8%` in the formula bar. Press Enter.
+5. Double-click the **2026 Sales Plan** grand total cell **on the Energy & Sports row**.
+   The existing value, 0.49, appears selected. **Place the cursor after it** rather than
+   typing over it, so the cell reads `0.49+8%`. Press Enter.
+
+> [!IMPORTANT]
+> This is an append, not a replacement. Double-clicking selects the current value, so
+> typing `+8%` straight away **overwrites it and the cell becomes 0.00**. You will see
+> every parent total drop by the amount you just destroyed.
+>
+> Click once more to deselect, or press **End**, to put the cursor after the number. The
+> cell should read `0.49+8%` before you press Enter.
+
+**Check it worked.** Energy & Sports goes **0.49 → 0.53**, and 8% of 0.49 is 0.04, so
+every total above it rises by exactly that:
+
+| Row | Before | After |
+|---|---|---|
+| Energy & Sports | 0.49 | **0.53** |
+| Beverages | 1.49 | **1.53** |
+| Americas | 7.14 | **7.18** |
+| All | 25.87 | **25.91** |
+
+If Energy & Sports reads 0.00 and the totals fell by 0.49, the value was overwritten.
+Undo with Ctrl+Z, or retype `0.49`, and try again with the cursor positioned after the
+number.
 
 The increase rolls up through *Beverages* to *Americas* automatically.
 
@@ -264,7 +287,8 @@ A number without its reasoning is a number nobody can defend in a board meeting.
 ### Test it
 
 5. Expand *Asia Pacific*, double-click the **Beverages** cell in the **2026 Sales Plan**
-   grand total column, enter `+10%`, and press Enter.
+   grand total column, and **append** `+10%` after the existing value as you did with the
+   8% uplift. Press Enter.
 6. In the **Regional Manager** column for *Asia Pacific* → *Beverages*, select
    **Submitted**.
 
