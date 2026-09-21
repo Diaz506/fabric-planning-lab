@@ -47,6 +47,13 @@ This is the module that makes planning matter to everyone outside Finance.
 4. On the **Planning** ribbon, select **Totals** and enable **Column Subtotal** on the
    left.
 
+> [!NOTE]
+> Nothing will appear to happen. A subtotal totals the **visible children** of a
+> hierarchy level, so with the columns collapsed at Year there is nothing beneath to
+> total, and each Year column is already the aggregate. Expand a year with the `>` and
+> the subtotal column appears alongside the quarters. Enabling it now means it is ready
+> when you need it.
+
 ## Part 2: Define the forecast measure
 
 1. On the **Model** ribbon, select **Forecast**.
@@ -60,9 +67,30 @@ That split is the whole idea of a rolling forecast. **Closed periods** read actu
 automatically. **Open periods** accept planning input. As the year advances, months move
 from one side to the other and the forecast re-bases itself.
 
+**Check it worked.** The sheet should now show a **Forecast** column beside Gross Revenue
+for each year, and a **2026** column group appears on its own, because the forecast
+period covers it:
+
+| Year | Forecast column shows | Why |
+|---|---|---|
+| 2024 | Exactly the Gross Revenue figure, 24.57 on the All row | Closed period, linked to the measure |
+| 2025 | Exactly the Gross Revenue figure, 25.87 on the All row | Closed period, linked to the measure |
+| 2026 | **Empty** | Open period, data input with no default |
+
+If 2024 and 2025 do not mirror Gross Revenue exactly, the closed period source was not
+set. If 2026 is not empty, the open period picked up a default value.
+
 ## Part 3: Generate the statistical forecast
 
-1. Select the grand total cell: the *All* row, 2026 Forecast subtotal.
+1. Select the **All** row cell under the **2026 Forecast** column. It is empty, which is
+   correct: the statistical forecast is what fills it.
+
+> [!TIP]
+> Leave the column hierarchy collapsed at Year. With 2026 collapsed, that one cell is the
+> whole-year figure, which is exactly what you want the solver to work from. Microsoft's
+> tutorial calls it the "2026 Forecast subtotal", but no separate subtotal column appears
+> until you expand the year into quarters.
+
 2. On the **Model** ribbon, select **Predict**.
 3. Select the lock icon to freeze the selection. Confirm **Row Selected** is
    *Grand Total* and **Measure** is *Forecast*.
@@ -88,9 +116,12 @@ from one side to the other and the forecast re-bases itself.
 > a consumer goods business with both an annual cycle and a quarterly promotional rhythm,
 > which is exactly why both seasonality levels are checked.
 
-9. In the **Filter** panel, edit the year filter and add **2026**.
+9. In the **Filter** panel, check the year filter. **2026 may already be present**,
+   because creating a forecast measure brings its forecast-period columns into the sheet
+   whether or not the filter names that year. If it is missing, add it.
+10. Expand **2026** with the `>` to see the monthly figures the forecast produced.
 
-You should now see January forecast at **$2.09M** against actual **$1.92M**. The
+You should now see January forecast at around **$2.09M** against actual **$1.92M**. The
 forecast was optimistic. Good. That is the situation worth practising.
 
 ## Part 4: Close the period and roll forward
