@@ -278,9 +278,29 @@ see it.
 ### Verify it
 
 6. Open the `Northwind_FMCG_[YourName]` database, expand **dbo** → **Tables**, and
-   confirm the **Forecast** table is populated.
-7. Back in the plan, select **Writeback** → **Logs** to review status, duration, measures
-   written, and writeback type.
+   confirm the **Forecast** table is populated. **Refresh the explorer and run a query**
+   rather than trusting the preview, which caches:
+
+   ```sql
+   SELECT COUNT(*) FROM dbo.Forecast;
+   SELECT TOP 100 * FROM dbo.Forecast;
+   ```
+
+7. Back in the plan, select **Writeback** → **Logs** to review status, duration, the user
+   who ran it, measures written, and writeback type.
+
+> [!TIP]
+> **If the table exists but looks empty**, the table was created so the connection and
+> permissions are fine. Work through it in this order:
+>
+> 1. **Check the logs first.** If they report success with *Forecast* among the measures
+>    written, the rows are there and the SQL view is stale. Refresh and query again.
+> 2. **Confirm Forecast stayed selected** on the Settings **Data** tab. If deselecting
+>    Gross Revenue left nothing ticked, writeback reports success and writes nothing.
+> 3. **Check the writeback filter** on the Settings **Advanced** tab. A restrictive filter
+>    can exclude every row.
+> 4. **Check the scenario.** If you wrote back one scenario and are previewing another,
+>    the rows will not match.
 
 > [!WARNING]
 > Deleting a row in a planning sheet does **not** delete it from the destination table.
