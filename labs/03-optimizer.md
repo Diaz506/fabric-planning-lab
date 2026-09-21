@@ -21,14 +21,18 @@ goal-seek for planning. You state the target, name the levers, and it back-calcu
 
 1. On the **Home** ribbon, select **New Planning Sheet**. Name it `Gross Profit` and
    select **Create**.
-2. Assign the fields:
+2. Assign the fields. **Values takes two measures**, one from each source:
 
    | Field | Value | Source |
    |---|---|---|
    | **Rows** | *Region* → *Category* → *Sub Category* | *Geography*, then *Product* |
    | **Columns** | Date hierarchy | *Date* |
-   | **Values** | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
-   | **Values** | *2025 COGS* | *Measures Table* |
+   | **Values**, first | *2026 Sales Plan* | **From Sheets** → *Plan Intro* |
+   | **Values**, second | *2025 COGS* | *Measures Table* |
+
+   Tick both in the **Data** pane. The grid should end up with two measure columns, and
+   the sheet title above it should read *2026 Sales Plan, 2025 COGS by Region...*. If it
+   names only one measure, the other did not attach.
 
 3. Double-click the **Sum of 2026 Sales Plan** label in the **Values** field and rename it
    to `2026 Sales Plan`.
@@ -56,6 +60,18 @@ or from the semantic model are read-only.
 
 You now have editable copies of both levers, with the originals preserved as a baseline
 for comparison afterwards. That comparison is the payoff at the end of this module.
+
+**Check before moving on.** The grid should now have **four** measure columns:
+
+| Column | Origin | Editable? |
+|---|---|---|
+| 2026 Sales Plan | From Sheets, Plan Intro | no |
+| 2025 COGS | Measures Table | no |
+| **Sales Plan** | your copy | **yes** |
+| **COGS** | your copy | **yes** |
+
+If you see only two, Step 2 has not taken effect, and the formula in Step 3 will not find
+the columns it needs.
 
 ## Step 3: Calculate gross profit
 
