@@ -37,13 +37,27 @@ two ways is the fastest way to understand which one your own data calls for.
    |---|---|---|
    | **Rows** | *Region* → *Cities* | *Geography* |
    | **Columns** | *Year*, *Quarter*, *Month* | *Date* |
-   | **Values** | Tick **every** measure in the table | **P&L Measures** |
+   | **Values** | The ten driver measures listed below | **P&L Measures** |
 
 > [!IMPORTANT]
-> **Expand P&L Measures, not Measures Table.** They are different tables. *Measures
-> Table* holds the four headline measures used in Modules 01 to 04: Gross Revenue, COGS,
-> and their 2025-scoped versions. *P&L Measures* holds the driver-level measures this
-> module needs, and you want all of them.
+> **Expand P&L Measures, not Measures Table.** They are different. *Measures Table* holds
+> the four headline measures used in Modules 01 to 04. *P&L Measures* holds the drivers
+> this module needs.
+>
+> Microsoft's tutorial says to take "all the measures from the P&L Measures table", but
+> the table contains more than measures and more than you want. Tick these ten:
+>
+> Admin Expenses · Avg Selling Price · Discounts and Returns · Employee Expenses ·
+> Labor Cost · Other Direct Exp · R&D · Raw Material Cost · Sales Volume ·
+> Selling and Marketing Expenses
+>
+> Leave the rest alone:
+>
+> | Also in the table | Why skip it |
+> |---|---|
+> | *Date Hierarchy*, *Region Hierarchy* | Hierarchies, not measures. Your rows and columns already come from the Geography and Date tables |
+> | *Invoice ID* | Has no sigma icon, so it is a field rather than an aggregating measure |
+> | *COGS*, *Gross revenue*, *net revenue* | Native measures whose names collide with three of the six formula measures you are about to create. Two columns called COGS makes formula references ambiguous |
 
 <details>
 <summary>What these measures are, and the P&L they build</summary>
@@ -89,6 +103,11 @@ Net Revenue - COGS                        = Gross Profit
 Admin + Employee + R&D + Selling & Mktg   = Operating Expenses
 Gross Profit - Operating Expenses         = Net Profit
 ```
+
+The table already contains native *Gross revenue*, *net revenue* and *COGS* measures,
+which is why they are left unticked. You are rebuilding those three from their drivers so
+the model knows how they are composed. A native measure is a number; a formula measure is
+a number with a reason.
 
 A driver-based model is worth the effort because of what it does next. Change Sales
 Volume by 5% and every line below it moves, all the way to net profit, without touching
