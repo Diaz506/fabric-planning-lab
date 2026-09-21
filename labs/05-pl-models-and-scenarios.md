@@ -197,8 +197,27 @@ against city values summing to 178.96, a rounding difference.
    | **Column aggregation type** | **Formula** | **Defaults to Sum. Change it.** |
    | **Row aggregation type** | Formula | Already the default |
 
-   Select **Create**. Drag *Gross Revenue* onto the canvas, then drag *Sales Volume* and
+   Select **Create**, then place the two drivers underneath it. Select the
+   **Gross Revenue** row and use **Add child** on the toolbar, or drag *Sales Volume* and
    *Avg Selling Price* beneath it.
+
+   The result should be two levels, not three:
+
+   ```
+   Gross Revenue          Formula    [Sales Volume]*[Avg Selling Price]
+     Sales Volume         Native
+     Avg Selling Price    Native
+   ```
+
+> [!IMPORTANT]
+> **Sales Volume and Avg Selling Price are siblings, both children of Gross Revenue.**
+> Dragging one onto the other makes the second a grandchild, which you will see as a
+> deeper indent and a chevron appearing on Sales Volume. Price is not a component of
+> volume; they are two inputs to the same multiplication.
+>
+> The toolbar's **Add child** and **Add sibling** buttons build the structure without
+> dragging, and cannot produce accidental nesting. Select the row you want to attach to
+> first.
 
 > [!IMPORTANT]
 > **Column aggregation type defaults to Sum and must be changed to Formula, on every one
