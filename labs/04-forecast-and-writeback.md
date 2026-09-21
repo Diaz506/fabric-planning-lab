@@ -27,9 +27,15 @@ This is the module that makes planning matter to everyone outside Finance.
 
    | Field | Value | Source table |
    |---|---|---|
-   | **Rows** | *Category* → *Sub-Category* | *Product* |
+   | **Rows** | *Category* → *Sub Category* | *Product* |
    | **Columns** | *Year*, *Quarter*, *Month Short* | *Date* |
    | **Values** | *Gross Revenue* | *Measures Table* |
+
+> [!NOTE]
+> This module uses the **unscoped** *Gross Revenue*, not *2025 Gross Revenue*. That is
+> deliberate. A statistical forecast needs multiple years of history, and the 2025-scoped
+> measure would give it one. Modules 01 and 03 use the scoped version because they plan a
+> single year; this one is the exception.
 
 3. In the **Filter** panel, apply a year filter for **2024** and **2025**.
 

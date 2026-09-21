@@ -47,21 +47,34 @@ belongs to. Knowing which table holds what saves a lot of hunting.
 
 | Table | Type | Holds | Used in |
 |---|---|---|---|
-| **Measures Table** | Measures | *2025 Gross Revenue*, *2025 COGS*, and the other headline measures | Modules 01, 03, 04, 06 |
-| **Date** | Dimension | *Year*, *Quarter*, *Month*, *Month Short*; the column hierarchy everywhere | Every module |
+| **Measures Table** | Measures | *Gross Revenue*, *2025 Gross Revenue*, *COGS*, *2025 COGS* | Modules 01, 03, 04, 06 |
+| **Date** | Dimension | *Date Hierarchy*, *Date Key*, *Half Year*, *Month*, *Month Name*, *Month Short*, *Quarter*, *Year*, *Year Month*, *Year Quarter* | Every module |
 | **Fact Transactions** | Fact | Revenue and cost actuals at geography and product level | Underlies the Measures Table |
 | **Geography** | Dimension | *Region*, *Sub Region*, *City* | Modules 01, 03, 05 |
 | **P&L Measures** | Fact | Driver-level measures: sales volume, average selling price, COGS components, operating expenses | Module 05, measure model |
 | **P&L Rows** | Fact | P&L line items as rows, with *Account* and *Value* columns | Module 05, row model |
-| **Product** | Dimension | *Category*, *Sub-Category* | Modules 01, 03, 04, 06 |
+| **Product** | Dimension | *Category*, *Sub Category* | Modules 01, 03, 04, 06 |
 
 The fact tables share the common *Date* dimension.
 
 > [!IMPORTANT]
+> **The Measures Table holds scoped and unscoped versions of the same measure.**
+>
+> | Measure | Scope | Result |
+> |---|---|---|
+> | *Gross Revenue* | All years | Columns for 2023, 2024, 2025 and 2026 |
+> | *2025 Gross Revenue* | FY25 only | One year, **$25.87M** |
+> | *COGS* | All years | All years |
+> | *2025 COGS* | FY25 only | FY25 only |
+>
+> The lab uses the **2025-scoped** measures, matching Microsoft's tutorials. Picking the
+> unscoped version produces a valid sheet with the wrong shape, and no error to tell you.
+
+> [!NOTE]
 > Microsoft's tutorial text calls the transaction fact table **Sales Transactions**, but
 > the table shipped in the model is named **Fact Transactions**. This lab uses the name
 > you will actually see in the Data pane. The tutorials also never name the table holding
-> *Category* and *Sub-Category*; it is **Product**.
+> *Category* and *Sub Category*; it is **Product**.
 
 ---
 

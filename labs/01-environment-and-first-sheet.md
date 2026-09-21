@@ -111,9 +111,19 @@ The model's tables appear in the **Data** tab: dimensions, measures, and the dat
 
    | Field | Value | Source table |
    |---|---|---|
-   | **Rows** | *Region* → *Category* → *Sub-Category* | *Geography* for Region; *Product* for Category and Sub-Category |
+   | **Rows** | *Region* → *Category* → *Sub Category* | *Geography* for Region; *Product* for Category and Sub Category |
    | **Columns** | *Year*, *Quarter*, *Month Short* | *Date* |
    | **Values** | *2025 Gross Revenue* | *Measures Table* |
+
+> [!IMPORTANT]
+> The Measures Table contains both **Gross Revenue** and **2025 Gross Revenue**, and they
+> behave differently. *Gross Revenue* spans every year in the model, so the sheet fills
+> with 2023 through 2026 columns. *2025 Gross Revenue* is scoped to FY25 and shows a
+> single year totalling **$25.87M**, which is the baseline this lab plans from. The same
+> pairing exists for **COGS** and **2025 COGS**.
+>
+> Pick *2025 Gross Revenue*. Choosing the unscoped measure will not error, it will just
+> quietly give you a multi-year sheet, and the numbers in Module 02 will not match.
 
 > [!TIP]
 > In the **Data** pane, dimensions and measures are grouped by the table they belong to.
