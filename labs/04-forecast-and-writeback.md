@@ -200,8 +200,15 @@ twelve months ahead.
 2. Set **Close period till** to **Custom** → **January 2026**.
 3. Select **Extend Forecast Range**, set **Duration** to **1 Month**, and select
    **Preview**.
-4. Confirm **Closed** reads `Jan 2024 – Jan 2026` and **Open** reads
-   `Feb 2026 – Jan 2027`. Select **Save**.
+4. The **Confirm Close Period** dialog appears, listing the affected measure with its
+   before and after ranges. Changed values are highlighted. Confirm the **Forecast** row
+   reads:
+
+   | Measure | Closed Period | Open Period |
+   |---|---|---|
+   | Forecast | Jan 2024 - **Jan 2026** | **Feb 2026** - **Jan 2027** |
+
+   Select **Save**. **Back** returns to the settings and **Discard** abandons the change.
 
 The horizon rolled. January 2026 is now actuals, and January 2027 has appeared as a new
 open period with nothing in it.
