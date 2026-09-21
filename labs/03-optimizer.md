@@ -12,8 +12,38 @@ Revenue is planned at $30M. The board also asked for **$12.5M gross profit**, an
 has checked whether those two numbers are compatible.
 
 The traditional answer is a week of trial and error: nudge revenue up, nudge COGS down,
-recalculate, repeat until the number appears or the deadline does. The Optimizer is
-goal-seek for planning. You state the target, name the levers, and it back-calculates.
+recalculate, repeat until the number appears or the deadline does. The Optimizer does
+that search for you.
+
+### What it actually does
+
+It is a **multivariate goal seek**, an iterative solver rather than a rearranged formula.
+Each pass it:
+
+1. tries a value for each input,
+2. recalculates the result measure,
+3. compares that to your target,
+4. adjusts the inputs and goes round again.
+
+It repeats until the result is within tolerance of the target, or it runs out of
+iterations. That is why the split between two levers is not predictable in advance, and
+why the same target can be reached more than one way.
+
+Three pieces have to be in place:
+
+| Piece | In this module |
+|---|---|
+| **Independent variables**, the inputs it may change | `Sales Plan` and `COGS`, the editable copies from Step 2 |
+| **Dependent measure**, a formula measure to solve for | `Gross Profit`, built in Step 3 |
+| **Goal**, target a value or push it to a maximum or minimum | Target of `12.5m` |
+
+It offers two modes. **Target-based** finds the inputs that hit a specific number, which
+is what you use here. **Direction-based** maximizes or minimizes instead, for questions
+like "what is the most margin available without breaching these limits?"
+
+Common uses beyond this example: finding the volume and price needed for a revenue
+target, the reductions needed across expense categories to meet a budget, or the
+collection and payment changes needed to reach a cash balance.
 
 ---
 
@@ -201,8 +231,38 @@ commitments somebody can own, rather than a percentage nobody can act on.
 > [!NOTE]
 > You ran this without constraints, so the Optimizer was free to move both levers however
 > it liked. In practice you would constrain it, capping the COGS reduction at what
-> procurement has actually agreed, or floor revenue at what the sales plan supports.
+> procurement has actually agreed, or flooring revenue at what the sales plan supports.
 > Constraints are where this stops being a math trick and starts being a plan.
+
+### Constraints, when you do want them
+
+The **Add Constraints** page you skipped offers two kinds:
+
+- **Range-based**: give an input a minimum and a maximum, and the solver keeps it inside
+  that band. Use it for what is negotiable and by how much, such as a COGS reduction
+  capped at 2% because that is what procurement signed up to.
+- **Fixed-value**: pin an input so it cannot move at all, and the solver works the others
+  harder to compensate. If price is set for the year, fix it and let volume absorb the
+  target.
+
+Without constraints the Optimizer will happily propose something arithmetically perfect
+and operationally impossible. A 20% cost reduction hits the target and ends the
+conversation with procurement in about four seconds.
+
+### If it does not reach the target
+
+An unconstrained two-variable problem like this one converges easily. Tighter problems
+may not, and the Output page exposes three parameters to retune before running again:
+
+| Parameter | What it controls |
+|---|---|
+| **Strategy** | The size of each adjustment. Smaller steps converge more slowly but overshoot less; larger steps are faster and can sail past the answer |
+| **Tolerance** | How close counts as done. A target of 0.50 with tolerance 0.01 stops anywhere between 0.49 and 0.51 |
+| **Number of iterations** | How many times it may go round the loop before giving up |
+
+If the solver fails, the usual cause is that the constraints make the target
+unreachable. Check whether the target is actually achievable before loosening tolerance
+to force a result you cannot defend.
 
 ---
 
@@ -222,6 +282,8 @@ forecast that survives contact with reality.
    column?
 3. You run the Optimizer and it cuts COGS by 20%. Procurement says that is impossible.
    What should you have done?
+4. Two people run this module and reach $12.5M with different Sales Plan and COGS values.
+   Did one of them do it wrong?
 
 <details>
 <summary>Answers</summary>
@@ -231,7 +293,10 @@ forecast that survives contact with reality.
 2. Subtotals sum their children rather than recalculating the formula, so totals on
    margin and percentage rows come out wrong.
 3. Added constraints on the **Add Constraints** page to bound how far each lever can
-   move.
+   move, either a range or a fixed value.
+4. No. It is an iterative solver, not a formula with one answer. Many combinations of the
+   two levers reach the same target, and the path it takes depends on the starting values
+   and the step size.
 
 </details>
 
