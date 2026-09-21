@@ -263,6 +263,21 @@ APAC and Europe both expect a Q3 lift in beverages and personal care.
 Q3 rises 8% across both regions and both categories, applied down to subcategory and
 month. In the old workbook that was four tabs and a prayer.
 
+**Check it worked.** The filters are doing their job if the two regions you did *not*
+select stayed exactly where they were:
+
+| Region | Before | After | In the filter? |
+|---|---|---|---|
+| Americas | 7.18 | **7.18** | no |
+| Asia Pacific | 9.76 | **9.89** | yes |
+| Europe | 6.15 | **6.22** | yes |
+| Middle East & Africa | 2.81 | **2.81** | no |
+| **All** | 25.91 | **26.10** | |
+
+The 0.19 increase is 8% of the Q3 beverages and personal care base across those two
+regions, about $2.4M. If Americas or Middle East & Africa moved, a filter did not apply.
+If every region rose, the edit ran unfiltered and you should undo it.
+
 ---
 
 ## Part 3: Make the assumptions visible
