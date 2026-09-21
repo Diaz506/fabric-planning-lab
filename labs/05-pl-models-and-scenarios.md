@@ -295,11 +295,14 @@ against city values summing to 178.96, a rounding difference.
    in the **Measures** list, set **Insert Measure** to **COGS**, and select **Insert**.
 
    ```
-   COGS                             root
-     Raw Material Cost              child
-     Labor Cost                     child
-     Other Direct Exp               child
+   COGS                             root, separate from Net Revenue
+     Raw Material Cost              child of COGS
+     Labor Cost                     child of COGS
+     Other Direct Exp               child of COGS
    ```
+
+   You now have **two roots**, COGS and Net Revenue. They join in step 10, when Gross
+   Profit becomes the parent of both.
 
 > [!TIP]
 > The **Insert Measure** dropdown is not limited to *As roots*. Once a formula measure
@@ -320,23 +323,27 @@ against city values summing to 178.96, a rounding difference.
     Operating Expenses. The finished tree:
 
     ```
-    Net Profit
-      Gross Profit
-        Net Revenue
-          Gross Revenue
-            Sales Volume
-            Avg Selling Price
-          Discounts and Returns
-        COGS
-          Raw Material Cost
-          Labor Cost
-          Other Direct Exp
-      Operating Expenses
-        Admin Expenses
-        Employee Expenses
-        R&D
-        Selling and Marketing Expenses
+    Net Profit                       root, the only one left
+      Gross Profit                   child of Net Profit
+        Net Revenue                  child of Gross Profit
+          Gross Revenue              child of Net Revenue
+            Sales Volume             child of Gross Revenue
+            Avg Selling Price        child of Gross Revenue
+          Discounts and Returns      child of Net Revenue
+        COGS                         child of Gross Profit
+          Raw Material Cost          child of COGS
+          Labor Cost                 child of COGS
+          Other Direct Exp           child of COGS
+      Operating Expenses             child of Net Profit
+        Admin Expenses               child of Operating Expenses
+        Employee Expenses            child of Operating Expenses
+        R&D                          child of Operating Expenses
+        Selling and Marketing Expenses   child of Operating Expenses
     ```
+
+    Watch the root count as you go: three roots after Operating Expenses is built, two
+    once Gross Profit adopts Net Revenue and COGS, and one when Net Profit adopts the
+    last two. A single root means the P&L is complete.
 
 > [!IMPORTANT]
 > **Create each formula measure before the one that references it.** Net Profit refers to
