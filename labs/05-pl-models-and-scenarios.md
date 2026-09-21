@@ -169,14 +169,17 @@ against city values summing to 178.96, a rounding difference.
 ### Build the hierarchy
 
 5. On the **Model** ribbon, select **Measure Model**. The canvas opens.
-6. Drag **Sales Volume** and **Avg Selling Price** into the dashed
-   **Drop from measure list** box at the **bottom** of the canvas, not into the grid
-   above it.
+6. Add **Sales Volume** and **Avg Selling Price** to the canvas. Two ways:
+
+   - **Insert**, which avoids dragging. Tick both in the **Measures** list on the left,
+     leave **Insert Measure** set to **As roots**, and select **Insert**.
+   - **Drag**, if you prefer. Tick both first, then drag them across together, into the
+     dashed **Drop from measure list** box at the **bottom** of the canvas.
 
 > [!IMPORTANT]
-> Drop them separately so they land as siblings. Dropping one onto the other nests it as a
-> child, which you will see as an indent and a collapse chevron on the parent. If that
-> happens, drag the indented measure out before continuing.
+> Dragging them one at a time risks dropping the second onto the first, which nests it as
+> a child. You will see it as an indent with a collapse chevron on the parent. Both
+> measures should sit at the same level at this point. If one is indented, drag it out.
 >
 > Check the **Aggregation** column while you are here. If it reads `Sum` against
 > *Avg Selling Price* and the cell is editable, set it to **Average**. The measure model
